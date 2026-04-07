@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "project-workflow-analysis-blueprint-generator": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "computedHash": "3d55c341daf416e131919657ef92616619bfa52b6caea81029b79a64e4f958a3"
+    }
+  }
+}
