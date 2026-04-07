@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.space.analyze;
+﻿package com.yjc.snaphive.model.dto.space.analyze;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class SpaceRankAnalyzeRequest implements Serializable {
 
     /**
-     * 排名前 N 的空间
+     * 排名�?N 的空�?
      */
     private Integer topN = 10;
 

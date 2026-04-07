@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -14,7 +14,7 @@ public class HotSearch implements Serializable {
     private Long id;
 
     /**
-     * 搜索关键词
+     * 搜索关键�?
      */
     private String keyword;
 
@@ -29,7 +29,7 @@ public class HotSearch implements Serializable {
     private Long count;
 
     /**
-     * 最后更新时间
+     * 最后更新时�?
      */
     private Date lastUpdateTime;
 

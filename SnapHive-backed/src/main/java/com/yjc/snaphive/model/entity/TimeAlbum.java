@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -45,7 +45,7 @@ public class TimeAlbum implements Serializable {
     private String description;
 
     /**
-     * 是否公开[0-私密，1-公开]
+     * 是否公开[0-私密�?-公开]
      */
     private Integer isPublic;
 

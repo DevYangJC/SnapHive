@@ -1,4 +1,4 @@
-package com.yjc.snaphive.config;
+﻿package com.yjc.snaphive.config;
 
 import cn.hutool.http.ContentType;
 import cn.hutool.http.Header;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * 请求包装过滤器
+ * 请求包装过滤�?
  *
  * @author pine
  */

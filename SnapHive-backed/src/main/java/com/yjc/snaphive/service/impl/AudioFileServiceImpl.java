@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 音频文件服务实现类
+ * 音频文件服务实现�?
  */
 @Service
 @Slf4j
@@ -85,18 +85,18 @@ public class AudioFileServiceImpl extends ServiceImpl<AudioFileMapper, AudioFile
     public boolean deleteAudio(Long id, Long userId) {
         AudioFile audioFile = this.getById(id);
         if (audioFile == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "音频文件不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "音频文件不存�?);
         }
 
-        // 只能删除自己的音频
+        // 只能删除自己的音�?
         if (!audioFile.getUserId().equals(userId)) {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "无权删除该音频文件");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "无权删除该音频文�?);
         }
 
         try {
             // 删除COS中的文件
             cosManager.deleteObject(audioFile.getFilePath());
-            // 删除数据库记录
+            // 删除数据库记�?
             return this.removeById(id);
         } catch (Exception e) {
             log.error("音频文件删除失败", e);
@@ -151,7 +151,7 @@ public class AudioFileServiceImpl extends ServiceImpl<AudioFileMapper, AudioFile
     }
 
     /**
-     * 获取查询包装类
+     * 获取查询包装�?
      */
     private QueryWrapper<AudioFile> getQueryWrapper(AudioQueryRequest audioQueryRequest) {
         QueryWrapper<AudioFile> queryWrapper = new QueryWrapper<>();

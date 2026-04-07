@@ -1,4 +1,4 @@
-package com.yjc.snaphive.job;
+﻿package com.yjc.snaphive.job;
 
 import com.yjc.snaphive.esdao.EsSearchKeywordDao;
 import com.yjc.snaphive.mapper.HotSearchMapper;
@@ -24,7 +24,7 @@ import cn.hutool.core.util.RandomUtil;
 public class HotSearchSyncJob implements HotSearchSync, CommandLineRunner {
 
     private static final String HOT_SEARCH_CACHE_KEY = "hot_search:%s";
-    private static final int DEFAULT_SIZE = 50;  // 缓存前50个热门搜索
+    private static final int DEFAULT_SIZE = 50;  // 缓存�?0个热门搜�?
     private static final String[] SEARCH_TYPES = {"picture", "user", "post", "space"};
 
     @Resource
@@ -37,14 +37,14 @@ public class HotSearchSyncJob implements HotSearchSync, CommandLineRunner {
     private StringRedisTemplate stringRedisTemplate;
 
     /**
-     * 应用启动时进行缓存预热
+     * 应用启动时进行缓存预�?
      */
     @Override
     @Async
     public void run(String... args) {
         try {
-            log.info("开始热门搜索缓存预热");
-            // 延迟5秒，等待其他组件初始化完成
+            log.info("开始热门搜索缓存预�?);
+            // 延迟5秒，等待其他组件初始化完�?
             TimeUnit.SECONDS.sleep(5);
             warmUpCache();
             log.info("热门搜索缓存预热完成");
@@ -58,7 +58,7 @@ public class HotSearchSyncJob implements HotSearchSync, CommandLineRunner {
      */
     @Override
     public void warmUpCache() {
-        // 获取最近24小时的数据
+        // 获取最�?4小时的数�?
         Date startTime = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
 
         for (String type : SEARCH_TYPES) {
@@ -72,7 +72,7 @@ public class HotSearchSyncJob implements HotSearchSync, CommandLineRunner {
                             .findByTypeAndUpdateTimeAfterOrderByCountDesc(type, startTime);
 
                     if (!keywords.isEmpty()) {
-                        // 转换为MySQL实体并保存
+                        // 转换为MySQL实体并保�?
                         hotSearchList = keywords.stream()
                                 .map(keyword -> {
                                     HotSearch hotSearch = new HotSearch();
@@ -95,21 +95,21 @@ public class HotSearchSyncJob implements HotSearchSync, CommandLineRunner {
                     log.info("类型{}的热门搜索缓存预热成功，数量: {}", type, hotSearchList.size());
                 }
             } catch (Exception e) {
-                log.error("类型{}的热门搜索缓存预热失败", type, e);
+                log.error("类型{}的热门搜索缓存预热失�?, type, e);
             }
         }
     }
 
     /**
-     * 每17分钟同步一次热门搜索数据到MySQL和Redis
+     * �?7分钟同步一次热门搜索数据到MySQL和Redis
      */
     @Override
     @Scheduled(fixedRate = 1 * 60 * 1000)
     public void syncHotSearch() {
         try {
-            log.info("开始同步热门搜索数据");
+            log.info("开始同步热门搜索数�?);
 
-            // 获取最近24小时的数据
+            // 获取最�?4小时的数�?
             Date startTime = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000);
 
             // 获取所有类型的热门搜索
@@ -153,7 +153,7 @@ public class HotSearchSyncJob implements HotSearchSync, CommandLineRunner {
     private void updateCache(String type, List<HotSearch> hotSearchList) {
         String cacheKey = String.format(HOT_SEARCH_CACHE_KEY, type);
         try {
-            // 获取前50个热门搜索词
+            // 获取�?0个热门搜索词
             List<String> keywords = hotSearchList.stream()
                     .limit(DEFAULT_SIZE)
                     .map(HotSearch::getKeyword)
@@ -168,7 +168,7 @@ public class HotSearchSyncJob implements HotSearchSync, CommandLineRunner {
                 for (String keyword : keywords) {
                     connection.rPush(cacheKey.getBytes(), keyword.getBytes());
                 }
-                // 设置过期时间（13-15分钟随机）
+                // 设置过期时间�?3-15分钟随机�?
                 long expireSeconds = 13 * 60 + RandomUtil.randomInt(0, 120);
                 connection.expire(cacheKey.getBytes(), expireSeconds);
                 connection.exec();

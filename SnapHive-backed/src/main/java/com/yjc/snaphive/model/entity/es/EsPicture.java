@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity.es;
+﻿package com.yjc.snaphive.model.entity.es;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -29,7 +29,7 @@ public class EsPicture implements Serializable {
     private String url;
 
     /**
-     * 缩略图 url
+     * 缩略�?url
      */
     @Field(type = FieldType.Keyword)
     private String thumbnailUrl;
@@ -47,7 +47,7 @@ public class EsPicture implements Serializable {
     private String name;
 
     /**
-     * 简介：支持中英文混合搜索
+     * 简介：支持中英文混合搜�?
      */
     @MultiField(
             mainField = @Field(type = FieldType.Text),
@@ -107,7 +107,7 @@ public class EsPicture implements Serializable {
     private String picFormat;
 
     /**
-     * 图片主色调
+     * 图片主色�?
      */
     @Field(type = FieldType.Keyword)
     private String picColor;
@@ -119,25 +119,25 @@ public class EsPicture implements Serializable {
     private Long userId;
 
     /**
-     * 评论数
+     * 评论�?
      */
     @Field(type = FieldType.Long)
     private Long commentCount;
 
     /**
-     * 点赞数
+     * 点赞�?
      */
     @Field(type = FieldType.Long)
     private Long likeCount;
 
     /**
-     * 分享数
+     * 分享�?
      */
     @Field(type = FieldType.Long)
     private Long shareCount;
 
     /**
-     * 审核状态：0-待审核; 1-通过; 2-拒绝
+     * 审核状态：0-待审�? 1-通过; 2-拒绝
      */
     @Field(type = FieldType.Integer)
     private Integer reviewStatus;
@@ -149,7 +149,7 @@ public class EsPicture implements Serializable {
     private String reviewMessage;
 
     /**
-     * 审核人 ID
+     * 审核�?ID
      */
     @Field(type = FieldType.Long)
     private Long reviewerId;

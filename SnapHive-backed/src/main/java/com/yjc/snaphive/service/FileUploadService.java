@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.yjc.snaphive.model.vo.AudioFileVO;
 import com.yjc.snaphive.model.vo.PictureVO;
@@ -9,7 +9,7 @@ import com.yjc.snaphive.model.vo.PictureVO;
 public interface FileUploadService {
 
     /**
-     * 上传图片（通用接口）
+     * 上传图片（通用接口�?
      *
      * @param inputSource 输入源（可以是MultipartFile或URL字符串）
      * @param userId 用户ID
@@ -21,7 +21,7 @@ public interface FileUploadService {
     PictureVO uploadPicture(Object inputSource, Long userId, String name, String description, String tags);
 
     /**
-     * 上传音频（通用接口）
+     * 上传音频（通用接口�?
      *
      * @param inputSource 输入源（可以是MultipartFile或URL字符串）
      * @param userId 用户ID

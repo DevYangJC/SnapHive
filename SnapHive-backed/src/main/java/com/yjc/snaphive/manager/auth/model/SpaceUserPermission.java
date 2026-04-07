@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.auth.model;
+﻿package com.yjc.snaphive.manager.auth.model;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class SpaceUserPermission implements Serializable {
 
     /**
-     * 权限键
+     * 权限�?
      */
     private String key;
 

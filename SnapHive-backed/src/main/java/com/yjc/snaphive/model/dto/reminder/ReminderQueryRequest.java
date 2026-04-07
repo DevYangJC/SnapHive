@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.reminder;
+﻿package com.yjc.snaphive.model.dto.reminder;
 
 
 import com.yjc.snaphive.common.PageRequest;
@@ -21,7 +21,7 @@ public class ReminderQueryRequest extends PageRequest implements Serializable {
     private LocalDate date;
 
     /**
-     * 是否只看已完成
+     * 是否只看已完�?
      */
     private Boolean completed;
 

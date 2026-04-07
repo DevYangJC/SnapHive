@@ -1,22 +1,22 @@
-package com.yjc.snaphive.model.vo.space.analyze;
+﻿package com.yjc.snaphive.model.vo.space.analyze;
 
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * 空间资源使用分析响应类
+ * 空间资源使用分析响应�?
  */
 @Data
 public class SpaceUsageAnalyzeResponse implements Serializable {
 
     /**
-     * 已使用大小
+     * 已使用大�?
      */
     private Long usedSize;
 
     /**
-     * 总大小
+     * 总大�?
      */
     private Long maxSize;
 
@@ -31,7 +31,7 @@ public class SpaceUsageAnalyzeResponse implements Serializable {
     private Long usedCount;
 
     /**
-     * 最大图片数量
+     * 最大图片数�?
      */
     private Long maxCount;
 

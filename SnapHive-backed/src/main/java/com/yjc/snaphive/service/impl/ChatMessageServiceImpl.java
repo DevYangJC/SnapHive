@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -45,7 +45,7 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
 
     public ChatMessageServiceImpl() {
         this.objectMapper = new ObjectMapper();
-        // 注册 JavaTimeModule 以处理日期时间
+        // 注册 JavaTimeModule 以处理日期时�?
         objectMapper.registerModule(new JavaTimeModule());
         // 配置日期时间的序列化格式
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
@@ -232,14 +232,14 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
             throw new RuntimeException("回复的消息不存在");
         }
 
-        // 检查空间权限
+        // 检查空间权�?
         if (message.getSpaceId() != null) {
             if (!canUserChatInSpace(message.getSenderId(), message.getSpaceId())) {
-                throw new RuntimeException("您不是该空间的成员，无法发送消息");
+                throw new RuntimeException("您不是该空间的成员，无法发送消�?);
             }
         }
 
-        // 设置回复消息的关联信息
+        // 设置回复消息的关联信�?
         message.setReplyId(replyToMessageId);
         message.setRootId(replyToMessage.getRootId() != null ? replyToMessage.getRootId() : replyToMessageId);
 
@@ -253,7 +253,7 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
 
     @Override
     public void fillMessageInfo(ChatMessage message) {
-        // 填充发送者信息
+        // 填充发送者信�?
         User sender = userService.getById(message.getSenderId());
         if (sender != null) {
             // 清除敏感信息
@@ -269,7 +269,7 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
                 if (replyMessage.getReplyId() == null) {
                     fillMessageInfo(replyMessage);
                 } else {
-                    // 只填充基本信息
+                    // 只填充基本信�?
                     User replySender = userService.getById(replyMessage.getSenderId());
                     if (replySender != null) {
                         replySender.setUserPassword(null);
@@ -282,7 +282,7 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
     }
 
     /**
-     * 清除相关的聊天记录缓存
+     * 清除相关的聊天记录缓�?
      */
     private void clearChatHistoryCache(ChatMessage message) {
         if (message.getSpaceId() != null) {
@@ -315,7 +315,7 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
     }
 
     /**
-     * 在保存或更新消息后清除对应图片的聊天数缓存
+     * 在保存或更新消息后清除对应图片的聊天数缓�?
      */
     private void clearPictureChatCountCache(ChatMessage message) {
         if (message != null && message.getPictureId() != null) {
@@ -325,7 +325,7 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
     }
 
     /**
-     * 重写保存方法，在保存消息后清除相关缓存
+     * 重写保存方法，在保存消息后清除相关缓�?
      */
     @Override
     public boolean save(ChatMessage message) {
@@ -338,7 +338,7 @@ public class ChatMessageServiceImpl extends ServiceImpl<ChatMessageMapper, ChatM
     }
 
     /**
-     * 重写更新方法，在更新消息后清除相关缓存
+     * 重写更新方法，在更新消息后清除相关缓�?
      */
     @Override
     public boolean updateById(ChatMessage message) {

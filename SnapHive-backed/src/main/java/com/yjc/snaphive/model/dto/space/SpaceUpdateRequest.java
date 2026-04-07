@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.space;
+﻿package com.yjc.snaphive.model.dto.space;
 
 import lombok.Data;
 
@@ -21,17 +21,17 @@ public class SpaceUpdateRequest implements Serializable {
     private String spaceName;
 
     /**
-     * 空间级别：0-普通版 1-专业版 2-旗舰版
+     * 空间级别�?-普通版 1-专业�?2-旗舰�?
      */
     private Integer spaceLevel;
 
     /**
-     * 空间图片的最大总大小
+     * 空间图片的最大总大�?
      */
     private Long maxSize;
 
     /**
-     * 空间图片的最大数量
+     * 空间图片的最大数�?
      */
     private Long maxCount;
 

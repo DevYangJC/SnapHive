@@ -1,4 +1,4 @@
-package com.yjc.snaphive.config;
+﻿package com.yjc.snaphive.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 微言服务实现类
+ * 微言服务实现�?
  */
 @Service
 public class WeiYanServiceImpl extends ServiceImpl<WeiYanMapper, WeiYan>
@@ -78,7 +78,7 @@ public class WeiYanServiceImpl extends ServiceImpl<WeiYanMapper, WeiYan>
         if (weiYan == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
-        // 如果是恋爱板所有者或发布者，可以查看所有内容
+        // 如果是恋爱板所有者或发布者，可以查看所有内�?
         if (weiYan.getLoveBoardId().equals(loveBoardId) || (userId != null && userId.equals(weiYan.getUserId()))) {
             return weiYan;
         }
@@ -119,7 +119,7 @@ public class WeiYanServiceImpl extends ServiceImpl<WeiYanMapper, WeiYan>
     public Page<WeiYan> listWeiYan(Long loveBoardId, Long userId, long current, long pageSize) {
         QueryWrapper<WeiYan> queryWrapper = new QueryWrapper<>();
 
-        // 如果提供了恋爱板ID，添加恋爱板筛选条件
+        // 如果提供了恋爱板ID，添加恋爱板筛选条�?
         if (loveBoardId != null && loveBoardId > 0) {
             queryWrapper.eq("loveBoardId", loveBoardId);
 
@@ -147,7 +147,7 @@ public class WeiYanServiceImpl extends ServiceImpl<WeiYanMapper, WeiYan>
         if (weiYan == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
-        // 更新点赞数
+        // 更新点赞�?
         weiYan.setLikeCount(weiYan.getLikeCount() + 1);
         return this.updateById(weiYan);
     }

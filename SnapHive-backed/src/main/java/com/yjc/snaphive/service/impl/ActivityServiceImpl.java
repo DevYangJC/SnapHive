@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
@@ -73,7 +73,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
         // 标题校验
         ThrowUtils.throwIf(StrUtil.isBlank(title), ErrorCode.PARAMS_ERROR, "标题不能为空");
-        ThrowUtils.throwIf(title.length() > 100, ErrorCode.PARAMS_ERROR, "标题最多100字");
+        ThrowUtils.throwIf(title.length() > 100, ErrorCode.PARAMS_ERROR, "标题最�?00�?);
 
         // 内容校验
         ThrowUtils.throwIf(StrUtil.isBlank(content), ErrorCode.PARAMS_ERROR, "内容不能为空");
@@ -93,7 +93,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                     String marker = "{img-" + (i + 1) + "}";
                     // 确保 marker 在内容中存在
                     ThrowUtils.throwIf(!content.contains(marker),
-                            ErrorCode.PARAMS_ERROR, "图片标记 " + marker + " 未在内容中找到");
+                            ErrorCode.PARAMS_ERROR, "图片标记 " + marker + " 未在内容中找�?);
                 }
             }
         }
@@ -104,7 +104,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         activity.setUserId(loginUser.getId());
         // 管理员创建的活动自动通过审核
         activity.setStatus(1); // 已审核通过
-        activity.setIsExpired(0); // 未过期
+        activity.setIsExpired(0); // 未过�?
         activity.setReviewMessage("管理员创建自动通过");
 
         // 保存活动
@@ -142,7 +142,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         // 构建查询条件
         QueryWrapper<Activity> queryWrapper = new QueryWrapper<>();
 
-        // 搜索词
+        // 搜索�?
         String searchText = request.getSearchText();
         if (StrUtil.isNotBlank(searchText)) {
             queryWrapper.like("title", searchText).or().like("content", searchText);
@@ -153,7 +153,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         boolean isAdmin = loginUser != null && UserConstant.ADMIN_ROLE.equals(loginUser.getUserRole());
 
         if (isPublic || !isAdmin) {
-            // 公共查询或非管理员，只显示已发布的活动
+            // 公共查询或非管理员，只显示已发布的活�?
             queryWrapper.eq("status", 1);
         } else {
             // 管理员查询所有状态的活动
@@ -163,7 +163,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             }
         }
 
-        // 是否只看未过期
+        // 是否只看未过�?
         if (Boolean.TRUE.equals(request.getNotExpired())) {
             queryWrapper.eq("isExpired", 0);
         }
@@ -193,7 +193,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
 
-        // 更新审核状态
+        // 更新审核状�?
         Activity updateActivity = new Activity();
         updateActivity.setId(activityId);
         updateActivity.setStatus(status);
@@ -208,14 +208,14 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         // 参数校验
         ThrowUtils.throwIf(id == null || id <= 0, ErrorCode.PARAMS_ERROR);
 
-        // 检测爬虫
+        // 检测爬�?
         crawlerManager.detectNormalRequest(request);
 
         // 获取活动信息
         Activity activity = this.getById(id);
         ThrowUtils.throwIf(activity == null, ErrorCode.NOT_FOUND_ERROR);
 
-        // 增加浏览量
+        // 增加浏览�?
         incrementViewCount(id, request);
 
         // 获取附件并按位置排序
@@ -238,7 +238,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         User user = userService.getById(activity.getUserId());
         activity.setUser(userService.getUserVO(user));
 
-        // 设置点赞和分享状态
+        // 设置点赞和分享状�?
         if (loginUser != null) {
             boolean isLiked = likeRecordService.isContentLiked(activity.getId(), 2, loginUser.getId());
             activity.setIsLiked(isLiked ? 1 : 0);
@@ -249,7 +249,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             activity.setIsShared(0);
         }
 
-        // 获取最新的浏览量
+        // 获取最新的浏览�?
         long realViewCount = getViewCount(id);
         activity.setViewCount(realViewCount);
 
@@ -262,7 +262,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         String viewCountKey = String.format("activity:viewCount:%d", activityId);
         String incrementCount = stringRedisTemplate.opsForValue().get(viewCountKey);
 
-        // 从数据库获取基础浏览量
+        // 从数据库获取基础浏览�?
         Activity activity = this.getById(activityId);
         if (activity == null) {
             return 0L;
@@ -283,7 +283,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             activity.setUser(userService.getUserVO(user));
         }
 
-        // 获取实时浏览量（合并 Redis 中的增量）
+        // 获取实时浏览量（合并 Redis 中的增量�?
         long realViewCount = getViewCount(activity.getId());
         activity.setViewCount(realViewCount);
 
@@ -294,8 +294,8 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     @Override
     public Page<Activity> listCarouselActivities(ActivityQueryRequest request) {
         QueryWrapper<Activity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("status", 1)  // 已发布
-                .eq("isExpired", 0)   // 未过期
+        queryWrapper.eq("status", 1)  // 已发�?
+                .eq("isExpired", 0)   // 未过�?
                 .eq("isDelete", 0)
                 .orderByDesc("createTime")
                 // 只选择需要的字段
@@ -303,7 +303,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
         Page<Activity> activityPage = this.page(new Page<>(request.getCurrent(), request.getPageSize()), queryWrapper);
 
-        // 获取实时浏览量
+        // 获取实时浏览�?
         activityPage.getRecords().forEach(activity -> {
             long realViewCount = getViewCount(activity.getId());
             activity.setViewCount(realViewCount);
@@ -313,7 +313,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     }
 
     /**
-     * 异步增加活动浏览量
+     * 异步增加活动浏览�?
      */
     @Async("asyncExecutor")
     public void incrementViewCount(Long activityId, HttpServletRequest request) {
@@ -330,7 +330,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             // 获取分布式锁
             Boolean locked = stringRedisTemplate.opsForValue().setIfAbsent(lockKey, "1", 10, TimeUnit.SECONDS);
             if (Boolean.TRUE.equals(locked)) {
-                // 增加浏览量
+                // 增加浏览�?
                 stringRedisTemplate.opsForValue().increment(viewCountKey);
 
                 // 当浏览量达到一定阈值时，更新数据库
@@ -340,12 +340,12 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                             .setSql("viewCount = viewCount + " + viewCountStr)
                             .eq("id", activityId)
                             .update();
-                    // 更新后重置 Redis 计数
+                    // 更新后重�?Redis 计数
                     stringRedisTemplate.delete(viewCountKey);
                 }
             }
         } finally {
-            // 释放锁
+            // 释放�?
             stringRedisTemplate.delete(lockKey);
         }
     }

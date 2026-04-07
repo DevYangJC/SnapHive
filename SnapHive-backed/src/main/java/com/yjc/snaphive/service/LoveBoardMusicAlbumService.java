@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -9,7 +9,7 @@ import com.yjc.snaphive.model.vo.AudioFileVO;
 import java.util.List;
 
 /**
- * 恋爱板音乐专栏服务
+ * 恋爱板音乐专栏服�?
  */
 public interface LoveBoardMusicAlbumService extends IService<LoveBoardMusicAlbum> {
 
@@ -48,7 +48,7 @@ public interface LoveBoardMusicAlbumService extends IService<LoveBoardMusicAlbum
      *
      * @param id 专栏ID
      * @param userId 用户ID（可选，用于权限检查）
-     * @param password 访问密码（可选，用于私密专栏访问）
+     * @param password 访问密码（可选，用于私密专栏访问�?
      * @return 音乐专栏信息
      */
     LoveBoardMusicAlbum getMusicAlbumById(Long id, Long userId, String password);
@@ -58,7 +58,7 @@ public interface LoveBoardMusicAlbumService extends IService<LoveBoardMusicAlbum
      *
      * @param albumId 专栏ID
      * @param userId 用户ID（可选，用于权限检查）
-     * @param password 访问密码（可选，用于私密专栏访问）
+     * @param password 访问密码（可选，用于私密专栏访问�?
      * @return 音频列表
      */
     List<AudioFileVO> getAlbumAudios(Long albumId, Long userId, String password);
@@ -67,8 +67,8 @@ public interface LoveBoardMusicAlbumService extends IService<LoveBoardMusicAlbum
      * 分页获取恋爱板的音乐专栏列表
      *
      * @param loveBoardId 恋爱板ID
-     * @param current 当前页
-     * @param pageSize 页大小
+     * @param current 当前�?
+     * @param pageSize 页大�?
      * @return 专栏列表
      */
     Page<LoveBoardMusicAlbum> listMusicAlbums(Long loveBoardId, Long current, Long pageSize);
@@ -77,7 +77,7 @@ public interface LoveBoardMusicAlbumService extends IService<LoveBoardMusicAlbum
      * 设置专栏密码
      *
      * @param albumId 专栏ID
-     * @param newPassword 新密码
+     * @param newPassword 新密�?
      * @param userId 用户ID
      * @return 是否成功
      */
@@ -87,8 +87,8 @@ public interface LoveBoardMusicAlbumService extends IService<LoveBoardMusicAlbum
      * 更新专栏密码
      *
      * @param albumId 专栏ID
-     * @param oldPassword 旧密码
-     * @param newPassword 新密码
+     * @param oldPassword 旧密�?
+     * @param newPassword 新密�?
      * @param userId 用户ID
      * @return 是否成功
      */
@@ -98,14 +98,14 @@ public interface LoveBoardMusicAlbumService extends IService<LoveBoardMusicAlbum
      * 移除专栏密码
      *
      * @param albumId 专栏ID
-     * @param oldPassword 旧密码
+     * @param oldPassword 旧密�?
      * @param userId 用户ID
      * @return 是否成功
      */
     boolean removeAlbumPassword(Long albumId, String oldPassword, Long userId);
 
     /**
-     * 上传音乐到专栏
+     * 上传音乐到专�?
      *
      * @param musicUploadRequest 音乐上传请求
      * @param userId 用户ID
@@ -123,7 +123,7 @@ public interface LoveBoardMusicAlbumService extends IService<LoveBoardMusicAlbum
     boolean deleteAudioFromAlbum(Long albumId, Long audioId, Long userId);
 
     /**
-     * 检查专栏音频数量是否达到上限
+     * 检查专栏音频数量是否达到上�?
      * @param albumId 专栏ID
      * @return 是否达到上限
      */

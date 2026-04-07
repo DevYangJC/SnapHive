@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -13,7 +13,7 @@ import lombok.Data;
 
 import java.util.List;
 /**
- * 论坛帖子表
+ * 论坛帖子�?
  * @TableName post
  */
 @Data
@@ -61,7 +61,7 @@ public class Post implements Serializable {
     private Integer isShared;
 
     /**
-     * 分享数
+     * 分享�?
      */
     private Long shareCount;
 }

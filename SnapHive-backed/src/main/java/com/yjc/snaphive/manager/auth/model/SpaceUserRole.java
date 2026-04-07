@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.auth.model;
+﻿package com.yjc.snaphive.manager.auth.model;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class SpaceUserRole implements Serializable {
 
     /**
-     * 角色键
+     * 角色�?
      */
     private String key;
 
@@ -22,7 +22,7 @@ public class SpaceUserRole implements Serializable {
     private String name;
 
     /**
-     * 权限键列表
+     * 权限键列�?
      */
     private List<String> permissions;
 

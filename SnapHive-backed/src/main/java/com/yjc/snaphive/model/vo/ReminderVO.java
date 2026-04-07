@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.vo;
+﻿package com.yjc.snaphive.model.vo;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.constant;
+﻿package com.yjc.snaphive.constant;
 
 public class CommonValue {
     public static final String DEFAULT_USER_NAME = "无名";

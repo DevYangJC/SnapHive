@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.picture;
+﻿package com.yjc.snaphive.model.dto.picture;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class PictureUploadByBatchRequest implements Serializable {
 
     /**
-     * 搜索词
+     * 搜索�?
      */
     private String searchText;
 

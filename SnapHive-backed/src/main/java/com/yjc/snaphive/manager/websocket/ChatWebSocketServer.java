@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket;
+﻿package com.yjc.snaphive.manager.websocket;
 
 import com.yjc.snaphive.exception.BusinessException;
 import com.yjc.snaphive.manager.websocket.disruptor.ChatEventProducer;
@@ -76,7 +76,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
             Long privateChatId = (Long) session.getAttributes().get("privateChatId");
 
             if (user == null) {
-                log.error("用户未登录");
+                log.error("用户未登�?);
                 session.close();
                 return;
             }
@@ -84,7 +84,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
             // 保存用户session
             userSessions.put(user.getId(), session);
 
-            // 如果是私聊
+            // 如果是私�?
             if (privateChatId != null) {
                 log.info("用户 {} 加入私聊 {}", user.getId(), privateChatId);
                 privateChatSessions.computeIfAbsent(privateChatId, k -> ConcurrentHashMap.newKeySet()).add(session);
@@ -97,7 +97,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
                 sendPictureChatHistory(session, pictureId);
                 broadcastOnlineUsers(pictureId, null, null);  // 修改这里
             }
-            // 如果是空间聊天
+            // 如果是空间聊�?
             else if (spaceId != null) {
                 // 检查用户是否有权限加入空间聊天
                 if (!chatMessageService.canUserChatInSpace(user.getId(), spaceId)) {
@@ -125,7 +125,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
             // 使用 ObjectMapper 解析消息
             Map<String, Object> messageMap = webSocketObjectMapper.readValue(message.getPayload(), Map.class);
 
-            // 安全地获取消息类型
+            // 安全地获取消息类�?
             Object typeObj = messageMap.get("type");
             String type = typeObj != null ? typeObj.toString() : null;
 
@@ -142,11 +142,11 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
                 return;
             }
 
-            // 处理普通消息
+            // 处理普通消�?
             ChatMessage chatMessage = new ChatMessage();
             User user = (User) session.getAttributes().get("user");
 
-            // 检查必要字段
+            // 检查必要字�?
             String content = (String) messageMap.get("content");
             if (content == null) {
                 sendErrorMessage(session, "消息内容不能为空");
@@ -163,7 +163,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
                 targetId = (Long) session.getAttributes().get("privateChatId");
                 chatMessage.setPrivateChatId(targetId);
             } else if (session.getAttributes().get("pictureId") != null) {
-                messageType = 2;  // 图片聊天室
+                messageType = 2;  // 图片聊天�?
                 targetId = (Long) session.getAttributes().get("pictureId");
                 chatMessage.setPictureId(targetId);
             } else if (session.getAttributes().get("spaceId") != null) {
@@ -249,11 +249,11 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
     }
 
     /**
-     * 发送私聊消息
+     * 发送私聊消�?
      */
     private void sendToPrivateChat(ChatMessage message) throws IOException {
         if (message.getPrivateChatId() == null) {
-            log.error("privateChatId为空，无法发送消息");
+            log.error("privateChatId为空，无法发送消�?);
             return;
         }
 
@@ -273,7 +273,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
      */
     private void sendToPictureRoom(ChatMessage chatMessage) throws IOException {
         if (chatMessage.getPictureId() == null) {
-            log.error("pictureId为空，无法发送消息");
+            log.error("pictureId为空，无法发送消�?);
             return;
         }
 
@@ -289,7 +289,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
     }
 
     /**
-     * 发送空间聊天消息
+     * 发送空间聊天消�?
      */
     private void sendToSpaceRoom(ChatMessage chatMessage) throws IOException {
         Set<WebSocketSession> sessions = spaceSessions.get(chatMessage.getSpaceId());
@@ -304,23 +304,23 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
     }
 
     /**
-     * 发送图片聊天室的历史消息
+     * 发送图片聊天室的历史消�?
      */
     private void sendPictureChatHistory(WebSocketSession session, Long pictureId) {
         try {
-            // 获取最近的20条消息，消息中会包含发送者信息
+            // 获取最近的20条消息，消息中会包含发送者信�?
             Page<ChatMessage> history = chatMessageService.getPictureChatHistory(pictureId, 1, 20);
             Map<String, Object> response = new HashMap<>();
             response.put("type", "history");
             response.put("messages", history.getRecords());
             session.sendMessage(new TextMessage(webSocketObjectMapper.writeValueAsString(response)));
         } catch (IOException e) {
-            log.error("发送历史消息失败", e);
+            log.error("发送历史消息失�?, e);
         }
     }
 
     /**
-     * 发送空间聊天历史记录
+     * 发送空间聊天历史记�?
      */
     private void sendSpaceChatHistory(WebSocketSession session, Long spaceId) {
         try {
@@ -330,16 +330,16 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
             response.put("messages", history.getRecords());
             session.sendMessage(new TextMessage(webSocketObjectMapper.writeValueAsString(response)));
         } catch (IOException e) {
-            log.error("发送空间历史消息失败", e);
+            log.error("发送空间历史消息失�?, e);
         }
     }
 
     /**
-     * 发送私聊历史消息
+     * 发送私聊历史消�?
      */
     private void sendUserChatHistory(WebSocketSession session, Long privateChatId) {
         try {
-            // 获取最近的20条消息
+            // 获取最近的20条消�?
             Page<ChatMessage> history = chatMessageService.getPrivateChatHistory(privateChatId, 1L, 20L);
 
             Map<String, Object> response = new HashMap<>();
@@ -349,7 +349,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
 
             session.sendMessage(new TextMessage(webSocketObjectMapper.writeValueAsString(response)));
         } catch (IOException e) {
-            log.error("发送私聊历史消息失败", e);
+            log.error("发送私聊历史消息失�?, e);
         }
     }
 
@@ -362,7 +362,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
             response.put("hasMore", history.getPages() > page);
             session.sendMessage(new TextMessage(webSocketObjectMapper.writeValueAsString(response)));
         } catch (IOException e) {
-            log.error("发送更多历史消息失败", e);
+            log.error("发送更多历史消息失�?, e);
         }
     }
 
@@ -375,12 +375,12 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
             response.put("hasMore", history.getPages() > page);
             session.sendMessage(new TextMessage(webSocketObjectMapper.writeValueAsString(response)));
         } catch (IOException e) {
-            log.error("发送更多私聊历史消息失败", e);
+            log.error("发送更多私聊历史消息失�?, e);
         }
     }
 
     private void handleLoadMoreMessage(WebSocketSession session, Map<String, Object> messageMap) throws IOException {
-        // 安全地处理数值类型转换
+        // 安全地处理数值类型转�?
         Object pictureIdObj = messageMap.get("pictureId");
         Object spaceIdObj = messageMap.get("spaceId");
         Object pageObj = messageMap.get("page");
@@ -440,7 +440,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
     }
 
     /**
-     * 发送更多空间聊天历史记录
+     * 发送更多空间聊天历史记�?
      */
     private void sendMoreSpaceHistory(WebSocketSession session, Long spaceId, Long page) {
         try {
@@ -451,7 +451,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
             response.put("hasMore", history.getPages() > page);
             session.sendMessage(new TextMessage(webSocketObjectMapper.writeValueAsString(response)));
         } catch (IOException e) {
-            log.error("发送更多空间历史消息失败", e);
+            log.error("发送更多空间历史消息失�?, e);
         }
     }
 
@@ -473,7 +473,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
             Set<WebSocketSession> targetSessions;
             if (pictureId != null) {
                 targetSessions = pictureSessions.get(pictureId);
-                // 获取该图片聊天室的在线用户
+                // 获取该图片聊天室的在线用�?
                 Set<User> onlineUsers = new HashSet<>();
                 if (targetSessions != null) {
                     for (WebSocketSession session : targetSessions) {
@@ -515,7 +515,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
                     }
                 }
 
-                // 获取空间所有成员
+                // 获取空间所有成�?
                 List<User> allMembers = chatMessageService.getSpaceMembers(spaceId);
 
                 // 计算离线用户
@@ -585,7 +585,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
     }
 
     /**
-     * 发送聊天历史记录
+     * 发送聊天历史记�?
      */
     private void sendChatHistory(WebSocketSession session, List<ChatMessage> history, boolean hasMore) {
         try {
@@ -598,17 +598,17 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
             response.put("hasMore", hasMore);
             session.sendMessage(new TextMessage(webSocketObjectMapper.writeValueAsString(response)));
         } catch (IOException e) {
-            log.error("发送历史消息失败", e);
+            log.error("发送历史消息失�?, e);
         }
     }
 
     /**
-     * 处理图片聊天室消息
+     * 处理图片聊天室消�?
      */
     public void handlePictureChatMessage(ChatMessage chatMessage, WebSocketSession session) throws IOException {
         try {
             if (chatMessage.getPictureId() == null) {
-                log.error("图片ID为空，无法处理消息");
+                log.error("图片ID为空，无法处理消�?);
                 sendErrorMessage(session, "消息处理失败");
                 return;
             }
@@ -619,15 +619,15 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
             // 填充消息信息
             chatMessageService.fillMessageInfo(chatMessage);
 
-            // 填充发送者信息
+            // 填充发送者信�?
             User sender = userService.getById(chatMessage.getSenderId());
             chatMessage.setSender(sender);
 
-            // 发送消息
+            // 发送消�?
             sendToPictureRoom(chatMessage);
         } catch (Exception e) {
-            log.error("处理图片聊天室消息失败", e);
-            sendErrorMessage(session, "消息发送失败");
+            log.error("处理图片聊天室消息失�?, e);
+            sendErrorMessage(session, "消息发送失�?);
         }
     }
 
@@ -642,11 +642,11 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
             // 填充消息信息
             chatMessageService.fillMessageInfo(chatMessage);
 
-            // 发送消息
+            // 发送消�?
             sendToSpaceRoom(chatMessage);
         } catch (Exception e) {
             log.error("处理空间聊天消息失败", e);
-            sendErrorMessage(session, "消息发送失败");
+            sendErrorMessage(session, "消息发送失�?);
         }
     }
 
@@ -657,7 +657,7 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
         try {
             User user = (User) session.getAttributes().get("user");
 
-            // 先保存消息
+            // 先保存消�?
             chatMessageService.save(chatMessage);
 
             // 使用原有的私聊处理逻辑（更新私聊记录）
@@ -666,17 +666,17 @@ public class ChatWebSocketServer extends TextWebSocketHandler {
             // 填充消息信息
             chatMessageService.fillMessageInfo(chatMessage);
 
-            // 填充发送者信息
+            // 填充发送者信�?
             chatMessage.setSender(user);
 
-            // 发送消息
+            // 发送消�?
             sendToPrivateChat(chatMessage);
         } catch (BusinessException e) {
             log.error("处理私聊消息失败: {}", e.getMessage());
             sendErrorMessage(session, e.getMessage());
         } catch (Exception e) {
             log.error("处理私聊消息失败", e);
-            sendErrorMessage(session, "消息发送失败");
+            sendErrorMessage(session, "消息发送失�?);
         }
     }
 }

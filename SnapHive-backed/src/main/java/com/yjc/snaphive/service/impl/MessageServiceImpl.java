@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author 鹿梦
+ * @author SnapHive
  * @description 针对表【message(留言板表)】的数据库操作Service实现
  * @createDate 2025-01-03 16:28:14
  */
@@ -40,7 +40,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message>
 
     @Override
     public Boolean addMessage(AddMessage addMessage) {
-        // 检查频率限制
+        // 检查频率限�?
         if (!rateLimiter.allowMessageAdd(addMessage.getIp())) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "发送太频繁，请稍后再试");
         }
@@ -50,7 +50,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message>
         message.setIp(addMessage.getIp());
         boolean success = this.save(message);
 
-        // 如果添加成功，删除缓存
+        // 如果添加成功，删除缓�?
         if (success) {
             redisTemplate.delete(MESSAGE_CACHE_KEY);
         }
@@ -61,12 +61,12 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message>
     @Override
     @SuppressWarnings("unchecked")
     public List<MessageVO> getTop500() {
-        // 检查频率限制
+        // 检查频率限�?
         if (!rateLimiter.allowMessageQuery("system")) {
-            throw new BusinessException(ErrorCode.OPERATION_ERROR, "查询太频繁，请稍后再试");
+            throw new BusinessException(ErrorCode.OPERATION_ERROR, "查询太频繁，请稍后再�?);
         }
 
-        // 尝试从缓存获取
+        // 尝试从缓存获�?
         List<MessageVO> cachedMessages = (List<MessageVO>) redisTemplate.opsForValue().get(MESSAGE_CACHE_KEY);
         if (cachedMessages != null) {
             return cachedMessages;
@@ -83,9 +83,9 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message>
 
     @Override
     public Page<Message> page(MessageQueryRequest messageQueryRequest) {
-        // 检查频率限制
+        // 检查频率限�?
         if (!rateLimiter.allowMessageQuery("system")) {
-            throw new BusinessException(ErrorCode.OPERATION_ERROR, "查询太频繁，请稍后再试");
+            throw new BusinessException(ErrorCode.OPERATION_ERROR, "查询太频繁，请稍后再�?);
         }
 
         long current = messageQueryRequest.getCurrent();
@@ -124,7 +124,7 @@ public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message>
         }
         boolean success = this.removeById(id);
 
-        // 如果删除成功，删除缓存
+        // 如果删除成功，删除缓�?
         if (success) {
             redisTemplate.delete(MESSAGE_CACHE_KEY);
         }

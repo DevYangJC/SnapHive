@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity.es;
+﻿package com.yjc.snaphive.model.entity.es;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -52,7 +52,7 @@ public class EsUser implements Serializable {
     private String userAvatar;
 
     /**
-     * 用户简介：支持中英文混合搜索
+     * 用户简介：支持中英文混合搜�?
      */
     @MultiField(
             mainField = @Field(type = FieldType.Text),

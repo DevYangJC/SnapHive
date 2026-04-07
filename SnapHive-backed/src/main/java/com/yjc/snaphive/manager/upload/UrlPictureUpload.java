@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.upload;
+﻿package com.yjc.snaphive.manager.upload;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
@@ -33,13 +33,13 @@ public class UrlPictureUpload extends PictureUploadTemplate {
         try {
             new URL(fileUrl);
         } catch (MalformedURLException e) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "文件地址格式不正确");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "文件地址格式不正�?);
         }
-        // 3. 校验 URL 的协议
+        // 3. 校验 URL 的协�?
         ThrowUtils.throwIf(!fileUrl.startsWith("http://") && !fileUrl.startsWith("https://"),
-                ErrorCode.PARAMS_ERROR, "仅支持 HTTP 或 HTTPS 协议的文件地址"
+                ErrorCode.PARAMS_ERROR, "仅支�?HTTP �?HTTPS 协议的文件地址"
         );
-        // 4. 发送 HEAD 请求验证文件是否存在
+        // 4. 发�?HEAD 请求验证文件是否存在
         HttpResponse httpResponse = null;
         try {
             httpResponse = HttpUtil.createRequest(Method.HEAD, fileUrl)
@@ -48,16 +48,16 @@ public class UrlPictureUpload extends PictureUploadTemplate {
             if (httpResponse.getStatus() != HttpStatus.HTTP_OK) {
                 return;
             }
-            // 5. 文件存在，文件类型校验
+            // 5. 文件存在，文件类型校�?
             String contentType = httpResponse.header("Content-Type");
             // 不为空，才校验是否合法，这样校验规则相对宽松
             if (StrUtil.isNotBlank(contentType)) {
-                // 允许的图片类型
+                // 允许的图片类�?
                 final List<String> ALLOW_CONTENT_TYPES = Arrays.asList("image/jpeg", "image/jpg", "image/png", "image/webp","image/gif");
                 ThrowUtils.throwIf(!ALLOW_CONTENT_TYPES.contains(contentType.toLowerCase()),
                         ErrorCode.PARAMS_ERROR, "文件类型错误");
             }
-            // 6. 文件存在，文件大小校验
+            // 6. 文件存在，文件大小校�?
             String contentLengthStr = httpResponse.header("Content-Length");
             if (StrUtil.isNotBlank(contentLengthStr)) {
                 try {
@@ -85,7 +85,7 @@ public class UrlPictureUpload extends PictureUploadTemplate {
     @Override
     protected void processFile(Object inputSource, File file) throws Exception {
         String fileUrl = (String) inputSource;
-        // 下载文件到临时目录
+        // 下载文件到临时目�?
         HttpUtil.downloadFile(fileUrl, file);
     }
 }

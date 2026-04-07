@@ -1,10 +1,10 @@
-package com.yjc.snaphive.common;
+﻿package com.yjc.snaphive.common;
 
 
 import com.yjc.snaphive.exception.ErrorCode;
 
 /**
- * 响应工具类
+ * 响应工具�?
  */
 public class ResultUtils {
 
@@ -22,7 +22,7 @@ public class ResultUtils {
     /**
      * 失败
      *
-     * @param errorCode 错误码
+     * @param errorCode 错误�?
      * @return 响应
      */
     public static BaseResponse<?> error(ErrorCode errorCode) {
@@ -32,7 +32,7 @@ public class ResultUtils {
     /**
      * 失败
      *
-     * @param code    错误码
+     * @param code    错误�?
      * @param message 错误信息
      * @return 响应
      */
@@ -43,7 +43,7 @@ public class ResultUtils {
     /**
      * 失败
      *
-     * @param errorCode 错误码
+     * @param errorCode 错误�?
      * @return 响应
      */
     public static BaseResponse<?> error(ErrorCode errorCode, String message) {

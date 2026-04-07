@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.yjc.snaphive.common.BaseResponse;
 import com.yjc.snaphive.common.ResultUtils;
@@ -47,7 +47,7 @@ public class Game2048Controller {
     }
 
     /**
-     * 获取排行榜
+     * 获取排行�?
      */
     @GetMapping("/ranking")
     public BaseResponse<List<Game2048RecordVO>> getRankingList(@RequestParam(required = false) Integer limit) {

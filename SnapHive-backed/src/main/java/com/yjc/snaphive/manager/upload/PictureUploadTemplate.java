@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.upload;
+﻿package com.yjc.snaphive.manager.upload;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
@@ -46,29 +46,29 @@ public abstract class PictureUploadTemplate {
         // 2. 图片上传地址
         String uuid = RandomUtil.randomString(16);
         String originalFilename = getOriginFilename(inputSource);
-        // 自己拼接文件上传路径，而不是使用原始文件名称，可以增强安全性
+        // 自己拼接文件上传路径，而不是使用原始文件名称，可以增强安全�?
         String uploadFilename = String.format("%s_%s.%s", DateUtil.formatDate(new Date()), uuid,
                 FileUtil.getSuffix(originalFilename));
         String uploadPath = String.format("/%s/%s", uploadPathPrefix, uploadFilename);
         File file = null;
         try {
-            // 3. 创建临时文件，获取文件到服务器
+            // 3. 创建临时文件，获取文件到服务�?
             file = File.createTempFile(uploadPath, null);
             // 处理文件来源
             processFile(inputSource, file);
-            // 4. 上传图片到对象存储
+            // 4. 上传图片到对象存�?
             PutObjectResult putObjectResult = cosManager.putPictureObject(uploadPath, file);
-            // 5. 获取图片信息对象，封装返回结果
+            // 5. 获取图片信息对象，封装返回结�?
             ImageInfo imageInfo = putObjectResult.getCiUploadResult().getOriginalInfo().getImageInfo();
-            // 获取到图片处理结果
+            // 获取到图片处理结�?
             ProcessResults processResults = putObjectResult.getCiUploadResult().getProcessResults();
             List<CIObject> objectList = processResults.getObjectList();
             if (CollUtil.isNotEmpty(objectList)) {
-                // 获取压缩之后得到的文件信息
+                // 获取压缩之后得到的文件信�?
                 CIObject compressedCiObject = objectList.get(0);
                 // 缩略图默认等于压缩图
                 CIObject thumbnailCiObject = compressedCiObject;
-                // 有生成缩略图，才获取缩略图
+                // 有生成缩略图，才获取缩略�?
                 if (objectList.size() > 1) {
                     thumbnailCiObject = objectList.get(1);
                 }
@@ -77,7 +77,7 @@ public abstract class PictureUploadTemplate {
             }
             return buildResult(originalFilename, file, uploadPath, imageInfo);
         } catch (Exception e) {
-            log.error("图片上传到对象存储失败", e);
+            log.error("图片上传到对象存储失�?, e);
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "上传失败");
         } finally {
             // 6. 临时文件清理
@@ -87,12 +87,12 @@ public abstract class PictureUploadTemplate {
     }
 
     /**
-     * 校验输入源（本地文件或 URL）
+     * 校验输入源（本地文件�?URL�?
      */
     protected abstract void validPicture(Object inputSource);
 
     /**
-     * 获取输入源的原始文件名
+     * 获取输入源的原始文件�?
      */
     protected abstract String getOriginFilename(Object inputSource);
 
@@ -104,9 +104,9 @@ public abstract class PictureUploadTemplate {
     /**
      * 封装返回结果
      *
-     * @param originalFilename   原始文件名
+     * @param originalFilename   原始文件�?
      * @param compressedCiObject 压缩后的对象
-     * @param thumbnailCiObject 缩略图对象
+     * @param thumbnailCiObject 缩略图对�?
      * @param imageInfo 图片信息
      * @return
      */
@@ -139,7 +139,7 @@ public abstract class PictureUploadTemplate {
      * @param originalFilename
      * @param file
      * @param uploadPath
-     * @param imageInfo        对象存储返回的图片信息
+     * @param imageInfo        对象存储返回的图片信�?
      * @return
      */
     private UploadPictureResult buildResult(String originalFilename, File file, String uploadPath, ImageInfo imageInfo) {

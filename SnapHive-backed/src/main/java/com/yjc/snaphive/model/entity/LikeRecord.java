@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 通用点赞表
+ * 通用点赞�?
  */
 @TableName(value ="like_record")
 @Data
@@ -32,7 +32,7 @@ public class LikeRecord implements Serializable {
     private Long targetId;
 
     /**
-     * 内容类型：1-图片 2-帖子 3-空间
+     * 内容类型�?-图片 2-帖子 3-空间
      */
     private Integer targetType;
 
@@ -47,17 +47,17 @@ public class LikeRecord implements Serializable {
     private Boolean isLiked;
 
     /**
-     * 第一次点赞时间
+     * 第一次点赞时�?
      */
     private Date firstLikeTime;
 
     /**
-     * 最近一次点赞时间
+     * 最近一次点赞时�?
      */
     private Date lastLikeTime;
 
     /**
-     * 是否已读（0-未读，1-已读）
+     * 是否已读�?-未读�?-已读�?
      */
     private Integer isRead;
 

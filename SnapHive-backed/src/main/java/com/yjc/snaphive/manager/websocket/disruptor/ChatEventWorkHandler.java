@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket.disruptor;
+﻿package com.yjc.snaphive.manager.websocket.disruptor;
 
 import com.lmax.disruptor.WorkHandler;
 import com.yjc.snaphive.manager.websocket.ChatWebSocketServer;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Lazy;
 import javax.annotation.Resource;
 
 /**
- * 聊天事件处理器
+ * 聊天事件处理�?
  */
 @Component
 @Slf4j
@@ -24,13 +24,13 @@ public class ChatEventWorkHandler implements WorkHandler<ChatEvent> {
     public void onEvent(ChatEvent event) {
         try {
             ChatMessage chatMessage = event.getChatMessage();
-            // 确保消息的目标ID已设置
+            // 确保消息的目标ID已设�?
             switch (event.getTargetType()) {
                 case 1: // 私聊
                     chatMessage.setPrivateChatId(event.getTargetId());
                     chatWebSocketServer.handlePrivateChatMessage(chatMessage, event.getSession());
                     break;
-                case 2: // 图片聊天室
+                case 2: // 图片聊天�?
                     chatMessage.setPictureId(event.getTargetId());
                     chatWebSocketServer.handlePictureChatMessage(chatMessage, event.getSession());
                     break;

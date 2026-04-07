@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.enums;
+﻿package com.yjc.snaphive.model.enums;
 
 import cn.hutool.core.util.ObjUtil;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public enum PictureReviewStatusEnum {
 
-    REVIEWING("待审核", 0),
+    REVIEWING("待审�?, 0),
     PASS("通过", 1),
     REJECT("拒绝", 2);
 
@@ -26,7 +26,7 @@ public enum PictureReviewStatusEnum {
      * 根据 value 获取枚举
      *
      * @param value 枚举值的 value
-     * @return 枚举值
+     * @return 枚举�?
      */
     public static PictureReviewStatusEnum getEnumByValue(Integer value) {
         if (ObjUtil.isEmpty(value)) {

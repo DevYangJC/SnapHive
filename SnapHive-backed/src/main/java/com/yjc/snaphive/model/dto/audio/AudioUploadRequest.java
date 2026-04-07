@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.audio;
+﻿package com.yjc.snaphive.model.dto.audio;
 
 import lombok.Data;
 
@@ -21,7 +21,7 @@ public class AudioUploadRequest implements Serializable {
     private String description;
 
     /**
-     * 艺术家/作者
+     * 艺术�?作�?
      */
     private String artist;
 

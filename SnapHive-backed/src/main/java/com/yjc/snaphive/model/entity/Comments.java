@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -33,7 +33,7 @@ public class Comments implements Serializable {
     private Long targetId;
 
     /**
-     * 评论目标类型：1-图片 2-帖子
+     * 评论目标类型�?-图片 2-帖子
      */
     private Integer targetType;
 
@@ -73,7 +73,7 @@ public class Comments implements Serializable {
     private Long dislikeCount;
 
     /**
-     * 是否已读（0-未读，1-已读）
+     * 是否已读�?-未读�?-已读�?
      */
     private Integer isRead;
 

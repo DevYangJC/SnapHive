@@ -1,9 +1,9 @@
-package com.yjc.snaphive.model.dto.file;
+﻿package com.yjc.snaphive.model.dto.file;
 
 import lombok.Data;
 
 /**
- * 上传图片的结果
+ * 上传图片的结�?
  */
 @Data
 public class UploadPictureResult {
@@ -14,7 +14,7 @@ public class UploadPictureResult {
     private String url;
 
     /**
-     * 缩略图 url
+     * 缩略�?url
      */
     private String thumbnailUrl;
     /**
@@ -38,7 +38,7 @@ public class UploadPictureResult {
     private int picHeight;
 
     /**
-     * 图片宽高比
+     * 图片宽高�?
      */
     private Double picScale;
 
@@ -48,7 +48,7 @@ public class UploadPictureResult {
     private String picFormat;
 
     /**
-     * 图片主色调
+     * 图片主色�?
      */
     private String picColor;
 

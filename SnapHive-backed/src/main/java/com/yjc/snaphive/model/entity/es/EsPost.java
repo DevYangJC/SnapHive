@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity.es;
+﻿package com.yjc.snaphive.model.entity.es;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -72,7 +72,7 @@ public class EsPost implements Serializable {
     private Long commentCount;
 
     /**
-     * 分享数
+     * 分享�?
      */
     @Field(type = FieldType.Long)
     private Long shareCount;

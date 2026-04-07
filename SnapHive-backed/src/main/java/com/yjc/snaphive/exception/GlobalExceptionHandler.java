@@ -1,4 +1,4 @@
-package com.yjc.snaphive.exception;
+﻿package com.yjc.snaphive.exception;
 
 import cn.dev33.satoken.exception.NotLoginException;
 import cn.dev33.satoken.exception.NotPermissionException;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * 全局异常处理器
+ * 全局异常处理�?
  */
 @RestControllerAdvice
 @Slf4j

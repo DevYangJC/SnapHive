@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.picture;
+﻿package com.yjc.snaphive.model.dto.picture;
 
 import lombok.Data;
 
@@ -22,7 +22,7 @@ public class PictureUpdateRequest implements Serializable {
     private String name;
 
     /**
-     * 简介
+     * 简�?
      */
     private String introduction;
 

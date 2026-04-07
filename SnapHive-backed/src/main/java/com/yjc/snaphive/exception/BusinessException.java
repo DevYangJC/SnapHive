@@ -1,15 +1,15 @@
-package com.yjc.snaphive.exception;
+﻿package com.yjc.snaphive.exception;
 
 import lombok.Getter;
 
 /**
- * 自定义业务异常
+ * 自定义业务异�?
  */
 @Getter
 public class BusinessException extends RuntimeException {
 
     /**
-     * 错误码
+     * 错误�?
      */
     private final int code;
 

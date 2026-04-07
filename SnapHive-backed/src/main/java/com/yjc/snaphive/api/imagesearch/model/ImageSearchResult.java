@@ -1,4 +1,4 @@
-package com.yjc.snaphive.api.imagesearch.model;
+﻿package com.yjc.snaphive.api.imagesearch.model;
 
 import lombok.Data;
 

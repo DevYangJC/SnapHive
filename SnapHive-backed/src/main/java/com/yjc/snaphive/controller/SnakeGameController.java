@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.yjc.snaphive.common.BaseResponse;
 import com.yjc.snaphive.common.ResultUtils;
@@ -47,7 +47,7 @@ public class SnakeGameController {
     }
 
     /**
-     * 获取排行榜
+     * 获取排行�?
      */
     @PostMapping("/ranking")
     public BaseResponse<List<SnakeGameRecord>> getRankingList(@RequestBody GameRankingRequest request) {

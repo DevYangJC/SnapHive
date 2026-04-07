@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -13,12 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 public interface PrivateChatService extends IService<PrivateChat> {
 
     /**
-     * 获取用户的私聊列表
+     * 获取用户的私聊列�?
      */
     Page<PrivateChat> getUserPrivateChats(long userId, long current, long size);
 
     /**
-     * 创建或更新私聊
+     * 创建或更新私�?
      */
     PrivateChat createOrUpdatePrivateChat(long userId, long targetUserId, String lastMessage);
 

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.yjc.snaphive.common.BaseResponse;
@@ -46,7 +46,7 @@ public class SpaceUserController {
     private UserService userService;
 
     /**
-     * 添加成员到空间
+     * 添加成员到空�?
      */
     @PostMapping("/add")
     @SaSpaceCheckPermission(value = SpaceUserPermissionConstant.SPACE_USER_MANAGE)
@@ -57,7 +57,7 @@ public class SpaceUserController {
     }
 
     /**
-     * 从空间移除成员
+     * 从空间移除成�?
      */
     @PostMapping("/delete")
     @SaSpaceCheckPermission(value = SpaceUserPermissionConstant.SPACE_USER_MANAGE)
@@ -70,7 +70,7 @@ public class SpaceUserController {
         // 判断是否存在
         SpaceUser oldSpaceUser = spaceUserService.getById(id);
         ThrowUtils.throwIf(oldSpaceUser == null, ErrorCode.NOT_FOUND_ERROR);
-        // 操作数据库
+        // 操作数据�?
         boolean result = spaceUserService.removeById(id);
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
         return ResultUtils.success(true);
@@ -87,7 +87,7 @@ public class SpaceUserController {
         Long spaceId = spaceUserQueryRequest.getSpaceId();
         Long userId = spaceUserQueryRequest.getUserId();
         ThrowUtils.throwIf(ObjectUtil.hasEmpty(spaceId, userId), ErrorCode.PARAMS_ERROR);
-        // 查询数据库
+        // 查询数据�?
         SpaceUser spaceUser = spaceUserService.getOne(spaceUserService.getQueryWrapper(spaceUserQueryRequest));
         ThrowUtils.throwIf(spaceUser == null, ErrorCode.NOT_FOUND_ERROR);
         return ResultUtils.success(spaceUser);
@@ -117,7 +117,7 @@ public class SpaceUserController {
         if (spaceUserEditRequest == null || spaceUserEditRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        // 将实体类和 DTO 进行转换
+        // 将实体类�?DTO 进行转换
         SpaceUser spaceUser = new SpaceUser();
         BeanUtils.copyProperties(spaceUserEditRequest, spaceUser);
         // 数据校验
@@ -126,7 +126,7 @@ public class SpaceUserController {
         long id = spaceUserEditRequest.getId();
         SpaceUser oldSpaceUser = spaceUserService.getById(id);
         ThrowUtils.throwIf(oldSpaceUser == null, ErrorCode.NOT_FOUND_ERROR);
-        // 操作数据库
+        // 操作数据�?
         boolean result = spaceUserService.updateById(spaceUser);
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
         return ResultUtils.success(true);

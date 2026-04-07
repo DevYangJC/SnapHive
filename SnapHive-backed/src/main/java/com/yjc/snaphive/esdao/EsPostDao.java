@@ -1,4 +1,4 @@
-package com.yjc.snaphive.esdao;
+﻿package com.yjc.snaphive.esdao;
 
 import com.yjc.snaphive.model.entity.es.EsPost;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;

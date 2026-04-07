@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket.disruptor;
+﻿package com.yjc.snaphive.manager.websocket.disruptor;
 
 import cn.hutool.core.thread.ThreadFactoryBuilder;
 import com.lmax.disruptor.dsl.Disruptor;

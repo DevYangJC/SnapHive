@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.common.BaseResponse;
@@ -50,7 +50,7 @@ public class PrivateChatController {
     }
 
     /**
-     * 清空未读消息数
+     * 清空未读消息�?
      */
     @PostMapping("/clear_unread/{targetUserId}/{isSender}")
     public BaseResponse<Boolean> clearUnreadCount(@PathVariable Long targetUserId,boolean isSender,
@@ -63,7 +63,7 @@ public class PrivateChatController {
     }
 
     /**
-     * 更新聊天类型（好友/私信）
+     * 更新聊天类型（好�?私信�?
      */
     @PostMapping("/update_type/{targetUserId}")
     public BaseResponse<Boolean> updateChatType(@PathVariable Long targetUserId,
@@ -76,7 +76,7 @@ public class PrivateChatController {
     }
 
     /**
-     * 创建或更新私聊
+     * 创建或更新私�?
      */
     @PostMapping("/create_update")
     public BaseResponse<PrivateChat> createOrUpdatePrivateChat(@RequestParam Long targetUserId,
@@ -85,12 +85,12 @@ public class PrivateChatController {
         ThrowUtils.throwIf(targetUserId == null || targetUserId <= 0, ErrorCode.PARAMS_ERROR);
         User loginUser = userService.getLoginUser(request);
 
-        // 不能和自己私聊
-        ThrowUtils.throwIf(targetUserId.equals(loginUser.getId()), ErrorCode.PARAMS_ERROR, "不能和自己私聊");
+        // 不能和自己私�?
+        ThrowUtils.throwIf(targetUserId.equals(loginUser.getId()), ErrorCode.PARAMS_ERROR, "不能和自己私�?);
 
-        // 检查目标用户是否存在
+        // 检查目标用户是否存�?
         User targetUser = userService.getById(targetUserId);
-        ThrowUtils.throwIf(targetUser == null, ErrorCode.NOT_FOUND_ERROR, "目标用户不存在");
+        ThrowUtils.throwIf(targetUser == null, ErrorCode.NOT_FOUND_ERROR, "目标用户不存�?);
 
         PrivateChat privateChat = privateChatService.createOrUpdatePrivateChat(loginUser.getId(), targetUserId, lastMessage);
         return ResultUtils.success(privateChat);

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import javax.servlet.http.HttpServletRequest;
 import com.yjc.snaphive.model.vo.AiChatVO;

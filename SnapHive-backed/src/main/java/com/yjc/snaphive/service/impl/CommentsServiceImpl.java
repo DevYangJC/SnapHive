@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -77,14 +77,14 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
             case 1: // 图片
                 Picture picture = pictureService.getById(commentsAddRequest.getTargetId());
                 if (picture == null) {
-                    throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "图片不存在");
+                    throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "图片不存�?);
                 }
                 targetUserId = picture.getUserId();
                 break;
             case 2: // 帖子
                 Post post = postService.getById(commentsAddRequest.getTargetId());
                 if (post == null) {
-                    throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "帖子不存在");
+                    throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "帖子不存�?);
                 }
                 targetUserId = post.getUserId();
                 break;
@@ -97,23 +97,23 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         comments.setUserId(user.getId());  // 设置评论用户ID
         comments.setTargetUserId(targetUserId);
         comments.setIsRead(0);
-        comments.setLikeCount(0L);  // 设置初始点赞数
-        comments.setDislikeCount(0L);  // 设置初始点踩数
-        comments.setIsDelete(0);  // 设置未删除状态
+        comments.setLikeCount(0L);  // 设置初始点赞�?
+        comments.setDislikeCount(0L);  // 设置初始点踩�?
+        comments.setIsDelete(0);  // 设置未删除状�?
 
         boolean result = save(comments);
         if (!result) {
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "评论保存失败");
         }
 
-        // 更新评论数
+        // 更新评论�?
         updateCommentCount(commentsAddRequest.getTargetId(), commentsAddRequest.getTargetType(), 1);
 
         return true;
     }
 
     /**
-     * 更新评论数
+     * 更新评论�?
      */
     private void updateCommentCount(Long targetId, Integer targetType, int delta) {
         switch (targetType) {
@@ -150,10 +150,10 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         // 获取评论信息
         Comments comment = this.getById(commentsDeleteRequest.getCommentId());
         if (comment == null || comment.getIsDelete() == 1) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "评论不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "评论不存�?);
         }
 
-        // 校验权限（只能删除自己的评论）
+        // 校验权限（只能删除自己的评论�?
         if (!user.getId().equals(comment.getUserId())) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
@@ -161,13 +161,13 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         // 先计算要删除的评论及其子评论的总数
         int deletedCommentCount = countCommentsRecursively(comment.getCommentId());
 
-        // 删除评论及其子评论
+        // 删除评论及其子评�?
         boolean success = deleteCommentsRecursively(comment.getCommentId());
         if (!success) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "删除评论失败");
         }
 
-        // 更新 MySQL 中的评论数
+        // 更新 MySQL 中的评论�?
         switch (comment.getTargetType()) {
             case 1: // 图片
                 pictureService.update()
@@ -213,7 +213,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
     }
 
     /**
-     * 递归删除评论及其子评论
+     * 递归删除评论及其子评�?
      */
     private boolean deleteCommentsRecursively(Long commentId) {
         // 获取所有未删除的子评论
@@ -222,7 +222,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
                 .eq("isDelete", 0);
         List<Comments> childComments = this.list(queryWrapper);
 
-        // 递归删除子评论
+        // 递归删除子评�?
         for (Comments childComment : childComments) {
             if (!deleteCommentsRecursively(childComment.getCommentId())) {
                 return false;
@@ -255,40 +255,40 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
                         commentsQueryRequest.getTargetType() : 1) // 默认查询图片评论
                 .eq("parentCommentId", 0)
                 .orderByDesc("createTime");
-        // 查询评论是否存在，不存在返回空
+        // 查询评论是否存在，不存在返回�?
         if (count(queryWrapper) == 0) {
             return null;
         }
         // 得到顶级评论列表
         Page<Comments> commentsPage = page(page, queryWrapper);
-        // 获取评论用户的 ID 列表
+        // 获取评论用户�?ID 列表
         List<Long> userIds = commentsPage.getRecords().stream()
                 .map(Comments::getUserId)
                 .collect(Collectors.toList());
-        // 批量查询评论用户信息，先检查 userIds 不为空
+        // 批量查询评论用户信息，先检�?userIds 不为�?
         if (userIds.isEmpty()) {
             return new PageDTO<>(commentsPage.getCurrent(), commentsPage.getSize(), commentsPage.getTotal());
         }
         // 批量查询评论用户信息
         List<User> users = userService.listByIds(userIds);
-        // 将 User 列表转换为 commentUserVO 列表
+        // �?User 列表转换�?commentUserVO 列表
         List<CommentUserVO> commentUserVOs = users.stream().map(user1 -> {
             CommentUserVO commentUserVO = new CommentUserVO();
             BeanUtils.copyProperties(user1, commentUserVO);
             return commentUserVO;
         }).collect(Collectors.toList());
-        // 将 Comments 列表转换为 CommentsVO 列表
+        // �?Comments 列表转换�?CommentsVO 列表
         Map<Long, CommentUserVO> userMap = commentUserVOs.stream()
                 .collect(Collectors.toMap(CommentUserVO::getId, CommentUserVO -> CommentUserVO));
         List<CommentsVO> commentsVOList = commentsPage.getRecords().stream().map(comments -> {
             CommentsVO commentsVO = new CommentsVO();
             BeanUtils.copyProperties(comments, commentsVO);
-            // 查找对应的评论用户信息
+            // 查找对应的评论用户信�?
             CommentUserVO commentUserVO = userMap.get(comments.getUserId());
             if (commentUserVO!= null) {
                 commentsVO.setCommentUser(commentUserVO);
             }
-            // 递归查询子评论
+            // 递归查询子评�?
             commentsVO.setChildren(getChildrenComments(comments.getCommentId()));
             return commentsVO;
         }).collect(Collectors.toList());
@@ -299,12 +299,12 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
 
     @Override
     public Boolean likeComment(CommentsLikeRequest commentslikeRequest, HttpServletRequest request) {
-        // 检查评论 ID 是否为空
+        // 检查评�?ID 是否为空
         ThrowUtils.throwIf(commentslikeRequest.getCommentId() == null, ErrorCode.PARAMS_ERROR, "评论 id 不能为空");
         // 获取用户信息
         User user = (User) request.getSession().getAttribute("user");
 
-        // 创建更新包装器
+        // 创建更新包装�?
         UpdateWrapper<Comments> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("commentId", commentslikeRequest.getCommentId());
         //判断评论是否getOne(updateWrapper);
@@ -334,7 +334,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         queryWrapper.eq("parentCommentId", parentCommentId);
         // 按照创建时间倒序排列
         queryWrapper.orderByDesc("createTime");
-        // 使用 CommentsService 的 list 方法查询子评论
+        // 使用 CommentsService �?list 方法查询子评�?
         List<Comments> childrenComments = this.list(queryWrapper);
         if (childrenComments == null || childrenComments.isEmpty()) {
             return Collections.emptyList();
@@ -367,21 +367,21 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
     }
 
     /**
-     * 更新 ES 中图片的评论数
+     * 更新 ES 中图片的评论�?
      */
     private void updateEsPictureCommentCount(Long pictureId, int delta) {
         try {
-            // 先查询 ES 中是否存在该数据
+            // 先查�?ES 中是否存在该数据
             Optional<EsPicture> esOptional = esPictureDao.findById(pictureId);
             EsPicture esPicture;
             if (esOptional.isPresent()) {
-                // 如果存在，只更新评论数
+                // 如果存在，只更新评论�?
                 esPicture = esOptional.get();
                 long newCount = esPicture.getCommentCount() + delta;
-                // 确保评论数不会小于0
+                // 确保评论数不会小�?
                 esPicture.setCommentCount(Math.max(0, newCount));
             } else {
-                // 如果不存在，从 MySQL 获取完整数据
+                // 如果不存在，�?MySQL 获取完整数据
                 Picture picture = pictureMapper.selectById(pictureId);
                 if (picture == null) {
                     return;
@@ -396,7 +396,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
     }
 
     /**
-     * 更新 ES 中帖子的评论数
+     * 更新 ES 中帖子的评论�?
      */
     private void updateEsPostCommentCount(Long postId, int delta) {
         try {
@@ -416,7 +416,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         QueryWrapper<Comments> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("targetUserId", userId)
                 .eq("isRead", 0)
-                .ne("userId", userId)  // 添加这一行，排除自己评论自己的记录
+                .ne("userId", userId)  // 添加这一行，排除自己评论自己的记�?
                 .orderByDesc("createTime");
 
         List<Comments> unreadComments = this.list(queryWrapper);
@@ -424,7 +424,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
             return new ArrayList<>();
         }
 
-        // 2. 批量更新为已读
+        // 2. 批量更新为已�?
         List<Long> commentIds = unreadComments.stream()
                 .map(Comments::getCommentId)
                 .collect(Collectors.toList());
@@ -452,7 +452,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
                     Picture picture = pictureMapper.selectById(comment.getTargetId());
                     if (picture != null) {
                         commentsVO.setPicture(PictureVO.objToVo(picture));
-                        // 设置图片作者信息
+                        // 设置图片作者信�?
                         User pictureUser = userService.getById(picture.getUserId());
                         if (pictureUser != null) {
                             commentsVO.getPicture().setUser(userService.getUserVO(pictureUser));
@@ -462,7 +462,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
                 case 2: // 帖子
                     Post post = postService.getById(comment.getTargetId());
                     if (post != null) {
-                        // 设置帖子作者信息
+                        // 设置帖子作者信�?
                         User postUser = userService.getById(post.getUserId());
                         if (postUser != null) {
                             post.setUser(userService.getUserVO(postUser));
@@ -475,7 +475,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
                     break;
             }
 
-            // 递归获取子评论
+            // 递归获取子评�?
             commentsVO.setChildren(getChildrenComments(comment.getCommentId()));
 
             return commentsVO;
@@ -487,7 +487,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
         return this.count(new QueryWrapper<Comments>()
                 .eq("targetUserId", userId)
                 .eq("isRead", 0)
-                .ne("userId", userId));  // 添加这一行，排除自己评论自己的记录
+                .ne("userId", userId));  // 添加这一行，排除自己评论自己的记�?
     }
 
     @Override
@@ -509,8 +509,8 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
 
         // 构建查询条件
         QueryWrapper<Comments> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("userId", userId)  // 查询用户发出的评论
-                .eq("isDelete", 0);  // 只查询未删除的评论
+        queryWrapper.eq("userId", userId)  // 查询用户发出的评�?
+                .eq("isDelete", 0);  // 只查询未删除的评�?
 
         // 处理目标类型查询
         Integer targetType = commentsQueryRequest.getTargetType();
@@ -542,7 +542,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
                     Picture picture = pictureService.getById(comment.getTargetId());
                     if (picture != null) {
                         vo.setPicture(PictureVO.objToVo(picture));
-                        // 设置图片作者信息
+                        // 设置图片作者信�?
                         User pictureUser = userService.getById(picture.getUserId());
                         if (pictureUser != null) {
                             vo.getPicture().setUser(userService.getUserVO(pictureUser));
@@ -552,7 +552,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
                 case 2: // 帖子
                     Post post = postService.getById(comment.getTargetId());
                     if (post != null) {
-                        // 设置帖子作者信息
+                        // 设置帖子作者信�?
                         User postUser = userService.getById(post.getUserId());
                         if (postUser != null) {
                             post.setUser(userService.getUserVO(postUser));
@@ -585,9 +585,9 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
 
         // 构建查询条件
         QueryWrapper<Comments> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("targetUserId", userId)  // 查询用户收到的评论
-                .eq("isDelete", 0)  // 只查询未删除的评论
-                .ne("userId", userId);  // 排除自己评论自己的记录
+        queryWrapper.eq("targetUserId", userId)  // 查询用户收到的评�?
+                .eq("isDelete", 0)  // 只查询未删除的评�?
+                .ne("userId", userId);  // 排除自己评论自己的记�?
 
         // 处理目标类型查询
         Integer targetType = commentsQueryRequest.getTargetType();
@@ -619,7 +619,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
                     Picture picture = pictureService.getById(comment.getTargetId());
                     if (picture != null) {
                         vo.setPicture(PictureVO.objToVo(picture));
-                        // 设置图片作者信息
+                        // 设置图片作者信�?
                         User pictureUser = userService.getById(picture.getUserId());
                         if (pictureUser != null) {
                             vo.getPicture().setUser(userService.getUserVO(pictureUser));
@@ -629,7 +629,7 @@ public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> i
                 case 2: // 帖子
                     Post post = postService.getById(comment.getTargetId());
                     if (post != null) {
-                        // 设置帖子作者信息
+                        // 设置帖子作者信�?
                         User postUser = userService.getById(post.getUserId());
                         if (postUser != null) {
                             post.setUser(userService.getUserVO(postUser));

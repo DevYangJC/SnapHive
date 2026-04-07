@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.timealbum;
+﻿package com.yjc.snaphive.model.dto.timealbum;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ public class TimeAlbumPasswordRequest {
     private Long albumId;
 
     /**
-     * 新密码
+     * 新密�?
      */
     private String newPassword;
 

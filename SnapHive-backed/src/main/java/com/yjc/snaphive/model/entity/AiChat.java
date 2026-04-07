@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -21,7 +21,7 @@ public class AiChat implements Serializable {
     private String content;
 
     @TableField("role")
-    private String role = "user";  // 默认为用户角色
+    private String role = "user";  // 默认为用户角�?
 
     @TableField("createTime")
     private Date createTime;
@@ -36,7 +36,7 @@ public class AiChat implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public AiChat() {
-        // 默认构造函数
+        // 默认构造函�?
     }
 
     public AiChat(Long userId, String content, String role, Date createTime) {

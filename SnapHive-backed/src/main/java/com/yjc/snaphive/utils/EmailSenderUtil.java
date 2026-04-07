@@ -1,4 +1,4 @@
-package com.yjc.snaphive.utils;
+﻿package com.yjc.snaphive.utils;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -56,7 +56,7 @@ public class EmailSenderUtil {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
 
             // 编码邮件主题
-            String encodedSubject = MimeUtility.encodeText("SnapHive邮箱验证码", "UTF-8", "B");
+            String encodedSubject = MimeUtility.encodeText("SnapHive邮箱验证�?, "UTF-8", "B");
             message.setSubject(encodedSubject, "UTF-8");
 
             String htmlContent = readHTMLFromFile();
@@ -114,9 +114,9 @@ public class EmailSenderUtil {
             message.setContent(htmlContent, "text/html;charset=UTF-8");
 
             Transport.send(message);
-            logger.info("审核通知邮件发送成功");
+            logger.info("审核通知邮件发送成�?);
         } catch (MessagingException | IOException e) {
-            logger.error("审核通知邮件发送失败: {}", e.getMessage(), e);
+            logger.error("审核通知邮件发送失�? {}", e.getMessage(), e);
         }
     }
 }

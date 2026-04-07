@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.sharding;
+﻿package com.yjc.snaphive.manager.sharding;
 
 import org.apache.shardingsphere.sharding.api.sharding.standard.PreciseShardingValue;
 import org.apache.shardingsphere.sharding.api.sharding.standard.RangeShardingValue;
@@ -17,7 +17,7 @@ public class PictureShardingAlgorithm implements StandardShardingAlgorithm<Long>
     public String doSharding(Collection<String> availableTargetNames, PreciseShardingValue<Long> preciseShardingValue) {
         Long spaceId = preciseShardingValue.getValue();
         String logicTableName = preciseShardingValue.getLogicTableName();
-        // spaceId 为 null 表示查询所有图片
+        // spaceId �?null 表示查询所有图�?
         if (spaceId == null) {
             return logicTableName;
         }

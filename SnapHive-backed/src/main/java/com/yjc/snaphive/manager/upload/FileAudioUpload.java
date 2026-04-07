@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.upload;
+﻿package com.yjc.snaphive.manager.upload;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.crypto.digest.DigestUtil;
@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * 文件方式上传音频实现类
+ * 文件方式上传音频实现�?
  */
 @Component
 @Slf4j
@@ -47,7 +47,7 @@ public class FileAudioUpload extends AudioUploadTemplate {
         // 2. 校验文件后缀（不区分大小写）
         String fileSuffix = FileUtil.getSuffix(multipartFile.getOriginalFilename());
         if (fileSuffix == null || !ALLOW_AUDIO_FORMAT_SET.contains(fileSuffix.toLowerCase())) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "不支持的音频格式，仅支持：" + String.join(", ", ALLOW_AUDIO_FORMAT_SET));
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "不支持的音频格式，仅支持�? + String.join(", ", ALLOW_AUDIO_FORMAT_SET));
         }
     }
 
@@ -78,7 +78,7 @@ public class FileAudioUpload extends AudioUploadTemplate {
                 return (int) (microseconds / 1_000_000L);
             }
 
-            // 如果无法获取准确时长，尝试估算
+            // 如果无法获取准确时长，尝试估�?
             long frames = audioInputStream.getFrameLength();
             if (frames != -1) {
                 float frameRate = audioInputStream.getFormat().getFrameRate();

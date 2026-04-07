@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.user;
+﻿package com.yjc.snaphive.model.dto.user;
 
 import lombok.Data;
 
@@ -13,7 +13,7 @@ public class UserLoginRequest implements Serializable {
     private static final long serialVersionUID = 8735650154179439661L;
 
     /**
-     * 账号或邮箱
+     * 账号或邮�?
      */
     private String accountOrEmail;
 
@@ -23,7 +23,7 @@ public class UserLoginRequest implements Serializable {
     private String userPassword;
 
     /**
-     * 验证码
+     * 验证�?
      */
     private String verifyCode;
 

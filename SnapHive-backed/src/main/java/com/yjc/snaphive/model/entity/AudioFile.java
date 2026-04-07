@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 音频文件实体类
+ * 音频文件实体�?
  */
 @TableName(value = "audio_file")
 @Data
@@ -25,7 +25,7 @@ public class AudioFile implements Serializable {
     private Long userId;
 
     /**
-     * 文件名
+     * 文件�?
      */
     private String fileName;
 
@@ -45,7 +45,7 @@ public class AudioFile implements Serializable {
     private Long fileSize;
 
     /**
-     * 音频时长(秒)
+     * 音频时长(�?
      */
     private Integer duration;
 
@@ -55,7 +55,7 @@ public class AudioFile implements Serializable {
     private String mimeType;
 
     /**
-     * 文件MD5值
+     * 文件MD5�?
      */
     private String md5;
 
@@ -75,7 +75,7 @@ public class AudioFile implements Serializable {
     private String description;
 
     /**
-     * 艺术家/作者
+     * 艺术�?作�?
      */
     private String artist;
 
@@ -100,7 +100,7 @@ public class AudioFile implements Serializable {
     private Long viewCount;
 
     /**
-     * 点赞数
+     * 点赞�?
      */
     private Long likeCount;
 

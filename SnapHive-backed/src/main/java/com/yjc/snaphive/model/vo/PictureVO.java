@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.vo;
+﻿package com.yjc.snaphive.model.vo;
 
 import cn.hutool.json.JSONUtil;
 import com.yjc.snaphive.model.entity.Picture;
@@ -24,7 +24,7 @@ public class PictureVO implements Serializable {
     private String url;
 
     /**
-     * 缩略图 url
+     * 缩略�?url
      */
     private String thumbnailUrl;
 
@@ -34,7 +34,7 @@ public class PictureVO implements Serializable {
     private String name;
 
     /**
-     * 简介
+     * 简�?
      */
     private String introduction;
 
@@ -79,12 +79,12 @@ public class PictureVO implements Serializable {
     private String picFormat;
 
     /**
-     * 图片主色调
+     * 图片主色�?
      */
     private String picColor;
 
     /**
-     * 审核状态：0-待审核; 1-通过; 2-拒绝
+     * 审核状态：0-待审�? 1-通过; 2-拒绝
      */
     private Integer reviewStatus;
 
@@ -94,17 +94,17 @@ public class PictureVO implements Serializable {
     private String reviewMessage;
 
     /**
-     * 评论数
+     * 评论�?
      */
     private Long commentCount;
 
     /**
-     * 点赞数
+     * 点赞�?
      */
     private Long likeCount;
 
     /**
-     * 分享数
+     * 分享�?
      */
     private Long shareCount;
 
@@ -149,7 +149,7 @@ public class PictureVO implements Serializable {
     private List<String> permissionList = new ArrayList<>();
 
     /**
-     * 浏览量
+     * 浏览�?
      */
     private Long viewCount;
 
@@ -159,12 +159,12 @@ public class PictureVO implements Serializable {
     private Long chatCount;
 
     /**
-     * 是否精选
+     * 是否精�?
      */
     private Integer isFeature;
 
     /**
-     * 是否允许下载：0-禁止下载 1-允许下载
+     * 是否允许下载�?-禁止下载 1-允许下载
      */
     private Integer isDownload;
 
@@ -181,7 +181,7 @@ public class PictureVO implements Serializable {
         }
         Picture picture = new Picture();
         BeanUtils.copyProperties(pictureVO, picture);
-        // 类型不同，需要转换
+        // 类型不同，需要转�?
         picture.setTags(JSONUtil.toJsonStr(pictureVO.getTags()));
         return picture;
     }
@@ -195,7 +195,7 @@ public class PictureVO implements Serializable {
         }
         PictureVO pictureVO = new PictureVO();
         BeanUtils.copyProperties(picture, pictureVO);
-        // 类型不同，需要转换
+        // 类型不同，需要转�?
         pictureVO.setTags(JSONUtil.toList(picture.getTags(), String.class));
         return pictureVO;
     }

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yjc.snaphive.model.entity.Tag;
@@ -7,7 +7,7 @@ import com.yjc.snaphive.model.vo.TagVO;
 import java.util.List;
 
 /**
-* @author 鹿梦
+* @author SnapHive
 * @description 针对表【tag(标签)】的数据库操作Service
 * @createDate 2024-12-13 17:37:29
 */

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.annotation.AuthCheck;
@@ -61,7 +61,7 @@ public class ActivityController {
     }
 
     /**
-     * 获取轮播图活动列表
+     * 获取轮播图活动列�?
      */
     @PostMapping("/list/carousel")
     public BaseResponse<Page<Activity>> listCarouselActivities(@RequestBody ActivityQueryRequest activityQueryRequest) {

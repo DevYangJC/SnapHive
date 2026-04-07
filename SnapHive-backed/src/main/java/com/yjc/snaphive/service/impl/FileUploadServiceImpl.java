@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.yjc.snaphive.exception.ErrorCode;
@@ -26,7 +26,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 /**
- * 通用文件上传服务实现类
+ * 通用文件上传服务实现�?
  */
 @Service
 @Slf4j
@@ -53,12 +53,12 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Override
     public PictureVO uploadPicture(Object inputSource, Long userId, String name, String description, String tags) {
         // 校验参数
-        ThrowUtils.throwIf(userId == null || userId <= 0, ErrorCode.PARAMS_ERROR, "用户ID不合法");
+        ThrowUtils.throwIf(userId == null || userId <= 0, ErrorCode.PARAMS_ERROR, "用户ID不合�?);
         ThrowUtils.throwIf(inputSource == null, ErrorCode.PARAMS_ERROR, "上传内容不能为空");
 
         // 获取用户信息
         User user = userService.getById(userId);
-        ThrowUtils.throwIf(user == null, ErrorCode.NOT_FOUND_ERROR, "用户不存在");
+        ThrowUtils.throwIf(user == null, ErrorCode.NOT_FOUND_ERROR, "用户不存�?);
 
         // 上传图片
         String uploadPathPrefix = String.format("public/%s", userId);
@@ -69,7 +69,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 
         UploadPictureResult uploadPictureResult = pictureUploadTemplate.uploadPicture(inputSource, uploadPathPrefix);
 
-        // 构造图片信息
+        // 构造图片信�?
         Picture picture = new Picture();
         picture.setSpaceId(-2L); // 通用上传接口使用-2作为特殊标识
         picture.setUrl(uploadPictureResult.getUrl());
@@ -99,12 +99,12 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Override
     public AudioFileVO uploadAudio(Object inputSource, Long userId, String title, String description, String artist, String tags) {
         // 校验参数
-        ThrowUtils.throwIf(userId == null || userId <= 0, ErrorCode.PARAMS_ERROR, "用户ID不合法");
+        ThrowUtils.throwIf(userId == null || userId <= 0, ErrorCode.PARAMS_ERROR, "用户ID不合�?);
         ThrowUtils.throwIf(inputSource == null, ErrorCode.PARAMS_ERROR, "上传内容不能为空");
 
         // 获取用户信息
         User user = userService.getById(userId);
-        ThrowUtils.throwIf(user == null, ErrorCode.NOT_FOUND_ERROR, "用户不存在");
+        ThrowUtils.throwIf(user == null, ErrorCode.NOT_FOUND_ERROR, "用户不存�?);
 
         // 上传音频
         String uploadPathPrefix = String.format("audio/%s", userId);

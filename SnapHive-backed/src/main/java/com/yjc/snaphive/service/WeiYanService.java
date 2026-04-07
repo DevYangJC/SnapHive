@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -42,7 +42,7 @@ public interface WeiYanService extends IService<WeiYan> {
      * 根据id获取微言
      * @param id 微言id
      * @param loveBoardId 恋爱板id
-     * @param userId 当前用户id（可为null）
+     * @param userId 当前用户id（可为null�?
      * @return 微言信息
      */
     WeiYan getWeiYanById(long id, long loveBoardId, Long userId);
@@ -50,7 +50,7 @@ public interface WeiYanService extends IService<WeiYan> {
     /**
      * 获取恋爱板的微言列表
      * @param loveBoardId 恋爱板id
-     * @param userId 当前用户id（可为null）
+     * @param userId 当前用户id（可为null�?
      * @return 微言列表
      */
     List<WeiYan> listLoveBoardWeiYan(long loveBoardId, Long userId);

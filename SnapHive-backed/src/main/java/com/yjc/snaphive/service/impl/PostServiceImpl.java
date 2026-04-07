@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
@@ -77,7 +77,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
 
         // 标题校验
         ThrowUtils.throwIf(StrUtil.isBlank(title), ErrorCode.PARAMS_ERROR, "标题不能为空");
-        ThrowUtils.throwIf(title.length() > 100, ErrorCode.PARAMS_ERROR, "标题最多100字");
+        ThrowUtils.throwIf(title.length() > 100, ErrorCode.PARAMS_ERROR, "标题最�?00�?);
 
         // 内容校验
         ThrowUtils.throwIf(StrUtil.isBlank(content), ErrorCode.PARAMS_ERROR, "内容不能为空");
@@ -90,7 +90,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
                     String marker = "{img-" + (i + 1) + "}";
                     // 确保 marker 在内容中存在
                     ThrowUtils.throwIf(!content.contains(marker),
-                            ErrorCode.PARAMS_ERROR, "图片标记 " + marker + " 未在内容中找到");
+                            ErrorCode.PARAMS_ERROR, "图片标记 " + marker + " 未在内容中找�?);
                 }
             }
         }
@@ -99,13 +99,13 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         Post post = new Post();
         BeanUtils.copyProperties(postAddRequest, post);
         post.setUserId(loginUser.getId());
-        post.setStatus(0); // 待审核
+        post.setStatus(0); // 待审�?
 
         // 保存帖子
         boolean success = this.save(post);
         ThrowUtils.throwIf(!success, ErrorCode.OPERATION_ERROR);
 
-        // 同步到 ES
+        // 同步�?ES
         try {
             EsPost esPost = new EsPost();
             BeanUtils.copyProperties(post, esPost);
@@ -150,14 +150,14 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         // 参数校验
         ThrowUtils.throwIf(id == null || id <= 0, ErrorCode.PARAMS_ERROR);
 
-        // 检测爬虫
+        // 检测爬�?
         crawlerDetect(request);
 
         // 获取帖子信息
         Post post = this.getById(id);
         ThrowUtils.throwIf(post == null, ErrorCode.NOT_FOUND_ERROR);
 
-        // 增加浏览量
+        // 增加浏览�?
         incrementViewCount(id, request);
 
         // 获取附件并按位置排序
@@ -180,7 +180,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         User user = userService.getById(post.getUserId());
         post.setUser(userService.getUserVO(user));
 
-        // 设置点赞和分享状态
+        // 设置点赞和分享状�?
         if (loginUser != null) {
             boolean isLiked = likeRecordService.isContentLiked(post.getId(), 2, loginUser.getId());
             post.setIsLiked(isLiked ? 1 : 0);
@@ -191,7 +191,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
             post.setIsShared(0);
         }
 
-        // 获取最新的浏览量
+        // 获取最新的浏览�?
         long realViewCount = getViewCount(id);
         post.setViewCount(realViewCount);
 
@@ -206,7 +206,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         // 构建查询条件
         QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
 
-        // 搜索词
+        // 搜索�?
         String searchText = postQueryRequest.getSearchText();
         if (StrUtil.isNotBlank(searchText)) {
             queryWrapper.like("title", searchText).or().like("content", searchText);
@@ -229,7 +229,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         boolean isAdmin = loginUser != null && UserConstant.ADMIN_ROLE.equals(loginUser.getUserRole());
 
         if (isPublic || !isAdmin) {
-            // 公共查询或非管理员，只显示已发布的帖子
+            // 公共查询或非管理员，只显示已发布的帖�?
             queryWrapper.eq("status", 1);
         } else {
             // 管理员查询所有状态的帖子
@@ -262,7 +262,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         // 获取所有帖子ID
         Set<Long> postIds = posts.stream().map(Post::getId).collect(Collectors.toSet());
 
-        // 批量查询所有图片
+        // 批量查询所有图�?
         Map<Long, List<PostAttachment>> postAttachmentMap = getPostAttachments(postIds);
 
         // 批量查询用户信息
@@ -276,7 +276,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
             shareMap = getPostIdIsSharedMap(loginUser, postIds);
         }
 
-        // 批量获取浏览量
+        // 批量获取浏览�?
         Map<Long, Long> viewCountMap = new HashMap<>();
         List<String> viewCountKeys = postIds.stream()
                 .map(postId -> String.format("post:viewCount:%d", postId))
@@ -297,7 +297,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         for (Post post : posts) {
             // 清空内容，只在详情页显示
             post.setContent(null);
-            // 设置第一张图片
+            // 设置第一张图�?
             List<PostAttachment> attachments = postAttachmentMap.get(post.getId());
             post.setAttachments(attachments != null ? attachments : Collections.emptyList());
             // 设置用户信息
@@ -305,16 +305,16 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
             if (user != null) {
                 post.setUser(userService.getUserVO(user));
             }
-            // 设置点赞和分享状态
+            // 设置点赞和分享状�?
             post.setIsLiked(likeMap.getOrDefault(post.getId(), false) ? 1 : 0);
             post.setIsShared(shareMap.getOrDefault(post.getId(), false) ? 1 : 0);
-            // 设置实时浏览量
+            // 设置实时浏览�?
             post.setViewCount(viewCountMap.getOrDefault(post.getId(), 0L));
         }
     }
 
     /**
-     * 填充用户点赞状态
+     * 填充用户点赞状�?
      */
     private void fillUserLikeStatus(List<Post> posts, Long userId) {
         if (CollUtil.isEmpty(posts) || userId == null) {
@@ -326,10 +326,10 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     }
 
     /**
-     * 获取帖子的点赞状态映射
+     * 获取帖子的点赞状态映�?
      */
     private Map<Long, Boolean> getPostIdIsLikedMap(User currentUser, Set<Long> postIds) {
-        // 使用通用点赞表查询
+        // 使用通用点赞表查�?
         QueryWrapper<LikeRecord> likeQueryWrapper = new QueryWrapper<>();
         likeQueryWrapper.in("targetId", postIds)
                 .eq("userId", currentUser.getId())
@@ -347,7 +347,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     }
 
     /**
-     * 获取帖子的分享状态映射
+     * 获取帖子的分享状态映�?
      */
     private Map<Long, Boolean> getPostIdIsSharedMap(User currentUser, Set<Long> postIds) {
         // 查询分享记录
@@ -368,13 +368,13 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     }
 
     /**
-     * 获取帖子的附件信息
+     * 获取帖子的附件信�?
      */
     private Map<Long, List<PostAttachment>> getPostAttachments(Set<Long> postIds) {
         List<PostAttachment> allAttachments = postAttachmentService.list(
                 new QueryWrapper<PostAttachment>()
                         .in("postId", postIds)
-                        .eq("type", 1)  // 只查询图片类型
+                        .eq("type", 1)  // 只查询图片类�?
                         .orderByAsc("position")
         );
 
@@ -384,7 +384,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
                 postAttachmentMap.computeIfAbsent(attachment.getPostId(), k -> new ArrayList<>())
                         .add(attachment);
             }
-            // 只保留每个帖子的第一张图片
+            // 只保留每个帖子的第一张图�?
             postAttachmentMap.forEach((postId, attachments) -> {
                 if (attachments.size() > 1) {
                     attachments.subList(1, attachments.size()).clear();
@@ -416,7 +416,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
 
-        // 更新审核状态
+        // 更新审核状�?
         Post updatePost = new Post();
         updatePost.setId(postId);
         updatePost.setStatus(status);
@@ -458,12 +458,12 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
             queryWrapper.eq("category", request.getCategory());
         }
 
-        // 处理审核状态查询
+        // 处理审核状态查�?
         if (request.getStatus() != null) {
             queryWrapper.eq("status", request.getStatus());
         }
 
-        // 搜索标题和内容
+        // 搜索标题和内�?
         if (StrUtil.isNotBlank(request.getSearchText())) {
             queryWrapper.and(wrap -> wrap
                     .like("title", request.getSearchText())
@@ -477,28 +477,28 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         // 分页查询
         Page<Post> postPage = this.page(new Page<>(request.getCurrent(), request.getPageSize()), queryWrapper);
 
-        // 填充用户信息和首张图片
+        // 填充用户信息和首张图�?
         List<Post> records = postPage.getRecords();
         if (CollUtil.isNotEmpty(records)) {
             // 获取所有帖子ID
             Set<Long> postIds = records.stream().map(Post::getId).collect(Collectors.toSet());
 
-            // 批量查询所有图片并按位置排序
+            // 批量查询所有图片并按位置排�?
             List<PostAttachment> allAttachments = postAttachmentService.list(
                     new QueryWrapper<PostAttachment>()
                             .in("postId", postIds)
-                            .eq("type", 1)  // 只查询图片类型
+                            .eq("type", 1)  // 只查询图片类�?
                             .orderByAsc("position")
             );
 
-            // 在内存中取每个帖子的第一张图片
+            // 在内存中取每个帖子的第一张图�?
             Map<Long, List<PostAttachment>> postAttachmentMap = new HashMap<>();
             if (CollUtil.isNotEmpty(allAttachments)) {
                 for (PostAttachment attachment : allAttachments) {
                     postAttachmentMap.computeIfAbsent(attachment.getPostId(), k -> new ArrayList<>())
                             .add(attachment);
                 }
-                // 只保留每个帖子的第一张图片
+                // 只保留每个帖子的第一张图�?
                 postAttachmentMap.forEach((postId, attachments) -> {
                     if (attachments.size() > 1) {
                         attachments.subList(1, attachments.size()).clear();
@@ -513,7 +513,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
             records.forEach(post -> {
                 // 清空内容，只在详情页显示
                 post.setContent(null);
-                // 只设置第一张图片
+                // 只设置第一张图�?
                 List<PostAttachment> attachments = postAttachmentMap.get(post.getId());
                 post.setAttachments(attachments != null ? attachments : Collections.emptyList());
                 // 设置用户信息
@@ -534,11 +534,11 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         // 参数校验
         ThrowUtils.throwIf(post == null || post.getId() == null, ErrorCode.PARAMS_ERROR);
 
-        // 获取原帖子信息
+        // 获取原帖子信�?
         Post oldPost = this.getById(post.getId());
-        ThrowUtils.throwIf(oldPost == null, ErrorCode.NOT_FOUND_ERROR, "帖子不存在");
+        ThrowUtils.throwIf(oldPost == null, ErrorCode.NOT_FOUND_ERROR, "帖子不存�?);
 
-        // 保持不变的字段
+        // 保持不变的字�?
         post.setUserId(oldPost.getUserId());
         post.setCreateTime(oldPost.getCreateTime());
         post.setLikeCount(oldPost.getLikeCount());
@@ -546,7 +546,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         post.setViewCount(oldPost.getViewCount());
 
         // 更新基本信息
-        post.setStatus(0);  // 更新后需要重新审核
+        post.setStatus(0);  // 更新后需要重新审�?
         post.setUpdateTime(new Date());
 
         // 处理内容中的图片标记
@@ -559,12 +559,12 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
                     String marker = "{img-" + (i + 1) + "}";
                     // 确保 marker 在内容中存在
                     ThrowUtils.throwIf(!content.contains(marker),
-                            ErrorCode.PARAMS_ERROR, "图片标记 " + marker + " 未在内容中找到");
+                            ErrorCode.PARAMS_ERROR, "图片标记 " + marker + " 未在内容中找�?);
                 }
             }
         }
 
-        // 开始更新操作
+        // 开始更新操�?
         boolean success = this.updateById(post);
         ThrowUtils.throwIf(!success, ErrorCode.OPERATION_ERROR, "帖子更新失败");
 
@@ -574,7 +574,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
             EsPost esPost;
             if (esOptional.isPresent()) {
                 esPost = esOptional.get();
-                // 使用新的变量名避免冲突
+                // 使用新的变量名避免冲�?
                 Post updatedPost = this.getById(post.getId());
                 BeanUtils.copyProperties(updatedPost, esPost);
             } else {
@@ -593,7 +593,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
             postAttachmentService.remove(new QueryWrapper<PostAttachment>()
                     .eq("postId", post.getId()));
 
-            // 2. 保存新附件
+            // 2. 保存新附�?
             if (!attachments.isEmpty()) {
                 attachments.forEach(attach -> {
                     attach.setPostId(post.getId());
@@ -636,7 +636,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         // 构建查询条件
         QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
         queryWrapper.in("userId", followingIds)
-                .eq("status", 1)  // 只查询已发布的帖子
+                .eq("status", 1)  // 只查询已发布的帖�?
                 .eq("isDelete", 0);
 
         // 添加搜索条件
@@ -677,7 +677,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
      * 获取帖子榜单（带请求检测）
      */
     private List<Post> getTop100Post(long type, HttpServletRequest request) {
-        // 如果有请求对象，进行爬虫检测
+        // 如果有请求对象，进行爬虫检�?
         if (request != null) {
             crawlerDetect(request);
         }
@@ -685,7 +685,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         // 构建查询条件
         QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("isDelete", 0)
-                .eq("status", 1);  // 只查询已审核通过的帖子
+                .eq("status", 1);  // 只查询已审核通过的帖�?
 
         // 根据类型设置时间范围
         Date now = new Date();
@@ -714,7 +714,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         // 按照浏览量、点赞数、评论数排序
         queryWrapper.orderByDesc("viewCount", "likeCount", "commentCount");
 
-        // 限制返回100条
+        // 限制返回100�?
         queryWrapper.last("LIMIT 100");
 
         List<Post> posts = list(queryWrapper);
@@ -744,7 +744,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         List<PostAttachment> attachments = postAttachmentService.list(attachmentQueryWrapper);
         post.setAttachments(attachments);
 
-        // 获取实时浏览量（合并 Redis 中的增量）
+        // 获取实时浏览量（合并 Redis 中的增量�?
         long realViewCount = getViewCount(post.getId());
         post.setViewCount(realViewCount);
 
@@ -753,7 +753,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     }
 
     /**
-     * 获取帖子浏览量（包括 Redis 增量）
+     * 获取帖子浏览量（包括 Redis 增量�?
      */
     @Override
     public long getViewCount(Long postId) {
@@ -761,7 +761,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
         String viewCountKey = String.format("post:viewCount:%d", postId);
         String incrementCount = stringRedisTemplate.opsForValue().get(viewCountKey);
 
-        // 从数据库获取基础浏览量
+        // 从数据库获取基础浏览�?
         Post post = this.getById(postId);
         if (post == null) {
             return 0L;
@@ -775,7 +775,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     }
 
     /**
-     * 异步增加帖子浏览量
+     * 异步增加帖子浏览�?
      */
     @Async("asyncExecutor")
     public void incrementViewCount(Long postId, HttpServletRequest request) {
@@ -792,30 +792,30 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
             // 获取分布式锁
             Boolean locked = stringRedisTemplate.opsForValue().setIfAbsent(lockKey, "1", 10, TimeUnit.SECONDS);
             if (Boolean.TRUE.equals(locked)) {
-                // 增加浏览量
+                // 增加浏览�?
                 stringRedisTemplate.opsForValue().increment(viewCountKey);
 
                 // 当浏览量达到一定阈值时，更新数据库
                 String viewCountStr = stringRedisTemplate.opsForValue().get(viewCountKey);
-                if (viewCountStr != null && Long.parseLong(viewCountStr) % 100 == 0) {  // 改为100，和图片保持一致
+                if (viewCountStr != null && Long.parseLong(viewCountStr) % 100 == 0) {  // 改为100，和图片保持一�?
                     this.update()
                             .setSql("viewCount = viewCount + " + viewCountStr)
                             .eq("id", postId)
                             .update();
                     // 更新ES
                     updateEsPostViewCount(postId, Long.parseLong(viewCountStr));
-                    // 更新后重置 Redis 计数
+                    // 更新后重�?Redis 计数
                     stringRedisTemplate.delete(viewCountKey);
                 }
             }
         } finally {
-            // 释放锁
+            // 释放�?
             stringRedisTemplate.delete(lockKey);
         }
     }
 
     /**
-     * 更新 ES 中帖子的浏览量
+     * 更新 ES 中帖子的浏览�?
      */
     private void updateEsPostViewCount(Long postId, Long viewCount) {
         try {

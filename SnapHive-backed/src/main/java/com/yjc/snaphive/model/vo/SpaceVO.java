@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.vo;
+﻿package com.yjc.snaphive.model.vo;
 
 import com.yjc.snaphive.model.entity.Space;
 import lombok.Data;
@@ -25,27 +25,27 @@ public class SpaceVO implements Serializable {
     private String spaceName;
 
     /**
-     * 空间级别：0-普通版 1-专业版 2-旗舰版
+     * 空间级别�?-普通版 1-专业�?2-旗舰�?
      */
     private Integer spaceLevel;
 
     /**
-     * 空间类型：0-私有 1-团队
+     * 空间类型�?-私有 1-团队
      */
     private Integer spaceType;
 
     /**
-     * 空间图片的最大总大小
+     * 空间图片的最大总大�?
      */
     private Long maxSize;
 
     /**
-     * 空间图片的最大数量
+     * 空间图片的最大数�?
      */
     private Long maxCount;
 
     /**
-     * 当前空间下图片的总大小
+     * 当前空间下图片的总大�?
      */
     private Long totalSize;
 

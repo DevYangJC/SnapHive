@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -26,10 +26,10 @@ public class PostAttachment implements Serializable {
 
     private Long size;
 
-    // 在文章中的位置，可以是字符位置或者段落位置
+    // 在文章中的位置，可以是字符位置或者段落位�?
     private Integer position;
 
-    // 在文章中的标识符，例如 {img-1}, {img-2}
+    // 在文章中的标识符，例�?{img-1}, {img-2}
     private String marker;
 
     private Integer sort;

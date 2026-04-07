@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -27,7 +27,7 @@ public class Category implements Serializable {
     private String categoryName;
 
     /**
-     * 分类类型：0-图片分类 1-帖子分类
+     * 分类类型�?-图片分类 1-帖子分类
      */
     private Integer type;
 

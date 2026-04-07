@@ -1,4 +1,4 @@
-package com.yjc.snaphive.job;
+﻿package com.yjc.snaphive.job;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.yjc.snaphive.model.entity.Picture;
@@ -47,9 +47,9 @@ public class ContentReviewJob {
      */
     @Scheduled(cron = "0 0 7 * * ?")
     public void dailyCheck() {
-        log.info("开始执行每日审核检查");
+        log.info("开始执行每日审核检�?);
 
-        // 获取昨天的时间范围
+        // 获取昨天的时间范�?
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -1);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -62,21 +62,21 @@ public class ContentReviewJob {
         calendar.set(Calendar.SECOND, 59);
         Date endTime = calendar.getTime();
 
-        // 检查并发送邮件
+        // 检查并发送邮�?
         checkAndSendEmail(startTime, endTime, true);
 
-        // 更新最后检查时间
+        // 更新最后检查时�?
         lastCheckTime = new Date();
     }
 
     /**
-     * 在7-22点之间，每小时检查最近一小时的数据
+     * �?-22点之间，每小时检查最近一小时的数�?
      */
     @Scheduled(cron = "0 0 7-22 * * ?")
     public void regularCheck() {
-        log.info("开始执行定时审核检查");
+        log.info("开始执行定时审核检�?);
 
-        // 获取最近一小时的时间范围
+        // 获取最近一小时的时间范�?
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.HOUR_OF_DAY, -1);
         Date startTime = calendar.getTime();
@@ -88,7 +88,7 @@ public class ContentReviewJob {
 
     private void checkAndSendEmail(Date startTime, Date endTime, boolean isDaily) {
         try {
-            // 查询未审核的公共图库图片（spaceId为null或0）
+            // 查询未审核的公共图库图片（spaceId为null�?�?
             QueryWrapper<Picture> pictureWrapper = new QueryWrapper<Picture>()
                     .eq("reviewStatus", 0)
                     .eq("isDelete", 0)
@@ -108,15 +108,15 @@ public class ContentReviewJob {
             List<Picture> pictures = pictureService.list(pictureWrapper);
             List<Post> posts = postService.list(postWrapper);
 
-            // 如果有未审核的内容，发送邮件
+            // 如果有未审核的内容，发送邮�?
             if (!pictures.isEmpty() || !posts.isEmpty()) {
                 String emailContent = generateEmailContent(pictures, posts, isDaily);
                 emailSenderUtil.sendReviewEmail(adminEmail, emailContent);
-                log.info("已发送审核通知邮件，未审核公共图片：{}张，未审核帖子：{}条",
+                log.info("已发送审核通知邮件，未审核公共图片：{}张，未审核帖子：{}�?,
                         pictures.size(), posts.size());
             }
         } catch (Exception e) {
-            log.error("审核检查任务执行失败", e);
+            log.error("审核检查任务执行失�?, e);
         }
     }
 
@@ -127,7 +127,7 @@ public class ContentReviewJob {
         StringBuilder tableContent = new StringBuilder();
         int totalCount = pictures.size() + posts.size();
 
-        // 生成图片行
+        // 生成图片�?
         for (Picture picture : pictures) {
             User user = userService.getById(picture.getUserId());
             tableContent.append(String.format("<tr>" +
@@ -146,7 +146,7 @@ public class ContentReviewJob {
             ));
         }
 
-        // 生成帖子行
+        // 生成帖子�?
         for (Post post : posts) {
             User user = userService.getById(post.getUserId());
             tableContent.append(String.format("<tr>" +
@@ -165,7 +165,7 @@ public class ContentReviewJob {
             ));
         }
 
-        // 替换模板中的占位符
+        // 替换模板中的占位�?
         return template
                 .replace(":count", String.valueOf(totalCount))
                 .replace(":table_content", tableContent.toString());

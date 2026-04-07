@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -48,7 +48,7 @@ public class UserController {
 
 
     /**
-     * 获取防刷验证码
+     * 获取防刷验证�?
      */
 
     @GetMapping("/getcode")
@@ -58,7 +58,7 @@ public class UserController {
     }
 
     /**
-     * 获取邮箱验证码
+     * 获取邮箱验证�?
      */
     @PostMapping("/get_emailcode")
     public BaseResponse<String> getEmailCode(@RequestBody EmailCodeRequest emailCodeRequest, HttpServletRequest request) {
@@ -66,7 +66,7 @@ public class UserController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         userService.sendEmailCode(emailCodeRequest.getEmail(), emailCodeRequest.getType(), request);
-        return ResultUtils.success("验证码发送成功");
+        return ResultUtils.success("验证码发送成�?);
     }
 
     /**
@@ -124,7 +124,7 @@ public class UserController {
         if (StrUtil.hasBlank(accountOrEmail, userPassword, verifyCode, serververifycode)) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        // 校验验证码
+        // 校验验证�?
         userService.validateCaptcha(verifyCode, serververifycode);
         LoginUserVO loginUserVO = userService.userLogin(accountOrEmail, userPassword, request);
         return ResultUtils.success(loginUserVO);
@@ -150,7 +150,7 @@ public class UserController {
     }
 
     /**
-     * 用户退出
+     * 用户退�?
      */
     @PostMapping("/logout")
     public BaseResponse<Boolean> userLogout(HttpServletRequest request) {
@@ -165,9 +165,9 @@ public class UserController {
         ThrowUtils.throwIf(userDestroyRequest == null, ErrorCode.PARAMS_ERROR);
         // 获取当前登录用户
         User loginUser = userService.getLoginUser(request);
-        // 只能注销自己的账号
+        // 只能注销自己的账�?
         ThrowUtils.throwIf(!loginUser.getId().equals(userDestroyRequest.getId()),
-                ErrorCode.NO_AUTH_ERROR, "只能注销自己的账号");
+                ErrorCode.NO_AUTH_ERROR, "只能注销自己的账�?);
         // 异步删除用户数据
         userService.asyncDeleteUserData(userDestroyRequest.getId());
         return ResultUtils.success(true);
@@ -197,7 +197,7 @@ public class UserController {
         final String DEFAULT_PASSWORD = CommonValue.DEFAULT_PASSWORD;
         String encryptPassword = userService.getEncryptPassword(DEFAULT_PASSWORD);
         user.setUserPassword(encryptPassword);
-        // 插入数据库
+        // 插入数据�?
         boolean result = userService.save(user);
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
         return ResultUtils.success(user.getId());
@@ -213,13 +213,13 @@ public class UserController {
         // 参数校验，如果传入的删除请求列表为空，则抛出参数异常
         ThrowUtils.throwIf(deleteRequestList == null || deleteRequestList.isEmpty(), ErrorCode.PARAMS_ERROR);
         User loginUser = userService.getLoginUser(request);
-        // 根据ID列表查询对应的图片列表
+        // 根据ID列表查询对应的图片列�?
         List<User> pictureList = userService.listByIds(deleteRequestList);
         // 校验图片是否存在，如果查询到的图片列表为空，则抛出未找到资源异常
         ThrowUtils.throwIf(pictureList == null || pictureList.isEmpty(), ErrorCode.NOT_FOUND_ERROR);
         // 批量删除操作
         boolean result = userService.removeByIds(deleteRequestList);
-        // 如果删除失败，抛出操作异常
+        // 如果删除失败，抛出操作异�?
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
         return ResultUtils.success(true);
     }
@@ -237,7 +237,7 @@ public class UserController {
     }
 
     /**
-     * 根据 id 获取包装类
+     * 根据 id 获取包装�?
      */
     @GetMapping("/get/vo")
     public BaseResponse<UserVO> getUserVOById(long id) {
@@ -273,7 +273,7 @@ public class UserController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
-        // 判断是否是管理员，管理员可以更新任意用户，普通用户只能更新自己
+        // 判断是否是管理员，管理员可以更新任意用户，普通用户只能更新自�?
         User loginUser = userService.getLoginUser(request);
         if (loginUser == null || !loginUser.getUserRole().equals(UserConstant.ADMIN_ROLE)) {
             userUpdateRequest.setUserRole(UserConstant.DEFAULT_ROLE);
@@ -286,7 +286,7 @@ public class UserController {
         boolean result = userService.updateById(user);
         if (result) {
             // 更新ES
-            // 获取完整的用户信息
+            // 获取完整的用户信�?
             User updatedUser = userService.getById(user.getId());
             // 转换为ES实体
             EsUser esUser = new EsUser();
@@ -345,11 +345,11 @@ public class UserController {
      * 添加用户签到记录
      *
      * @param request
-     * @return 当前是否已签到成功
+     * @return 当前是否已签到成�?
      */
     @PostMapping("/add/sign_in")
     public BaseResponse<Boolean> addUserSignIn(HttpServletRequest request) {
-        // 必须要登录才能签到
+        // 必须要登录才能签�?
         User loginUser = userService.getLoginUser(request);
         boolean result = userService.addUserSignIn(loginUser.getId());
         return ResultUtils.success(result);
@@ -364,7 +364,7 @@ public class UserController {
      */
     @GetMapping("/get/sign_in")
     public BaseResponse<List<Integer>> getUserSignInRecord(Integer year, HttpServletRequest request) {
-        // 必须要登录才能获取
+        // 必须要登录才能获�?
         User loginUser = userService.getLoginUser(request);
         List<Integer> userSignInRecord = userService.getUserSignInRecord(loginUser.getId(), year);
         return ResultUtils.success(userSignInRecord);
@@ -401,7 +401,7 @@ public class UserController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
-        // 获取管理员信息
+        // 获取管理员信�?
         User admin = userService.getLoginUser(httpRequest);
 
         boolean result = userService.banOrUnbanUser(request.getUserId(), request.getIsUnban(), admin);

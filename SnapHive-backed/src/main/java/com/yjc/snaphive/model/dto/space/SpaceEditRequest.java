@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.space;
+﻿package com.yjc.snaphive.model.dto.space;
 
 import lombok.Data;
 

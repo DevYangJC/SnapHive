@@ -1,4 +1,4 @@
-package com.yjc.snaphive.job;
+﻿package com.yjc.snaphive.job;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.yjc.snaphive.constant.RedisConstant;
@@ -34,19 +34,19 @@ public class ChatCacheWarmUpJob {
     private ObjectMapper objectMapper;
 
     /**
-     * 每天凌晨2点执行缓存预热
+     * 每天凌晨2点执行缓存预�?
      */
     @Scheduled(cron = "0 0 2 * * ?")
     public void warmUpChatCache() {
         try {
-            log.info("开始聊天记录缓存预热任务");
+            log.info("开始聊天记录缓存预热任�?);
 
             // 获取一个月前的时间
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.MONTH, -1);
             Date oneMonthAgo = calendar.getTime();
 
-            // 获取最近一个月的活跃聊天
+            // 获取最近一个月的活跃聊�?
             warmUpPrivateChats(oneMonthAgo);
             warmUpPictureChats(oneMonthAgo);
             warmUpSpaceChats(oneMonthAgo);
@@ -132,16 +132,16 @@ public class ChatCacheWarmUpJob {
      * 预热最近的几页数据
      */
     private void warmUpRecentPages(Long id, String prefix) throws Exception {
-        // 只预热前3页数据
+        // 只预热前3页数�?
         for (int i = 1; i <= 3; i++) {
-            String cacheKey = prefix + id + ":" + i + ":20"; // 假设每页20条
+            String cacheKey = prefix + id + ":" + i + ":20"; // 假设每页20�?
 
             // 如果缓存已存在，跳过
             if (Boolean.TRUE.equals(stringRedisTemplate.hasKey(cacheKey))) {
                 continue;
             }
 
-            // 根据不同类型获取对应的聊天记录
+            // 根据不同类型获取对应的聊天记�?
             Object page;
             if (prefix.equals(RedisConstant.PRIVATE_CHAT_HISTORY_PREFIX)) {
                 page = chatMessageService.getPrivateChatHistory(id, i, 20);
@@ -151,7 +151,7 @@ public class ChatCacheWarmUpJob {
                 page = chatMessageService.getSpaceChatHistory(id, i, 20);
             }
 
-            // 设置缓存，添加随机过期时间防止缓存雪崩
+            // 设置缓存，添加随机过期时间防止缓存雪�?
             stringRedisTemplate.opsForValue().set(
                 cacheKey,
                 objectMapper.writeValueAsString(page),

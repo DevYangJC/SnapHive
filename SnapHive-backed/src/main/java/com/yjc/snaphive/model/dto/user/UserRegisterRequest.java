@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.user;
+﻿package com.yjc.snaphive.model.dto.user;
 
 import lombok.Data;
 
@@ -18,7 +18,7 @@ public class UserRegisterRequest implements Serializable {
     private String email;
 
     /**
-     * 验证码
+     * 验证�?
      */
     private String code;
 

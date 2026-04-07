@@ -1,4 +1,4 @@
-package com.yjc.snaphive.config;
+﻿package com.yjc.snaphive.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateUtils;
@@ -67,7 +67,7 @@ public class ElasticsearchConfig {
                 new HttpHost(hostname, port, "http")
         );
 
-        // 配置请求头
+        // 配置请求�?
         builder.setDefaultHeaders(new org.apache.http.Header[]{
                 new org.apache.http.message.BasicHeader("Content-Type", "application/json"),
                 new org.apache.http.message.BasicHeader("Accept", "application/json")
@@ -109,7 +109,7 @@ public class ElasticsearchConfig {
                         .setConnectionRequestTimeout(0)
         );
 
-        // 添加失败监听器
+        // 添加失败监听�?
         builder.setFailureListener(new RestClient.FailureListener() {
             @Override
             public void onFailure(Node node) {
@@ -122,8 +122,8 @@ public class ElasticsearchConfig {
     }
 
     /**
-     * 定时检查ES连接状态
-     * 每30秒执行一次
+     * 定时检查ES连接状�?
+     * �?0秒执行一�?
      */
     @Scheduled(fixedRate = 30000)
     public void checkConnection() {

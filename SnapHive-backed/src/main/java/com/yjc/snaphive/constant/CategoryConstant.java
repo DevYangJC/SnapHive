@@ -1,4 +1,4 @@
-package com.yjc.snaphive.constant;
+﻿package com.yjc.snaphive.constant;
 
 /**
  * 分类常量

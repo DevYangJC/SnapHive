@@ -1,4 +1,4 @@
-package com.yjc.snaphive.config;
+﻿package com.yjc.snaphive.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -15,7 +15,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 public class JsonConfig {
 
     /**
-     * 添加 Long 转 json 精度丢失的配置
+     * 添加 Long �?json 精度丢失的配�?
      */
     @Bean
     @Primary  // 标记为主要的 ObjectMapper
@@ -29,13 +29,13 @@ public class JsonConfig {
     }
 
     /**
-     * WebSocket 使用的 ObjectMapper
+     * WebSocket 使用�?ObjectMapper
      */
     @Bean(name = "webSocketObjectMapper")  // 指定bean名称
     public ObjectMapper webSocketObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
-        // Long 转 String
+        // Long �?String
         module.addSerializer(Long.class, ToStringSerializer.instance);
         module.addSerializer(Long.TYPE, ToStringSerializer.instance);
         objectMapper.registerModule(module);

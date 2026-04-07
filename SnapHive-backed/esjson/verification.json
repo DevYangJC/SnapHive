@@ -1,4 +1,4 @@
-# 1. 检查索引是否存在
+﻿# 1. 检查索引是否存在
 GET /_cat/indices?v
 
 # 2. 检查图片索引的文档数量
@@ -103,12 +103,12 @@ GET /user/_search
 "should": [
 {
 "match": {
-"userName": "鹿梦"
+"userName": "SnapHive"
 }
 },
 {
 "match": {
-"userProfile": "鹿梦"
+"userProfile": "SnapHive"
 }
 }
 ],

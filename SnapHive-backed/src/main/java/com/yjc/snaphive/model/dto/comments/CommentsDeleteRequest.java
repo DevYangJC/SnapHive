@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.comments;
+﻿package com.yjc.snaphive.model.dto.comments;
 
 import lombok.Data;
 

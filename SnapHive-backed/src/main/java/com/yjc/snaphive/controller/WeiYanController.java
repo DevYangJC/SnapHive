@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.common.BaseResponse;
@@ -46,7 +46,7 @@ public class WeiYanController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
         User loginUser = userService.getLoginUser(request);
-        // 验证用户是否是恋爱板的所有者
+        // 验证用户是否是恋爱板的所有�?
         if (!loveBoardService.isLoveBoardOwner(weiYan.getLoveBoardId(), loginUser.getId())) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
@@ -109,7 +109,7 @@ public class WeiYanController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "分页参数错误");
         }
 
-        // 如果提供了恋爱板ID，检查是否有效
+        // 如果提供了恋爱板ID，检查是否有�?
         boolean canViewAll = false;
         if (loveBoardId != null && loveBoardId > 0) {
             // 如果提供了用户ID，检查是否是恋爱板的主人

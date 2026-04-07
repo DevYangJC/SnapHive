@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -116,10 +116,10 @@ public class TimeAlbumController {
     }
 
     /**
-     * 上传爱心墙图片
+     * 上传爱心墙图�?
      *
      * @param request 请求
-     * @return 上传的图片列表
+     * @return 上传的图片列�?
      */
     @PostMapping("/heart-wall/upload")
     public BaseResponse<List<PictureVO>> uploadHeartWallPictures(TimeAlbumHeartWallRequest request, HttpServletRequest httpRequest) {
@@ -132,7 +132,7 @@ public class TimeAlbumController {
     }
 
     /**
-     * 获取爱心墙图片列表
+     * 获取爱心墙图片列�?
      *
      * @param albumId   相册ID
      * @param userId    用户ID
@@ -184,7 +184,7 @@ public class TimeAlbumController {
     }
 
     /**
-     * 删除爱心墙照片
+     * 删除爱心墙照�?
      *
      * @param pictureId 照片ID
      * @param albumId 相册ID

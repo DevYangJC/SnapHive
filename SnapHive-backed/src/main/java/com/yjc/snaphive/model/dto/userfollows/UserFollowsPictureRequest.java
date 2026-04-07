@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.userfollows;
+﻿package com.yjc.snaphive.model.dto.userfollows;
 
 
 import com.yjc.snaphive.common.PageRequest;
@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Data
 public class UserFollowsPictureRequest extends PageRequest implements Serializable {
     /**
-     * 是否只查询 spaceId 为 null 的数据
+     * 是否只查�?spaceId �?null 的数�?
      */
     private boolean nullSpaceId;
     /**

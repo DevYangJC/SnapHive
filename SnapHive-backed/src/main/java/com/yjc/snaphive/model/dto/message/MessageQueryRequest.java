@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.message;
+﻿package com.yjc.snaphive.model.dto.message;
 
 import com.yjc.snaphive.common.PageRequest;
 import lombok.Data;

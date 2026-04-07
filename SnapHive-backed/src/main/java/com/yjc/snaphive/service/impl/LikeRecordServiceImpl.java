@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -81,7 +81,7 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
             }
 
             // 校验目标类型
-            if (targetType != 1 && targetType != 2) { // 只允许图片(1)和帖子(2)
+            if (targetType != 1 && targetType != 2) { // 只允许图�?1)和帖�?2)
                 log.error("Invalid target type: {}", targetType);
                 return CompletableFuture.completedFuture(false);
             }
@@ -93,7 +93,7 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
                 return CompletableFuture.completedFuture(false);
             }
 
-            // 查询当前点赞状态
+            // 查询当前点赞状�?
             QueryWrapper<LikeRecord> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("userId", userId)
                     .eq("targetId", targetId)
@@ -112,17 +112,17 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
                     likeRecord.setIsLiked(true);
                     likeRecord.setFirstLikeTime(new Date());
                     likeRecord.setLastLikeTime(new Date());
-                    likeRecord.setIsRead(0); // 未读状态
+                    likeRecord.setIsRead(0); // 未读状�?
                     this.save(likeRecord);
                     updateLikeCount(targetId, targetType, 1);
                 }
             } else {
                 if (isLiked != oldLikeRecord.getIsLiked()) {
-                    // 更新点赞状态
+                    // 更新点赞状�?
                     oldLikeRecord.setIsLiked(isLiked);
                     oldLikeRecord.setLastLikeTime(new Date());
                     oldLikeRecord.setTargetUserId(targetUserId); // 更新目标内容所属用户ID
-                    // 如果是重新点赞，设置为未读
+                    // 如果是重新点赞，设置为未�?
                     if (isLiked) {
                         oldLikeRecord.setIsRead(0);
                     }
@@ -169,14 +169,14 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
                 .eq("isLiked", true)
                 .ne("userId", userId)
                 .orderByDesc("lastLikeTime")
-                .last("LIMIT 50");  // 限制最多返回50条数据
+                .last("LIMIT 50");  // 限制最多返�?0条数�?
 
         List<LikeRecord> unreadLikes = this.list(queryWrapper);
         if (CollUtil.isEmpty(unreadLikes)) {
             return new ArrayList<>();
         }
 
-        // 2. 批量更新为已读
+        // 2. 批量更新为已�?
         List<Long> likeIds = unreadLikes.stream()
                 .map(LikeRecord::getId)
                 .collect(Collectors.toList());
@@ -199,7 +199,7 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
         // 构建查询条件
         QueryWrapper<LikeRecord> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("targetUserId", userId)  // 查询被点赞的记录
-                .ne("userId", userId);  // 排除自己点赞自己的记录;
+                .ne("userId", userId);  // 排除自己点赞自己的记�?
 
         // 处理目标类型查询
         Integer targetType = likeQueryRequest.getTargetType();
@@ -233,7 +233,7 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
     }
 
     /**
-     * 更新点赞数
+     * 更新点赞�?
      */
     private void updateLikeCount(Long targetId, Integer targetType, int delta) {
         switch (targetType) {
@@ -279,7 +279,7 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
                     Picture picture = pictureService.getById(like.getTargetId());
                     if (picture != null) {
                         PictureVO pictureVO = PictureVO.objToVo(picture);
-                        // 设置图片作者信息
+                        // 设置图片作者信�?
                         User pictureUser = userService.getById(picture.getUserId());
                         if (pictureUser != null) {
                             pictureVO.setUser(userService.getUserVO(pictureUser));
@@ -290,7 +290,7 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
                 case 2: // 帖子
                     Post post = postService.getById(like.getTargetId());
                     if (post != null) {
-                        // 设置帖子作者信息
+                        // 设置帖子作者信�?
                         User postUser = userService.getById(post.getUserId());
                         if (postUser != null) {
                             post.setUser(userService.getUserVO(postUser));
@@ -307,7 +307,7 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
     }
 
     /**
-     * 更新 ES 中图片的点赞数
+     * 更新 ES 中图片的点赞�?
      */
     private void updateEsPictureLikeCount(Long pictureId, int delta) {
         try {
@@ -321,7 +321,7 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
     }
 
     /**
-     * 更新 ES 中帖子的点赞数
+     * 更新 ES 中帖子的点赞�?
      */
     private void updateEsPostLikeCount(Long postId, int delta) {
         try {
@@ -363,8 +363,8 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
 
         // 构建查询条件
         QueryWrapper<LikeRecord> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("userId", userId)  // 查询用户自己的点赞记录
-                .eq("isLiked", true);  // 只查询点赞状态为true的记录
+        queryWrapper.eq("userId", userId)  // 查询用户自己的点赞记�?
+                .eq("isLiked", true);  // 只查询点赞状态为true的记�?
 
         // 处理目标类型查询
         Integer targetType = likeQueryRequest.getTargetType();
@@ -393,7 +393,7 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
         // 获取目标内容所属用户ID
         Long targetUserId = getTargetUserId(targetId, targetType);
         if (targetUserId == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "目标内容不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "目标内容不存�?);
         }
 
         // 保存点赞记录
@@ -411,7 +411,7 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
         if (targetType == 1) { // 图片
             Picture picture = pictureService.getById(targetId);
             if (picture != null && (picture.getSpaceId() == null || picture.getSpaceId() == 0)) {
-                // 只对公共图库的图片使用缓存
+                // 只对公共图库的图片使用缓�?
                 incrementPictureLikeCount(targetId);
             } else {
                 // 非公共图库直接更新ES
@@ -475,7 +475,7 @@ public class LikeRecordServiceImpl extends ServiceImpl<LikeRecordMapper, LikeRec
                 .eq("targetType", targetType)
                 .eq("userId", userId));
 
-        // 更新 ES 中的点赞数
+        // 更新 ES 中的点赞�?
         if (targetType == 1) {
             updateEsPictureLikeCount(targetId, -1);
         } else if (targetType == 2) {

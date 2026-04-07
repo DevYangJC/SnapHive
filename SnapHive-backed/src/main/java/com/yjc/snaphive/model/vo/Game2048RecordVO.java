@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.vo;
+﻿package com.yjc.snaphive.model.vo;
 
 import lombok.Data;
 
@@ -17,7 +17,7 @@ public class Game2048RecordVO implements Serializable {
     private Long userId;
 
     /**
-     * 用户名
+     * 用户�?
      */
     private String userName;
 
@@ -32,12 +32,12 @@ public class Game2048RecordVO implements Serializable {
     private Integer score;
 
     /**
-     * 最大数字
+     * 最大数�?
      */
     private Integer maxTile;
 
     /**
-     * 游戏时长(秒)
+     * 游戏时长(�?
      */
     private Integer gameTime;
 

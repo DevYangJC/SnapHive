@@ -1,10 +1,10 @@
-package com.yjc.snaphive.model.enums;
+﻿package com.yjc.snaphive.model.enums;
 
 import lombok.Getter;
 
 
 /**
- * 用户数据获取类型枚举类
+ * 用户数据获取类型枚举�?
  */
 @Getter
 public enum UserDataFetchTypeEnum {
@@ -26,7 +26,7 @@ public enum UserDataFetchTypeEnum {
     /**
      * 根据值获取对应的枚举实例
      *
-     * @param value 要查找的枚举值
+     * @param value 要查找的枚举�?
      * @return 对应的枚举实例，如果没找到则返回 null
      */
     public static UserDataFetchTypeEnum getEnumByValue(int value) {

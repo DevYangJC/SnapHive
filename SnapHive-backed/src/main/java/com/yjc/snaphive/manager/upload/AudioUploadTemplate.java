@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.upload;
+﻿package com.yjc.snaphive.manager.upload;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.Date;
 
 /**
- * 音频上传模板类
+ * 音频上传模板�?
  */
 @Slf4j
 public abstract class AudioUploadTemplate {
@@ -47,12 +47,12 @@ public abstract class AudioUploadTemplate {
 
         File file = null;
         try {
-            // 3. 创建临时文件，获取文件到服务器
+            // 3. 创建临时文件，获取文件到服务�?
             file = File.createTempFile(uploadPath, null);
             // 处理文件来源
             processFile(inputSource, file);
 
-            // 4. 上传音频到对象存储
+            // 4. 上传音频到对象存�?
             cosManager.putAudioObject(uploadPath, file);
             String fileUrl = cosClientConfig.getHost() + "/" + uploadPath;
 
@@ -72,7 +72,7 @@ public abstract class AudioUploadTemplate {
             return audioFile;
 
         } catch (Exception e) {
-            log.error("音频上传到对象存储失败, path={}, error={}", uploadPath, e.getMessage());
+            log.error("音频上传到对象存储失�? path={}, error={}", uploadPath, e.getMessage());
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "音频上传失败");
         } finally {
             // 6. 临时文件清理
@@ -86,17 +86,17 @@ public abstract class AudioUploadTemplate {
     protected abstract void validAudio(Object inputSource);
 
     /**
-     * 获取原始文件名
+     * 获取原始文件�?
      */
     protected abstract String getOriginFilename(Object inputSource);
 
     /**
-     * 处理文件并生成临时文件
+     * 处理文件并生成临时文�?
      */
     protected abstract void processFile(Object inputSource, File file) throws Exception;
 
     /**
-     * 获取音频时长（秒）
+     * 获取音频时长（秒�?
      */
     protected abstract Integer getAudioDuration(File file);
 
@@ -106,7 +106,7 @@ public abstract class AudioUploadTemplate {
     protected abstract String getMimeType(Object inputSource);
 
     /**
-     * 计算MD5值
+     * 计算MD5�?
      */
     protected abstract String calculateMd5(File file);
 

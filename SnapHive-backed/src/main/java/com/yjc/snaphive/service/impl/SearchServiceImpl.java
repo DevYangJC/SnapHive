@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.yjc.snaphive.esdao.EsSearchKeywordDao;
 import com.yjc.snaphive.exception.ErrorCode;
@@ -87,7 +87,7 @@ public class SearchServiceImpl implements SearchService {
     private StringRedisTemplate stringRedisTemplate;
 
     /**
-     * 记录搜索关键词
+     * 记录搜索关键�?
      */
     private void recordSearchKeyword(String searchText, String type) {
         try {
@@ -99,7 +99,7 @@ public class SearchServiceImpl implements SearchService {
                 keyword.setCount(keyword.getCount() + 1);
                 keyword.setUpdateTime(new Date());
             } else {
-                // 新增关键词记录
+                // 新增关键词记�?
                 keyword = new EsSearchKeyword();
                 keyword.setKeyword(searchText);
                 keyword.setType(type);
@@ -110,12 +110,12 @@ public class SearchServiceImpl implements SearchService {
 
             esSearchKeywordDao.save(keyword);
         } catch (Exception e) {
-            log.error("记录搜索关键词失败", e);
+            log.error("记录搜索关键词失�?, e);
         }
     }
 
     /**
-     * 获取热门搜索（优先从Redis获取，其次MySQL，最后ES）
+     * 获取热门搜索（优先从Redis获取，其次MySQL，最后ES�?
      */
     @Override
     public List<String> getHotSearchKeywords(String type, Integer size) {
@@ -147,7 +147,7 @@ public class SearchServiceImpl implements SearchService {
                         .collect(Collectors.toList());
             }
 
-            // 如果没有结果，返回默认的热门搜索词
+            // 如果没有结果，返回默认的热门搜索�?
             if (resultList.isEmpty()) {
                 resultList = getDefaultHotSearchKeywords(type, size);
             }
@@ -169,10 +169,10 @@ public class SearchServiceImpl implements SearchService {
      */
     private List<String> getDefaultHotSearchKeywords(String type, Integer size) {
         if ("space".equals(type) || "user".equals(type)) {
-            // 对于空间和用户，返回默认关键词 "鹿梦"
-            return Arrays.asList("鹿梦").stream().limit(size).collect(Collectors.toList());
+            // 对于空间和用户，返回默认关键�?"SnapHive"
+            return Arrays.asList("SnapHive").stream().limit(size).collect(Collectors.toList());
         } else {
-            // 对于帖子和图片，返回与图片相关的默认关键词
+            // 对于帖子和图片，返回与图片相关的默认关键�?
             List<String> defaultKeywords = Arrays.asList(
                     "风景", "动物", "城市", "自然", "艺术",
                     "黑白", "抽象", "肖像", "摄影", "插画",
@@ -197,7 +197,7 @@ public class SearchServiceImpl implements SearchService {
                 for (String keyword : keywords) {
                     connection.rPush(cacheKey.getBytes(), keyword.getBytes());
                 }
-                // 设置过期时间（13-15分钟随机）
+                // 设置过期时间�?3-15分钟随机�?
                 long expireSeconds = CACHE_EXPIRE_TIME + RandomUtil.randomInt(0, 120);
                 connection.expire(cacheKey.getBytes(), expireSeconds);
                 connection.exec();
@@ -215,10 +215,10 @@ public class SearchServiceImpl implements SearchService {
 
         // 校验参数
         if (StringUtils.isBlank(searchText)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "搜索关键词不能为空");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "搜索关键词不能为�?);
         }
 
-        // 记录搜索关键词
+        // 记录搜索关键�?
         recordSearchKeyword(searchText, type);
 
         // 执行搜索
@@ -259,7 +259,7 @@ public class SearchServiceImpl implements SearchService {
         }
 
         boolQueryBuilder.minimumShouldMatch(1)
-                // 必要条件：已通过审核、未删除、公共图库
+                // 必要条件：已通过审核、未删除、公共图�?
                 .must(QueryBuilders.termQuery("reviewStatus", 1))
                 .must(QueryBuilders.termQuery("isDelete", 0))
                 .must(QueryBuilders.boolQuery()
@@ -288,7 +288,7 @@ public class SearchServiceImpl implements SearchService {
                 .map(hit -> hit.getContent())
                 .map(picture -> {
                     PictureVO pictureVO = PictureVO.objToVo(picture);
-                    // 获取并设置脱敏后的用户信息
+                    // 获取并设置脱敏后的用户信�?
                     User user = userService.getById(picture.getUserId());
                     if (user != null) {
                         pictureVO.setUser(userService.getUserVO(user));
@@ -346,7 +346,7 @@ public class SearchServiceImpl implements SearchService {
         // 获取搜索结果并转换为UserVO
         List<UserVO> userVOList = searchHits.getSearchHits().stream()
                 .map(SearchHit::getContent)
-                .map(userService::getUserVO)  // 使用UserService的脱敏方法
+                .map(userService::getUserVO)  // 使用UserService的脱敏方�?
                 .collect(Collectors.toList());
 
         return new org.springframework.data.domain.PageImpl<>(
@@ -380,7 +380,7 @@ public class SearchServiceImpl implements SearchService {
 
         boolQueryBuilder.minimumShouldMatch(1)
                 .must(QueryBuilders.termQuery("isDelete", 0))
-                .must(QueryBuilders.termQuery("status", 1)); // 只搜索已发布的帖子
+                .must(QueryBuilders.termQuery("status", 1)); // 只搜索已发布的帖�?
 
         // 修改排序逻辑，加入分享数权重
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
@@ -413,7 +413,7 @@ public class SearchServiceImpl implements SearchService {
                 .map(SearchHit::getContent)
                 .collect(Collectors.toList());
 
-        // 批量获取帖子的附件
+        // 批量获取帖子的附�?
         if (!postList.isEmpty()) {
             // 获取所有帖子ID
             List<Long> postIds = postList.stream()
@@ -425,7 +425,7 @@ public class SearchServiceImpl implements SearchService {
                     new QueryWrapper<PostAttachment>()
                             .in("postId", postIds)
                             .eq("type", 1)  // 只获取图片类型的附件
-                            .orderByAsc("position")  // 按位置排序
+                            .orderByAsc("position")  // 按位置排�?
             );
 
             // 构建帖子ID到附件列表的映射
@@ -434,7 +434,7 @@ public class SearchServiceImpl implements SearchService {
 
             // 填充帖子信息
             postList.forEach(post -> {
-                // 获取并设置用户信息
+                // 获取并设置用户信�?
                 User user = userService.getById(post.getUserId());
                 if (user != null) {
                     post.setUser(userService.getUserVO(user));
@@ -446,7 +446,7 @@ public class SearchServiceImpl implements SearchService {
                 // 设置附件（只保留第一张图片）
                 List<PostAttachment> postAttachments = postAttachmentMap.get(post.getId());
                 if (CollUtil.isNotEmpty(postAttachments)) {
-                    // 只保留第一张图片
+                    // 只保留第一张图�?
                     postAttachments = postAttachments.subList(0, 1);
                 }
                 post.setAttachments(postAttachments != null ? postAttachments : Collections.emptyList());
@@ -481,7 +481,7 @@ public class SearchServiceImpl implements SearchService {
 
         boolQueryBuilder.minimumShouldMatch(1)
                 .must(QueryBuilders.termQuery("isDelete", 0))
-                // 只搜索团队空间
+                // 只搜索团队空�?
                 .must(QueryBuilders.termQuery("spaceType", 1));
 
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
@@ -509,7 +509,7 @@ public class SearchServiceImpl implements SearchService {
                     .map(Space::getId)
                     .collect(Collectors.toList());
 
-            // 批量查询实际的空间数据
+            // 批量查询实际的空间数�?
             List<Space> actualSpaces = spaceService.listByIds(spaceIds);
             Map<Long, Space> spaceMap = actualSpaces.stream()
                     .collect(Collectors.toMap(Space::getId, space -> space));
@@ -530,17 +530,17 @@ public class SearchServiceImpl implements SearchService {
                             space -> {
                                 QueryWrapper<SpaceUser> queryWrapper = new QueryWrapper<>();
                                 queryWrapper.eq("spaceId", space.getId())
-                                        .eq("status", 1);  // 只统计已通过的成员
+                                        .eq("status", 1);  // 只统计已通过的成�?
                                 return spaceUserService.count(queryWrapper);
                             }
                     ));
 
-            // 转换为VO并填充信息
+            // 转换为VO并填充信�?
             spaceVOList = spaceList.stream()
                     .map(space -> {
                         SpaceVO spaceVO = SpaceVO.objToVo(space);
 
-                        // 从数据库获取实际的空间数据
+                        // 从数据库获取实际的空间数�?
                         Space actualSpace = spaceMap.get(space.getId());
                         if (actualSpace != null) {
                             spaceVO.setTotalSize(actualSpace.getTotalSize());
@@ -563,7 +563,7 @@ public class SearchServiceImpl implements SearchService {
                         if (userIdUserListMap.containsKey(userId)) {
                             User user = userIdUserListMap.get(userId).get(0);
                             UserVO userVO = userService.getUserVO(user);
-                            // 设置用户默认值
+                            // 设置用户默认�?
                             userVO.setUserProfile(userVO.getUserProfile() != null ? userVO.getUserProfile() : "");
                             spaceVO.setUser(userVO);
                         }

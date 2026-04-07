@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.spaceuser;
+﻿package com.yjc.snaphive.model.dto.spaceuser;
 
 import com.yjc.snaphive.common.PageRequest;
 import lombok.Data;
@@ -32,7 +32,7 @@ public class SpaceUserQueryRequest extends PageRequest implements Serializable {
     private String spaceRole;
 
     /**
-     * 审核状态：0-待审核 1-已通过 2-已拒绝
+     * 审核状态：0-待审�?1-已通过 2-已拒�?
      */
     private Integer status;
 

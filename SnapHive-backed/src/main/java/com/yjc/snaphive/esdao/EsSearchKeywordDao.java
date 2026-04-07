@@ -1,4 +1,4 @@
-package com.yjc.snaphive.esdao;
+﻿package com.yjc.snaphive.esdao;
 
 import com.yjc.snaphive.model.entity.es.EsSearchKeyword;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
@@ -16,7 +16,7 @@ public interface EsSearchKeywordDao extends ElasticsearchRepository<EsSearchKeyw
     EsSearchKeyword findByTypeAndKeyword(String type, String keyword);
 
     /**
-     * 根据类型查询热门关键词
+     * 根据类型查询热门关键�?
      */
     List<EsSearchKeyword> findByTypeAndUpdateTimeAfterOrderByCountDesc(String type, Date startTime);
 }

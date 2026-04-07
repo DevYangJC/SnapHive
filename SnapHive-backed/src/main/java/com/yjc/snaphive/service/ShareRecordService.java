@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -22,27 +22,27 @@ public interface ShareRecordService extends IService<ShareRecord> {
     List<ShareRecordVO> getAndClearUnreadShares(Long userId);
 
     /**
-     * 获取用户的分享历史
+     * 获取用户的分享历�?
      */
     Page<ShareRecordVO> getUserShareHistory(ShareQueryRequest shareQueryRequest, Long userId);
 
     /**
-     * 检查内容是否已被用户分享
+     * 检查内容是否已被用户分�?
      */
     boolean isContentShared(Long targetId, Integer targetType, Long userId);
 
     /**
-     * 获取用户未读分享数
+     * 获取用户未读分享�?
      */
     long getUnreadSharesCount(Long userId);
 
     /**
-     * 清除用户所有未读分享状态
+     * 清除用户所有未读分享状�?
      */
     void clearAllUnreadShares(Long userId);
 
     /**
-     * 获取用户自己的分享历史（分页）
+     * 获取用户自己的分享历史（分页�?
      */
     Page<ShareRecordVO> getMyShareHistory(ShareQueryRequest shareQueryRequest, Long userId);
 

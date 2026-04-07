@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket;
+﻿package com.yjc.snaphive.manager.websocket;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.json.JSONUtil;
@@ -27,7 +27,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 图片编辑 WebSocket 处理器
+ * 图片编辑 WebSocket 处理�?
  */
 @Component
 @Slf4j
@@ -40,7 +40,7 @@ public class PictureEditHandler extends TextWebSocketHandler {
     @Lazy
     private PictureEditEventProducer pictureEditEventProducer;
 
-    // 每张图片的编辑状态，key: pictureId, value: 当前正在编辑的用户 ID
+    // 每张图片的编辑状态，key: pictureId, value: 当前正在编辑的用�?ID
     private final Map<Long, Long> pictureEditingUsers = new ConcurrentHashMap<>();
 
     // 保存所有连接的会话，key: pictureId, value: 用户会话集合
@@ -66,12 +66,12 @@ public class PictureEditHandler extends TextWebSocketHandler {
         String message = String.format("用户 %s 加入编辑", user.getUserName());
         pictureEditResponseMessage.setMessage(message);
         pictureEditResponseMessage.setUser(userService.getUserVO(user));
-        // 广播给所有用户
+        // 广播给所有用�?
         broadcastToPicture(pictureId, pictureEditResponseMessage);
     }
 
     /**
-     * 收到前端发送的消息，根据消息类别处理消息
+     * 收到前端发送的消息，根据消息类别处理消�?
      *
      * @param session
      * @param message
@@ -80,9 +80,9 @@ public class PictureEditHandler extends TextWebSocketHandler {
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         super.handleTextMessage(session, message);
-        // 获取消息内容，将 JSON 转换为 PictureEditRequestMessage
+        // 获取消息内容，将 JSON 转换�?PictureEditRequestMessage
         PictureEditRequestMessage pictureEditRequestMessage = JSONUtil.toBean(message.getPayload(), PictureEditRequestMessage.class);
-        // 从 Session 属性中获取到公共参数
+        // �?Session 属性中获取到公共参�?
         User user = (User) session.getAttributes().get("user");
         Long pictureId = (Long) session.getAttributes().get("pictureId");
         // 根据消息类型处理消息（生产消息到 Disruptor 环形队列中）
@@ -90,7 +90,7 @@ public class PictureEditHandler extends TextWebSocketHandler {
     }
 
     /**
-     * 进入编辑状态
+     * 进入编辑状�?
      *
      * @param pictureEditRequestMessage
      * @param session
@@ -100,15 +100,15 @@ public class PictureEditHandler extends TextWebSocketHandler {
     public void handleEnterEditMessage(PictureEditRequestMessage pictureEditRequestMessage, WebSocketSession session, User user, Long pictureId) throws IOException {
         // 没有用户正在编辑该图片，才能进入编辑
         if (!pictureEditingUsers.containsKey(pictureId)) {
-            // 设置用户正在编辑该图片
+            // 设置用户正在编辑该图�?
             pictureEditingUsers.put(pictureId, user.getId());
             // 构造响应，发送加入编辑的消息通知
             PictureEditResponseMessage pictureEditResponseMessage = new PictureEditResponseMessage();
             pictureEditResponseMessage.setType(PictureEditMessageTypeEnum.ENTER_EDIT.getValue());
-            String message = String.format("用户 %s 开始编辑图片", user.getUserName());
+            String message = String.format("用户 %s 开始编辑图�?, user.getUserName());
             pictureEditResponseMessage.setMessage(message);
             pictureEditResponseMessage.setUser(userService.getUserVO(user));
-            // 广播给所有用户
+            // 广播给所有用�?
             broadcastToPicture(pictureId, pictureEditResponseMessage);
         }
     }
@@ -122,15 +122,15 @@ public class PictureEditHandler extends TextWebSocketHandler {
      * @param pictureId
      */
     public void handleEditActionMessage(PictureEditRequestMessage pictureEditRequestMessage, WebSocketSession session, User user, Long pictureId) throws IOException {
-        // 正在编辑的用户
+        // 正在编辑的用�?
         Long editingUserId = pictureEditingUsers.get(pictureId);
         String editAction = pictureEditRequestMessage.getEditAction();
         PictureEditActionEnum actionEnum = PictureEditActionEnum.getEnumByValue(editAction);
         if (actionEnum == null) {
-            log.error("无效的编辑动作");
+            log.error("无效的编辑动�?);
             return;
         }
-        // 确认是当前的编辑者
+        // 确认是当前的编辑�?
         if (editingUserId != null && editingUserId.equals(user.getId())) {
             // 构造响应，发送具体操作的通知
             PictureEditResponseMessage pictureEditResponseMessage = new PictureEditResponseMessage();
@@ -146,7 +146,7 @@ public class PictureEditHandler extends TextWebSocketHandler {
 
 
     /**
-     * 退出编辑状态
+     * 退出编辑状�?
      *
      * @param pictureEditRequestMessage
      * @param session
@@ -154,16 +154,16 @@ public class PictureEditHandler extends TextWebSocketHandler {
      * @param pictureId
      */
     public void handleExitEditMessage(PictureEditRequestMessage pictureEditRequestMessage, WebSocketSession session, User user, Long pictureId) throws IOException {
-        // 正在编辑的用户
+        // 正在编辑的用�?
         Long editingUserId = pictureEditingUsers.get(pictureId);
-        // 确认是当前的编辑者
+        // 确认是当前的编辑�?
         if (editingUserId != null && editingUserId.equals(user.getId())) {
-            // 移除用户正在编辑该图片
+            // 移除用户正在编辑该图�?
             pictureEditingUsers.remove(pictureId);
             // 构造响应，发送退出编辑的消息通知
             PictureEditResponseMessage pictureEditResponseMessage = new PictureEditResponseMessage();
             pictureEditResponseMessage.setType(PictureEditMessageTypeEnum.EXIT_EDIT.getValue());
-            String message = String.format("用户 %s 退出编辑图片", user.getUserName());
+            String message = String.format("用户 %s 退出编辑图�?, user.getUserName());
             pictureEditResponseMessage.setMessage(message);
             pictureEditResponseMessage.setUser(userService.getUserVO(user));
             broadcastToPicture(pictureId, pictureEditResponseMessage);
@@ -180,10 +180,10 @@ public class PictureEditHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         super.afterConnectionClosed(session, status);
-        // 从 Session 属性中获取到公共参数
+        // �?Session 属性中获取到公共参�?
         User user = (User) session.getAttributes().get("user");
         Long pictureId = (Long) session.getAttributes().get("pictureId");
-        // 移除当前用户的编辑状态
+        // 移除当前用户的编辑状�?
         handleExitEditMessage(null, session, user, pictureId);
         // 删除会话
         Set<WebSocketSession> sessionSet = pictureSessions.get(pictureId);
@@ -203,7 +203,7 @@ public class PictureEditHandler extends TextWebSocketHandler {
     }
 
     /**
-     * 广播给该图片的所有用户（支持排除掉某个 Session）
+     * 广播给该图片的所有用户（支持排除掉某�?Session�?
      *
      * @param pictureId
      * @param pictureEditResponseMessage
@@ -214,16 +214,16 @@ public class PictureEditHandler extends TextWebSocketHandler {
         if (CollUtil.isNotEmpty(sessionSet)) {
             // 创建 ObjectMapper
             ObjectMapper objectMapper = new ObjectMapper();
-            // 配置序列化：将 Long 类型转为 String，解决丢失精度问题
+            // 配置序列化：�?Long 类型转为 String，解决丢失精度问�?
             SimpleModule module = new SimpleModule();
             module.addSerializer(Long.class, ToStringSerializer.instance);
             module.addSerializer(Long.TYPE, ToStringSerializer.instance); // 支持 long 基本类型
             objectMapper.registerModule(module);
-            // 序列化为 JSON 字符串
+            // 序列化为 JSON 字符�?
             String message = objectMapper.writeValueAsString(pictureEditResponseMessage);
             TextMessage textMessage = new TextMessage(message);
             for (WebSocketSession session : sessionSet) {
-                // 排除掉的 session 不发送
+                // 排除掉的 session 不发�?
                 if (excludeSession != null && session.equals(excludeSession)) {
                     continue;
                 }
@@ -235,7 +235,7 @@ public class PictureEditHandler extends TextWebSocketHandler {
     }
 
     /**
-     * 广播给该图片的所有用户
+     * 广播给该图片的所有用�?
      *
      * @param pictureId
      * @param pictureEditResponseMessage

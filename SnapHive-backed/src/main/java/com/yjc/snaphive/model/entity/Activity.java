@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.yjc.snaphive.model.vo.UserVO;
@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 活动表
+ * 活动�?
  */
 @TableName(value = "activity")
 @Data
@@ -41,22 +41,22 @@ public class Activity implements Serializable {
     private String coverUrl;
 
     /**
-     * 浏览量
+     * 浏览�?
      */
     private Long viewCount;
 
     /**
-     * 点赞数
+     * 点赞�?
      */
     private Long likeCount;
 
     /**
-     * 评论数
+     * 评论�?
      */
     private Long commentCount;
 
     /**
-     * 状态 0-待审核 1-已发布 2-已拒绝
+     * 状�?0-待审�?1-已发�?2-已拒�?
      */
     private Integer status;
 
@@ -82,7 +82,7 @@ public class Activity implements Serializable {
     private Integer isDelete;
 
     /**
-     * 分享数
+     * 分享�?
      */
     private Long shareCount;
 
@@ -92,7 +92,7 @@ public class Activity implements Serializable {
     private Date expireTime;
 
     /**
-     * 是否过期 0-未过期 1-已过期
+     * 是否过期 0-未过�?1-已过�?
      */
     private Integer isExpired;
 
@@ -109,13 +109,13 @@ public class Activity implements Serializable {
     private List<PostAttachment> attachments;
 
     /**
-     * 是否已点赞 0-未点赞 1-已点赞
+     * 是否已点�?0-未点�?1-已点�?
      */
     @TableField(exist = false)
     private Integer isLiked;
 
     /**
-     * 是否已分享 0-未分享 1-已分享
+     * 是否已分�?0-未分�?1-已分�?
      */
     @TableField(exist = false)
     private Integer isShared;

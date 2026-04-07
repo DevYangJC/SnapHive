@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 
@@ -45,7 +45,7 @@ public class User implements Serializable {
     private String userAvatar;
 
     /**
-     * 用户简介
+     * 用户简�?
      */
     private String userProfile;
 

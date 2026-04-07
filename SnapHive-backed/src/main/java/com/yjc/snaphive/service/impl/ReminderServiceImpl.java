@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -51,22 +51,22 @@ public class ReminderServiceImpl extends ServiceImpl<ReminderMapper, Reminder>
         QueryWrapper<Reminder> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userId", userId);
 
-        // 根据日期筛选
+        // 根据日期筛�?
         if (reminderQueryRequest.getDate() != null) {
             queryWrapper.apply("DATE(createTime) = {0}", reminderQueryRequest.getDate());
         }
 
-        // 根据完成状态筛选
+        // 根据完成状态筛�?
         if (reminderQueryRequest.getCompleted() != null) {
             queryWrapper.eq("completed", reminderQueryRequest.getCompleted() ? 1 : 0);
         }
 
-        // 根据收藏状态筛选
+        // 根据收藏状态筛�?
         if (reminderQueryRequest.getStarred() != null) {
             queryWrapper.eq("isStarred", reminderQueryRequest.getStarred() ? 1 : 0);
         }
 
-        // 根据重要状态筛选
+        // 根据重要状态筛�?
         if (reminderQueryRequest.getImportant() != null) {
             queryWrapper.eq("isImportant", reminderQueryRequest.getImportant() ? 1 : 0);
         }

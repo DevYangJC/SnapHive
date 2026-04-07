@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket.model;
+﻿package com.yjc.snaphive.manager.websocket.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class PictureEditRequestMessage {
 
     /**
-     * 消息类型，例如 "ENTER_EDIT", "EXIT_EDIT", "EDIT_ACTION"
+     * 消息类型，例�?"ENTER_EDIT", "EXIT_EDIT", "EDIT_ACTION"
      */
     private String type;
 

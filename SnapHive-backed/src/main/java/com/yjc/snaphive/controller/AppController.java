@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.yjc.snaphive.annotation.AuthCheck;
 import com.yjc.snaphive.common.BaseResponse;
@@ -57,7 +57,7 @@ public class AppController {
     private static final long DOWNLOAD_LIMIT_DURATION = 1; // 1 hour
 
     /**
-     * 上传新版本
+     * 上传新版�?
      */
     @PostMapping("/upload")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
@@ -82,7 +82,7 @@ public class AppController {
     }
 
     /**
-     * 获取最新版本信息
+     * 获取最新版本信�?
      */
     @GetMapping("/version")
     public BaseResponse<Map<String, Object>> getLatestVersion() {
@@ -110,10 +110,10 @@ public class AppController {
     public void downloadApp(HttpServletResponse response, HttpServletRequest request) {
         Long userId = getUserIdFromRequest(request);
         if (userId == null) {
-            throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR, "用户未登录");
+            throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR, "用户未登�?);
         }
 
-        // 检查下载次数限制
+        // 检查下载次数限�?
         String downloadKey = String.format(DOWNLOAD_COUNT_KEY, userId);
         String downloadCountStr = stringRedisTemplate.opsForValue().get(downloadKey);
         int downloadCount = downloadCountStr != null ? Integer.parseInt(downloadCountStr) : 0;
@@ -129,13 +129,13 @@ public class AppController {
 
         File file = new File(latestVersion.getApkPath());
         if (!file.exists()) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "APK文件不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "APK文件不存�?);
         }
 
         try {
             String fileName = "yuemu_" + latestVersion.getVersion() + ".apk";
 
-            // 设置响应头
+            // 设置响应�?
             response.setContentType("application/vnd.android.package-archive");
             response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
 
@@ -175,12 +175,12 @@ public class AppController {
             @RequestParam(defaultValue = "10") long pageSize) {
         // 参数校验
         ThrowUtils.throwIf(current < 1, ErrorCode.PARAMS_ERROR, "页码不能小于1");
-        ThrowUtils.throwIf(pageSize < 1 || pageSize > 20, ErrorCode.PARAMS_ERROR, "每页大小必须在1-20之间");
+        ThrowUtils.throwIf(pageSize < 1 || pageSize > 20, ErrorCode.PARAMS_ERROR, "每页大小必须�?-20之间");
 
         // 获取版本历史
         Page<AppVersion> versionHistory = appVersionService.getVersionHistory(current, pageSize);
 
-        // 处理返回结果，脱敏处理
+        // 处理返回结果，脱敏处�?
         Page<AppVersion> result = new Page<>(versionHistory.getCurrent(), versionHistory.getSize(), versionHistory.getTotal());
         List<AppVersion> records = versionHistory.getRecords().stream().map(version -> {
             // 不返回文件路径等敏感信息

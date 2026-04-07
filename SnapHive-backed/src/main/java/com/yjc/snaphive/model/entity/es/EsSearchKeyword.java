@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity.es;
+﻿package com.yjc.snaphive.model.entity.es;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -21,7 +21,7 @@ public class EsSearchKeyword implements Serializable {
     private String id;
 
     /**
-     * 搜索关键词：支持中英文混合搜索
+     * 搜索关键词：支持中英文混合搜�?
      */
     @MultiField(
         mainField = @Field(type = FieldType.Text),

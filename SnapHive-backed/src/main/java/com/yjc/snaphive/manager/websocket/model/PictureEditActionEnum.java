@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket.model;
+﻿package com.yjc.snaphive.manager.websocket.model;
 
 import lombok.Getter;
 

@@ -1,9 +1,9 @@
-package com.yjc.snaphive.model.enums;
+﻿package com.yjc.snaphive.model.enums;
 
 import lombok.Getter;
 
 /**
- * 评论类型枚举类
+ * 评论类型枚举�?
  */
 @Getter
 public enum CommentTypeEnum {
@@ -21,7 +21,7 @@ public enum CommentTypeEnum {
     /**
      * 根据值获取对应的枚举实例
      *
-     * @param value 要查找的枚举值
+     * @param value 要查找的枚举�?
      * @return 对应的枚举实例，如果没找到则返回 null
      */
     public static CommentTypeEnum getEnumByValue(int value) {

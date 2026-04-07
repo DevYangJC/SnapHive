@@ -1,10 +1,10 @@
-package com.yjc.snaphive.model.dto.space.analyze;
+﻿package com.yjc.snaphive.model.dto.space.analyze;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 空间资源使用分析请求封装类
+ * 空间资源使用分析请求封装�?
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

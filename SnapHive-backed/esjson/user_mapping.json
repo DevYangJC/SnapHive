@@ -1,4 +1,4 @@
-# 如果需要删除已存在的索引
+﻿# 如果需要删除已存在的索引
 DELETE /user
 
 # 创建user索引
@@ -84,7 +84,7 @@ PUT /user
 POST /user/_analyze
 {
 "analyzer": "ik_max_word",
-"text": "鹿梦的图片分享"
+"text": "SnapHive的图片分享"
 }
 
 # 测试索引是否创建成功

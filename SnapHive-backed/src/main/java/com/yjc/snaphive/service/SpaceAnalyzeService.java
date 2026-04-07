@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lumenglover.yuemupicturebackend.model.dto.space.analyze.*;
@@ -11,7 +11,7 @@ import com.yjc.snaphive.model.vo.space.analyze.*;
 import java.util.List;
 
 /**
- * @author 鹿梦
+ * @author SnapHive
  * @createDate 2024-12-18 19:53:34
  */
 public interface SpaceAnalyzeService extends IService<Space> {

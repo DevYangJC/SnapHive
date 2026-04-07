@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -16,12 +16,12 @@ public class AppVersion implements Serializable {
     private Long id;
 
     /**
-     * 版本号
+     * 版本�?
      */
     private String version;
 
     /**
-     * 版本码
+     * 版本�?
      */
     private Integer versionCode;
 
@@ -46,7 +46,7 @@ public class AppVersion implements Serializable {
     private Integer isForce;
 
     /**
-     * 状态 0-禁用 1-启用
+     * 状�?0-禁用 1-启用
      */
     private Integer status;
 

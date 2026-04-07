@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yjc.snaphive.model.entity.UserSignInRecord;
@@ -7,8 +7,8 @@ import com.yjc.snaphive.mapper.UserSignInRecordMapper;
 import org.springframework.stereotype.Service;
 
 /**
-* @author 鹿梦
-* @description 针对表【user_sign_in_record(用户签到记录表)】的数据库操作Service实现
+* @author SnapHive
+* @description 针对表【user_sign_in_record(用户签到记录�?】的数据库操作Service实现
 * @createDate 2025-01-17 10:55:33
 */
 @Service

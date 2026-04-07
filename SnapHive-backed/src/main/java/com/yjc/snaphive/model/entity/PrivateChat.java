@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.yjc.snaphive.model.vo.UserVO;
@@ -28,27 +28,27 @@ public class PrivateChat implements Serializable {
     private Long targetUserId;
 
     /**
-     * 最后一条消息内容
+     * 最后一条消息内�?
      */
     private String lastMessage;
 
     /**
-     * 最后一条消息时间
+     * 最后一条消息时�?
      */
     private Date lastMessageTime;
 
     /**
-     * 用户未读消息数
+     * 用户未读消息�?
      */
     private Integer userUnreadCount;
 
     /**
-     * 目标用户未读消息数
+     * 目标用户未读消息�?
      */
     private Integer targetUserUnreadCount;
 
     /**
-     * 聊天类型：0-私信 1-好友(双向关注)
+     * 聊天类型�?-私信 1-好友(双向关注)
      */
     private Integer chatType;
 
@@ -75,7 +75,7 @@ public class PrivateChat implements Serializable {
     private UserVO targetUser;
 
     /**
-     * 当前用户是否为发送者（true表示当前用户是userId，false表示当前用户是targetUserId）
+     * 当前用户是否为发送者（true表示当前用户是userId，false表示当前用户是targetUserId�?
      */
     @TableField(exist = false)
     private Boolean isSender;

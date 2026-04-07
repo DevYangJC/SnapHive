@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -73,7 +73,7 @@ public class ShareRecordServiceImpl extends ServiceImpl<ShareRecordMapper, Share
             }
 
             // 校验目标类型
-            if (targetType != 1 && targetType != 2) { // 只允许图片(1)和帖子(2)
+            if (targetType != 1 && targetType != 2) { // 只允许图�?1)和帖�?2)
                 log.error("Invalid target type: {}", targetType);
                 return CompletableFuture.completedFuture(false);
             }
@@ -85,7 +85,7 @@ public class ShareRecordServiceImpl extends ServiceImpl<ShareRecordMapper, Share
                 return CompletableFuture.completedFuture(false);
             }
 
-            // 查询当前分享状态
+            // 查询当前分享状�?
             QueryWrapper<ShareRecord> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("userId", userId)
                     .eq("targetId", targetId)
@@ -104,7 +104,7 @@ public class ShareRecordServiceImpl extends ServiceImpl<ShareRecordMapper, Share
                 this.save(shareRecord);
                 updateShareCount(targetId, targetType, 1);
             } else {
-                // 更新分享状态
+                // 更新分享状�?
                 if (oldShareRecord.getIsShared() != isShared) {
                     oldShareRecord.setIsShared(isShared);
                     oldShareRecord.setShareTime(new Date());
@@ -145,7 +145,7 @@ public class ShareRecordServiceImpl extends ServiceImpl<ShareRecordMapper, Share
     }
 
     /**
-     * 更新分享数
+     * 更新分享�?
      */
     private void updateShareCount(Long targetId, Integer targetType, int delta) {
         switch (targetType) {
@@ -177,16 +177,16 @@ public class ShareRecordServiceImpl extends ServiceImpl<ShareRecordMapper, Share
         QueryWrapper<ShareRecord> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("targetUserId", userId)
                 .eq("isRead", 0)
-                .ne("userId", userId)  // 排除自己分享自己的记录
+                .ne("userId", userId)  // 排除自己分享自己的记�?
                 .orderByDesc("shareTime")
-                .last("LIMIT 50");  // 限制最多返回50条数据
+                .last("LIMIT 50");  // 限制最多返�?0条数�?
 
         List<ShareRecord> unreadShares = this.list(queryWrapper);
         if (CollUtil.isEmpty(unreadShares)) {
             return new ArrayList<>();
         }
 
-        // 2. 批量更新为已读
+        // 2. 批量更新为已�?
         List<Long> shareIds = unreadShares.stream()
                 .map(ShareRecord::getId)
                 .collect(Collectors.toList());
@@ -199,7 +199,7 @@ public class ShareRecordServiceImpl extends ServiceImpl<ShareRecordMapper, Share
     }
 
     /**
-     * 更新 ES 中图片的分享数
+     * 更新 ES 中图片的分享�?
      */
     private void updateEsPictureShareCount(Long pictureId, int delta) {
         try {
@@ -213,7 +213,7 @@ public class ShareRecordServiceImpl extends ServiceImpl<ShareRecordMapper, Share
     }
 
     /**
-     * 更新 ES 中帖子的分享数
+     * 更新 ES 中帖子的分享�?
      */
     private void updateEsPostShareCount(Long postId, int delta) {
         try {
@@ -237,7 +237,7 @@ public class ShareRecordServiceImpl extends ServiceImpl<ShareRecordMapper, Share
         // 构建查询条件
         QueryWrapper<ShareRecord> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("targetUserId", userId)
-                .ne("userId", userId);  // 排除自己分享自己的记录
+                .ne("userId", userId);  // 排除自己分享自己的记�?
 
         // 处理目标类型查询
         Integer targetType = shareQueryRequest.getTargetType();
@@ -317,7 +317,7 @@ public class ShareRecordServiceImpl extends ServiceImpl<ShareRecordMapper, Share
         return this.count(new QueryWrapper<ShareRecord>()
                 .eq("targetUserId", userId)
                 .eq("isRead", 0)
-                .ne("userId", userId));  // 排除自己分享自己的记录
+                .ne("userId", userId));  // 排除自己分享自己的记�?
     }
 
     @Override
@@ -339,8 +339,8 @@ public class ShareRecordServiceImpl extends ServiceImpl<ShareRecordMapper, Share
 
         // 构建查询条件
         QueryWrapper<ShareRecord> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("userId", userId)  // 查询用户自己的分享记录
-                .eq("isShared", true);  // 只查询分享状态为true的记录
+        queryWrapper.eq("userId", userId)  // 查询用户自己的分享记�?
+                .eq("isShared", true);  // 只查询分享状态为true的记�?
 
         // 处理目标类型查询
         Integer targetType = shareQueryRequest.getTargetType();
@@ -369,7 +369,7 @@ public class ShareRecordServiceImpl extends ServiceImpl<ShareRecordMapper, Share
         // 获取目标内容所属用户ID
         Long targetUserId = getTargetUserId(targetId, targetType);
         if (targetUserId == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "目标内容不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "目标内容不存�?);
         }
 
         ShareRecord shareRecord = new ShareRecord();

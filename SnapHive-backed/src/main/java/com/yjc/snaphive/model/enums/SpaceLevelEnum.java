@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.enums;
+﻿package com.yjc.snaphive.model.enums;
 
 import cn.hutool.core.util.ObjUtil;
 import lombok.Getter;
@@ -10,8 +10,8 @@ import lombok.Getter;
 public enum SpaceLevelEnum {
 
     COMMON("普通版", 0, 50, 100L * 1024 * 1024),
-    PROFESSIONAL("专业版", 1, 100, 250L * 1024 * 1024),
-    FLAGSHIP("旗舰版", 2, 250, 500L * 1024 * 1024);
+    PROFESSIONAL("专业�?, 1, 100, 250L * 1024 * 1024),
+    FLAGSHIP("旗舰�?, 2, 250, 500L * 1024 * 1024);
 
     private final String text;
 
@@ -24,9 +24,9 @@ public enum SpaceLevelEnum {
 
     /**
      * @param text 文本
-     * @param value 值
-     * @param maxSize 最大图片总大小
-     * @param maxCount 最大图片总数量
+     * @param value �?
+     * @param maxSize 最大图片总大�?
+     * @param maxCount 最大图片总数�?
      */
     SpaceLevelEnum(String text, int value, long maxCount, long maxSize) {
         this.text = text;

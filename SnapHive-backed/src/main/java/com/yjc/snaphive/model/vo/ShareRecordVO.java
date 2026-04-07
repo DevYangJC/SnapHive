@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.vo;
+﻿package com.yjc.snaphive.model.vo;
 
 import lombok.Data;
 
@@ -22,12 +22,12 @@ public class ShareRecordVO {
     private UserVO user;
 
     /**
-     * 内容类型：1-图片 2-帖子 3-空间
+     * 内容类型�?-图片 2-帖子 3-空间
      */
     private Integer targetType;
 
     /**
-     * 被分享的内容（根据targetType可能是PictureVO/Post/SpaceVO）
+     * 被分享的内容（根据targetType可能是PictureVO/Post/SpaceVO�?
      */
     private Object target;
 }

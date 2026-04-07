@@ -1,4 +1,4 @@
-package com.yjc.snaphive.constant;
+﻿package com.yjc.snaphive.constant;
 
 /**
  * Redis 常量
@@ -6,7 +6,7 @@ package com.yjc.snaphive.constant;
 public interface RedisConstant {
 
     /**
-     * 用户签到记录的 Redis key 前缀
+     * 用户签到记录�?Redis key 前缀
      */
     String USER_SIGN_IN_REDIS_KEY_PREFIX = "user:signins";
 
@@ -16,7 +16,7 @@ public interface RedisConstant {
     String TOP_100_PIC_REDIS_KEY_PREFIX = "top100Picture:";
 
     /**
-     * top100过期时间为1天
+     * top100过期时间�?�?
      */
     long TOP_100_PIC_REDIS_KEY_EXPIRE_TIME =  24 * 60 * 60;
 
@@ -31,7 +31,7 @@ public interface RedisConstant {
     String TOP_100_POST_REDIS_KEY_PREFIX = "top100Post:";
 
     /**
-     * 帖子top100过期时间为1天
+     * 帖子top100过期时间�?�?
      */
     long TOP_100_POST_REDIS_KEY_EXPIRE_TIME = 24 * 60 * 60;
 
@@ -51,7 +51,7 @@ public interface RedisConstant {
     String PRIVATE_CHAT_HISTORY_PREFIX = "chat:private:";
 
     /**
-     * 聊天记录缓存过期时间（30分钟）
+     * 聊天记录缓存过期时间�?0分钟�?
      */
     long CHAT_HISTORY_EXPIRE_TIME = 30 * 60;
 
@@ -62,13 +62,13 @@ public interface RedisConstant {
 
 
     /**
-     * 帖子缓存过期时间（1小时）
+     * 帖子缓存过期时间�?小时�?
      */
     long POST_CACHE_EXPIRE_TIME = 60 * 60;
 
 
     /**
-     * 获取用户签到记录的 Redis Key
+     * 获取用户签到记录�?Redis Key
      * @param year 年份
      * @param userId 用户 id
      * @return 拼接好的 Redis Key

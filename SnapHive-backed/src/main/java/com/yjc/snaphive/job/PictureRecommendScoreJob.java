@@ -1,4 +1,4 @@
-package com.yjc.snaphive.job;
+﻿package com.yjc.snaphive.job;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -42,26 +42,26 @@ public class PictureRecommendScoreJob implements CommandLineRunner {
     private double timeDecay;
 
     /**
-     * 程序启动时执行一次
+     * 程序启动时执行一�?
      */
     @Override
     public void run(String... args) {
-        log.info("程序启动，开始执行首次推荐分数计算...");
+        log.info("程序启动，开始执行首次推荐分数计�?..");
         calculateRecommendScores();
     }
 
     /**
-     * 每5分钟执行一次推荐分数计算
+     * �?分钟执行一次推荐分数计�?
      */
     @Scheduled(fixedRate = 300000)
     public void calculateRecommendScores() {
-        log.info("开始计算图片推荐分数...");
+        log.info("开始计算图片推荐分�?..");
         int pageSize = 100;
         long current = 1;
         long totalProcessed = 0;
 
         while (true) {
-            // 分页查询所有已审核通过的图片
+            // 分页查询所有已审核通过的图�?
             Page<Picture> page = pictureService.page(
                     new Page<>(current, pageSize),
                     new LambdaQueryWrapper<Picture>()
@@ -74,7 +74,7 @@ public class PictureRecommendScoreJob implements CommandLineRunner {
                 break;
             }
 
-            // 计算每张图片的推荐分数
+            // 计算每张图片的推荐分�?
             for (Picture picture : pictures) {
                 double score = calculateScore(picture);
                 picture.setRecommendScore(score);
@@ -84,7 +84,7 @@ public class PictureRecommendScoreJob implements CommandLineRunner {
             pictureService.updateBatchById(pictures);
 
             totalProcessed += pictures.size();
-            log.info("已处理 {}/{} 张图片的推荐分数", totalProcessed, page.getTotal());
+            log.info("已处�?{}/{} 张图片的推荐分数", totalProcessed, page.getTotal());
 
             if (pictures.size() < pageSize) {
                 break;
@@ -92,11 +92,11 @@ public class PictureRecommendScoreJob implements CommandLineRunner {
             current++;
         }
 
-        log.info("图片推荐分数计算完成，共处理 {} 张图片", totalProcessed);
+        log.info("图片推荐分数计算完成，共处理 {} 张图�?, totalProcessed);
     }
 
     /**
-     * 计算单张图片的推荐分数
+     * 计算单张图片的推荐分�?
      */
     private double calculateScore(Picture picture) {
         // 时间衰减分数
@@ -108,14 +108,14 @@ public class PictureRecommendScoreJob implements CommandLineRunner {
         double commentScore = Math.log1p(picture.getCommentCount() * 0.6);
         double shareScore = Math.log1p(picture.getShareCount() * 0.6);
 
-        // 加权求和，新内容获得额外的时间加成
+        // 加权求和，新内容获得额外的时间加�?
         double baseScore = timeScore * timeWeight +
                 viewScore * viewWeight +
                 likeScore * likeWeight +
                 commentScore * commentWeight +
                 shareScore * shareWeight;
 
-        // 根据内容发布时间给予不同的加成
+        // 根据内容发布时间给予不同的加�?
         long hours = ChronoUnit.HOURS.between(picture.getCreateTime().toInstant(), Instant.now());
         if (hours <= 6) {
             // 6小时内的内容获得3倍的分数加成

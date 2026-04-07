@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.space.analyze;
+﻿package com.yjc.snaphive.model.dto.space.analyze;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

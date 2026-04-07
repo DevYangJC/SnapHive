@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.yjc.snaphive.common.BaseResponse;
 import com.yjc.snaphive.common.ResultUtils;
@@ -46,7 +46,7 @@ public class FileUploadController {
             @ApiParam("音频文件") @RequestParam("file") MultipartFile file,
             @ApiParam("音频标题") @RequestParam(required = false) String title,
             @ApiParam("音频描述") @RequestParam(required = false) String description,
-            @ApiParam("艺术家") @RequestParam(required = false) String artist,
+            @ApiParam("艺术�?) @RequestParam(required = false) String artist,
             @ApiParam("标签") @RequestParam(required = false) String tags,
             HttpServletRequest request) {
         User loginUser = userService.getLoginUser(request);

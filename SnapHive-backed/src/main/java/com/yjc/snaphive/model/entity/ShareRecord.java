@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -29,7 +29,7 @@ public class ShareRecord implements Serializable {
     private Long targetId;
 
     /**
-     * 内容类型：1-图片 2-帖子
+     * 内容类型�?-图片 2-帖子
      */
     private Integer targetType;
 
@@ -49,7 +49,7 @@ public class ShareRecord implements Serializable {
     private Date shareTime;
 
     /**
-     * 是否已读（0-未读，1-已读）
+     * 是否已读�?-未读�?-已读�?
      */
     private Integer isRead;
 

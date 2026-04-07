@@ -1,4 +1,4 @@
-package com.yjc.snaphive.common;
+﻿package com.yjc.snaphive.common;
 
 import com.yjc.snaphive.exception.ErrorCode;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 全局响应封装类
+ * 全局响应封装�?
  *
  * @param <T>
  */

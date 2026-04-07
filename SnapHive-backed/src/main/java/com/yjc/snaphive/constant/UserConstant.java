@@ -1,4 +1,4 @@
-package com.yjc.snaphive.constant;
+﻿package com.yjc.snaphive.constant;
 
 /**
  * 用户常量
@@ -18,7 +18,7 @@ public interface UserConstant {
     String DEFAULT_ROLE = "user";
 
     /**
-     * 管理员角色
+     * 管理员角�?
      */
     String ADMIN_ROLE = "admin";
 

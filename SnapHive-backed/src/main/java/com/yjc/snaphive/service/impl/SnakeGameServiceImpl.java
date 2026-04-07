@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yjc.snaphive.exception.ErrorCode;
@@ -30,7 +30,7 @@ public class SnakeGameServiceImpl extends ServiceImpl<SnakeGameMapper, SnakeGame
         // 校验游戏模式
         Integer gameMode = request.getGameMode();
         ThrowUtils.throwIf(gameMode == null || gameMode < 1 || gameMode > 3,
-                ErrorCode.PARAMS_ERROR, "无效的游戏模式");
+                ErrorCode.PARAMS_ERROR, "无效的游戏模�?);
 
         // 构建记录
         SnakeGameRecord record = new SnakeGameRecord();
@@ -66,13 +66,13 @@ public class SnakeGameServiceImpl extends ServiceImpl<SnakeGameMapper, SnakeGame
 
         Integer gameMode = request.getGameMode();
         ThrowUtils.throwIf(gameMode == null || gameMode < 1 || gameMode > 3,
-                ErrorCode.PARAMS_ERROR, "无效的游戏模式");
+                ErrorCode.PARAMS_ERROR, "无效的游戏模�?);
 
         Integer limit = request.getLimit();
         if (limit == null || limit <= 0) {
             limit = 10;
         }
-        // 限制最大查询数量
+        // 限制最大查询数�?
         limit = Math.min(limit, 100);
 
         return snakeGameMapper.getRankingList(gameMode, limit);

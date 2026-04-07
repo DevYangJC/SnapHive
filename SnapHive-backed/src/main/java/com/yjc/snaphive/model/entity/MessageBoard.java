@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 祝福板实体
+ * 祝福板实�?
  */
 @Data
 @TableName("message_board")
@@ -42,7 +42,7 @@ public class MessageBoard implements Serializable {
     private String content;
 
     /**
-     * QQ号
+     * QQ�?
      */
     private String qq;
 
@@ -52,7 +52,7 @@ public class MessageBoard implements Serializable {
     private String location;
 
     /**
-     * 浏览器信息
+     * 浏览器信�?
      */
     private String browser;
 
@@ -67,12 +67,12 @@ public class MessageBoard implements Serializable {
     private String ipAddress;
 
     /**
-     * 点赞数
+     * 点赞�?
      */
     private Integer likeCount;
 
     /**
-     * 状态 0-隐藏 1-显示
+     * 状�?0-隐藏 1-显示
      */
     private Integer status;
 

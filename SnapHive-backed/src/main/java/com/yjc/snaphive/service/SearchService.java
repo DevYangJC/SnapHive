@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.yjc.snaphive.model.dto.search.SearchRequest;
 import org.springframework.data.domain.Page;

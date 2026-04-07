@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket.disruptor;
+﻿package com.yjc.snaphive.manager.websocket.disruptor;
 
 import com.lmax.disruptor.RingBuffer;
 import com.lmax.disruptor.dsl.Disruptor;
@@ -12,7 +12,7 @@ import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 /**
- * 图片编辑事件生产者
+ * 图片编辑事件生产�?
  */
 @Component
 @Slf4j

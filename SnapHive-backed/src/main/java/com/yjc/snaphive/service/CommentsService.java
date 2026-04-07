@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @author 鹿梦
+ * @author SnapHive
  * @description 针对表【comments】的数据库操作Service
  * @createDate 2024-12-29 18:26:42
  */
@@ -33,17 +33,17 @@ public interface CommentsService extends IService<Comments> {
      * 获取并清除用户未读的评论消息
      *
      * @param userId 用户ID
-     * @return 未读的评论消息列表
+     * @return 未读的评论消息列�?
      */
     List<CommentsVO> getAndClearUnreadComments(Long userId);
 
     /**
-     * 获取用户未读评论数
+     * 获取用户未读评论�?
      */
     long getUnreadCommentsCount(Long userId);
 
     /**
-     * 清除用户所有未读评论状态
+     * 清除用户所有未读评论状�?
      */
     void clearAllUnreadComments(Long userId);
 

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket;
+﻿package com.yjc.snaphive.manager.websocket;
 
 import cn.hutool.core.util.ObjUtil;
 import cn.hutool.core.util.StrUtil;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * WebSocket 拦截器，建立连接前要先校验
+ * WebSocket 拦截器，建立连接前要先校�?
  */
 @Slf4j
 @Component
@@ -27,12 +27,12 @@ public class WsHandshakeInterceptor implements HandshakeInterceptor {
     private UserService userService;
 
     /**
-     * 建立连接前要先校验
+     * 建立连接前要先校�?
      *
      * @param request
      * @param response
      * @param wsHandler
-     * @param attributes 给 WebSocketSession 会话设置属性
+     * @param attributes �?WebSocketSession 会话设置属�?
      * @return
      * @throws Exception
      */
@@ -60,36 +60,36 @@ public class WsHandshakeInterceptor implements HandshakeInterceptor {
         // 设置用户信息
         attributes.put("user", loginUser);
 
-        // 设置pictureId（如果有）
+        // 设置pictureId（如果有�?
         if (StrUtil.isNotBlank(pictureIdStr)) {
             try {
                 Long pictureId = Long.parseLong(pictureIdStr);
                 attributes.put("pictureId", pictureId);
             } catch (NumberFormatException e) {
-                log.error("pictureId格式错误，拒绝握手");
+                log.error("pictureId格式错误，拒绝握�?);
                 return false;
             }
         }
 
-        // 设置spaceId（如果有）
+        // 设置spaceId（如果有�?
         if (StrUtil.isNotBlank(spaceIdStr)) {
             try {
                 Long spaceId = Long.parseLong(spaceIdStr);
                 attributes.put("spaceId", spaceId);
             } catch (NumberFormatException e) {
-                log.error("spaceId格式错误，拒绝握手");
+                log.error("spaceId格式错误，拒绝握�?);
                 return false;
             }
         }
 
-        // 设置privateChatId（如果有）
+        // 设置privateChatId（如果有�?
         if (StrUtil.isNotBlank(privateChatId)) {
             try {
                 Long privateChatIdLong = Long.parseLong(privateChatId);
                 attributes.put("privateChatId", privateChatIdLong);
             }
             catch (NumberFormatException e) {
-                log.error("privateChatId格式错误，拒绝握手");
+                log.error("privateChatId格式错误，拒绝握�?);
                 return false;
             }
         }

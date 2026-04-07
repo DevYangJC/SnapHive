@@ -1,4 +1,4 @@
-package com.yjc.snaphive.mapper;
+﻿package com.yjc.snaphive.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yjc.snaphive.model.entity.Game2048Record;
@@ -18,9 +18,9 @@ public interface Game2048Mapper extends BaseMapper<Game2048Record> {
     Integer getUserHighestScore(@Param("userId") Long userId);
 
     /**
-     * 获取排行榜（每个用户只返回最高分记录）
+     * 获取排行榜（每个用户只返回最高分记录�?
      * @param limit 限制数量
-     * @return 排行榜记录
+     * @return 排行榜记�?
      */
     @Select("SELECT r.*, u.userAccount, u.userName, u.userAvatar " +
             "FROM game_2048_record r " +
@@ -37,7 +37,7 @@ public interface Game2048Mapper extends BaseMapper<Game2048Record> {
     List<Game2048RecordVO> getRankingListByHighestScore(@Param("limit") Integer limit);
 
     /**
-     * 获取排行榜
+     * 获取排行�?
      */
     List<Game2048RecordVO> getRankingList(@Param("limit") Integer limit);
 
@@ -49,7 +49,7 @@ public interface Game2048Mapper extends BaseMapper<Game2048Record> {
     /**
      * 获取用户游戏历史记录
      * @param userId 用户ID
-     * @param offset 偏移量
+     * @param offset 偏移�?
      * @param pageSize 每页大小
      * @return 游戏记录列表
      */

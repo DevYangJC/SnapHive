@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.vo.space.analyze;
+﻿package com.yjc.snaphive.model.vo.space.analyze;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

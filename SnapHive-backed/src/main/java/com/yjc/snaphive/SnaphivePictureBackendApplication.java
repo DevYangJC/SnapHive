@@ -1,4 +1,4 @@
-package com.yjc.snaphive;
+﻿package com.yjc.snaphive;
 
 import org.apache.shardingsphere.spring.boot.ShardingSphereAutoConfiguration;
 import org.mybatis.spring.annotation.MapperScan;

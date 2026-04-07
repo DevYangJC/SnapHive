@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.spaceuser;
+﻿package com.yjc.snaphive.model.dto.spaceuser;
 
 import lombok.Data;
 
@@ -21,7 +21,7 @@ public class SpaceUserAuditRequest implements Serializable {
     private Long userId;
 
     /**
-     * 审核结果：1-通过 2-拒绝
+     * 审核结果�?-通过 2-拒绝
      */
     private Integer status;
 

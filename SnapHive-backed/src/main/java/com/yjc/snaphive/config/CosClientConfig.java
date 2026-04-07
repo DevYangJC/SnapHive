@@ -1,4 +1,4 @@
-package com.yjc.snaphive.config;
+﻿package com.yjc.snaphive.config;
 
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
@@ -43,16 +43,16 @@ public class CosClientConfig {
 
     @Bean
     public COSClient cosClient() {
-        // 1 初始化用户身份信息（secretId, secretKey）。
-        // SECRETID 和 SECRETKEY 请登录访问管理控制台 https://console.cloud.tencent.com/cam/capi 进行查看和管理
+        // 1 初始化用户身份信息（secretId, secretKey）�?
+        // SECRETID �?SECRETKEY 请登录访问管理控制台 https://console.cloud.tencent.com/cam/capi 进行查看和管�?
         COSCredentials cred = new BasicCOSCredentials(secretId, secretKey);
-        // 2 设置 bucket 的地域
-        // clientConfig 中包含了设置 region, https(默认 http), 超时, 代理等 set 方法, 使用可参见源码或者常见问题 Java SDK 部分。
+        // 2 设置 bucket 的地�?
+        // clientConfig 中包含了设置 region, https(默认 http), 超时, 代理�?set 方法, 使用可参见源码或者常见问�?Java SDK 部分�?
         ClientConfig clientConfig = new ClientConfig(new Region(region));
         // 这里建议设置使用 https 协议
-        // 从 5.6.54 版本开始，默认使用了 https
+        // �?5.6.54 版本开始，默认使用�?https
         clientConfig.setHttpProtocol(HttpProtocol.https);
-        // 3 生成 cos 客户端。
+        // 3 生成 cos 客户端�?
         return new COSClient(cred, clientConfig);
     }
 }

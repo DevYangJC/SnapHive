@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -30,12 +30,12 @@ public class Reminder implements Serializable {
     private Integer isDelete;
 
     /**
-     * 是否收藏 0-未收藏 1-已收藏
+     * 是否收藏 0-未收�?1-已收�?
      */
     private Integer isStarred;
 
     /**
-     * 是否重要 0-普通 1-重要
+     * 是否重要 0-普�?1-重要
      */
     private Integer isImportant;
 

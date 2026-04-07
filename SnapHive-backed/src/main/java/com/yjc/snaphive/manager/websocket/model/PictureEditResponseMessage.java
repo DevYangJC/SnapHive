@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket.model;
+﻿package com.yjc.snaphive.manager.websocket.model;
 
 import com.yjc.snaphive.model.vo.UserVO;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class PictureEditResponseMessage {
 
     /**
-     * 消息类型，例如 "INFO", "ERROR", "ENTER_EDIT", "EXIT_EDIT", "EDIT_ACTION"
+     * 消息类型，例�?"INFO", "ERROR", "ENTER_EDIT", "EXIT_EDIT", "EDIT_ACTION"
      */
     private String type;
 
@@ -24,7 +24,7 @@ public class PictureEditResponseMessage {
     private String message;
 
     /**
-     * 执行的编辑动作
+     * 执行的编辑动�?
      */
     private String editAction;
 

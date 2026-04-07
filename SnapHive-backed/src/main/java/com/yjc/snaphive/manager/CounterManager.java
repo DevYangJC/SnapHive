@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager;
+﻿package com.yjc.snaphive.manager;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class CounterManager {
     /**
      * 增加并返回计数，默认统计一分钟内的计数结果
      *
-     * @param key 缓存键
+     * @param key 缓存�?
      * @return
      */
     public long incrAndGetCounter(String key) {
@@ -33,9 +33,9 @@ public class CounterManager {
     }
 
     /**
-     * 增加并返回计数
+     * 增加并返回计�?
      *
-     * @param key          缓存键
+     * @param key          缓存�?
      * @param timeInterval 时间间隔
      * @param timeUnit     时间间隔单位
      * @return
@@ -60,12 +60,12 @@ public class CounterManager {
     }
 
     /**
-     * 增加并返回计数
+     * 增加并返回计�?
      *
-     * @param key                     缓存键
+     * @param key                     缓存�?
      * @param timeInterval            时间间隔
      * @param timeUnit                时间间隔单位
-     * @param expirationTimeInSeconds 计数器缓存过期时间
+     * @param expirationTimeInSeconds 计数器缓存过期时�?
      * @return
      */
     public long incrAndGetCounter(String key, int timeInterval, TimeUnit timeUnit, long expirationTimeInSeconds) {

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.common.BaseResponse;
@@ -36,7 +36,7 @@ public class CommentsController {
     private CrawlerManager crawlerManager;
 
     /**
-     * 查询指定图片的评论列表
+     * 查询指定图片的评论列�?
      * @param commentsQueryRequest 评论查询参数
      * @param request HTTP请求
      * @return 评论列表（分页）
@@ -67,7 +67,7 @@ public class CommentsController {
      */
     @PostMapping("/add")
     public BaseResponse<Boolean> addComment(@RequestBody CommentsAddRequest commentsAddRequest, HttpServletRequest request) {
-        // 检测高频操作
+        // 检测高频操�?
         crawlerManager.detectFrequentRequest(request);
         return ResultUtils.success(commentsService.addComment(commentsAddRequest, request));
     }
@@ -80,7 +80,7 @@ public class CommentsController {
      */
     @PostMapping("/delete")
     public BaseResponse<Boolean> deleteComment(@RequestBody CommentsDeleteRequest commentsDeleteRequest, HttpServletRequest request) {
-        // 检测高频操作
+        // 检测高频操�?
         crawlerManager.detectFrequentRequest(request);
         return ResultUtils.success(commentsService.deleteComment(commentsDeleteRequest, request));
     }
@@ -93,7 +93,7 @@ public class CommentsController {
      */
     @PostMapping("/like")
     public BaseResponse<Boolean> likeComment(@RequestBody CommentsLikeRequest commentslikeRequest, HttpServletRequest request) {
-        // 检测高频操作
+        // 检测高频操�?
         crawlerManager.detectFrequentRequest(request);
         return ResultUtils.success(commentsService.likeComment(commentslikeRequest, request));
     }
@@ -108,7 +108,7 @@ public class CommentsController {
         User loginUser = userService.getLoginUser(request);
         ThrowUtils.throwIf(loginUser == null, ErrorCode.NOT_LOGIN_ERROR);
 
-        // 检测普通请求
+        // 检测普通请�?
         crawlerManager.detectNormalRequest(request);
 
         List<CommentsVO> unreadComments = commentsService.getAndClearUnreadComments(loginUser.getId());
@@ -125,7 +125,7 @@ public class CommentsController {
         User loginUser = userService.getLoginUser(request);
         ThrowUtils.throwIf(loginUser == null, ErrorCode.NOT_LOGIN_ERROR);
 
-        // 检测普通请求
+        // 检测普通请�?
         crawlerManager.detectNormalRequest(request);
 
         return ResultUtils.success(commentsService.getUnreadCommentsCount(loginUser.getId()));

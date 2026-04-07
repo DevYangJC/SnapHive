@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.common.BaseResponse;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 祝福板接口
+ * 祝福板接�?
  */
 @RestController
 @RequestMapping("/message-board")
@@ -37,7 +37,7 @@ public class MessageBoardController {
         if (messageBoard.getOwnerId() == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "祝福板主人ID不能为空");
         }
-        // 获取客户端信息，并限制长度
+        // 获取客户端信息，并限制长�?
         messageBoard.setIpAddress(request.getRemoteAddr());
         String userAgent = request.getHeader("User-Agent");
         if (userAgent != null && userAgent.length() > 255) {

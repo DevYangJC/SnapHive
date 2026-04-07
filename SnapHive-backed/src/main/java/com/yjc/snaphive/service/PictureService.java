@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @author 鹿梦
+ * @author SnapHive
  * @description 针对表【picture(图片)】的数据库操作Service
  * @createDate 2024-12-11 20:45:51
  */
@@ -30,7 +30,7 @@ public interface PictureService extends IService<Picture> {
     /**
      * 上传图片
      *
-     * @param inputSource 文件输入源
+     * @param inputSource 文件输入�?
      * @param pictureUploadRequest
      * @param loginUser
      * @return
@@ -40,7 +40,7 @@ public interface PictureService extends IService<Picture> {
                             User loginUser);
 
     /**
-     * 获取图片包装类（单条）
+     * 获取图片包装类（单条�?
      *
      * @param picture
      * @param request
@@ -49,7 +49,7 @@ public interface PictureService extends IService<Picture> {
     PictureVO getPictureVO(Picture picture, HttpServletRequest request);
 
     /**
-     * 获取图片包装类（分页）
+     * 获取图片包装类（分页�?
      *
      * @param picturePage
      * @param request
@@ -83,7 +83,7 @@ public interface PictureService extends IService<Picture> {
     void fillReviewParams(Picture picture, User loginUser);
 
     /**
-     * 批量抓取和创建图片
+     * 批量抓取和创建图�?
      *
      * @param pictureUploadByBatchRequest
      * @param loginUser
@@ -102,7 +102,7 @@ public interface PictureService extends IService<Picture> {
     void clearPictureFile(Picture oldPicture);
 
     /**
-     * 校验空间图片的权限
+     * 校验空间图片的权�?
      *
      * @param loginUser
      * @param picture
@@ -166,7 +166,7 @@ public interface PictureService extends IService<Picture> {
     boolean updatePicture(Picture picture);
 
     /**
-     * 获取图片详情(带权限校验)
+     * 获取图片详情(带权限校�?
      * @param id 图片ID
      * @param request HTTP请求
      * @return 图片详情VO
@@ -174,7 +174,7 @@ public interface PictureService extends IService<Picture> {
     PictureVO getPictureVOById(long id, HttpServletRequest request);
 
     /**
-     * 分页获取图片列表(带缓存)
+     * 分页获取图片列表(带缓�?
      * @param pictureQueryRequest 查询请求
      * @param request HTTP请求
      * @return 分页图片列表
@@ -182,14 +182,14 @@ public interface PictureService extends IService<Picture> {
     Page<PictureVO> listPictureVOByPageWithCache(PictureQueryRequest pictureQueryRequest, HttpServletRequest request);
 
     /**
-     * 获取Top100图片列表(带缓存)
+     * 获取Top100图片列表(带缓�?
      * @param id 榜单类型ID
      * @return Top100图片列表
      */
     List<PictureVO> getTop100PictureWithCache(Long id);
 
     /**
-     * 分页获取图片列表（封装类）
+     * 分页获取图片列表（封装类�?
      * @param pictureQueryRequest 查询请求
      * @param request HTTP请求
      * @return 分页图片列表
@@ -197,7 +197,7 @@ public interface PictureService extends IService<Picture> {
     Page<PictureVO> listPictureVOByPage(PictureQueryRequest pictureQueryRequest, HttpServletRequest request);
 
     /**
-     * 设置图片精选状态
+     * 设置图片精选状�?
      * @param pictureFeatureRequest 请求参数
      * @param loginUser 当前登录用户
      * @return 是否成功
@@ -205,7 +205,7 @@ public interface PictureService extends IService<Picture> {
     boolean setPictureFeature(PictureFeatureRequest pictureFeatureRequest, User loginUser);
 
     /**
-     * 分页获取精选图片列表
+     * 分页获取精选图片列�?
      * @param pictureQueryRequest 查询参数
      * @param request HTTP请求
      * @return 分页图片列表

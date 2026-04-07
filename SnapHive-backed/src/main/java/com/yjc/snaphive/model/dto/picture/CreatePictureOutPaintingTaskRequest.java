@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.picture;
+﻿package com.yjc.snaphive.model.dto.picture;
 
 import com.yjc.snaphive.api.aliyunai.model.CreateOutPaintingTaskRequest;
 import lombok.Data;

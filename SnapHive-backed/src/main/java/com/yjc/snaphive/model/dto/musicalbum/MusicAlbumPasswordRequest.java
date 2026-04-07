@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.musicalbum;
+﻿package com.yjc.snaphive.model.dto.musicalbum;
 
 import lombok.Data;
 
@@ -16,12 +16,12 @@ public class MusicAlbumPasswordRequest implements Serializable {
     private Long albumId;
 
     /**
-     * 旧密码
+     * 旧密�?
      */
     private String oldPassword;
 
     /**
-     * 新密码
+     * 新密�?
      */
     private String newPassword;
 

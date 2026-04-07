@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -22,7 +22,7 @@ public class MessageBoardServiceImpl extends ServiceImpl<MessageBoardMapper, Mes
         if (messageBoard.getOwnerId() == null) {
             throw new RuntimeException("祝福板主人ID不能为空");
         }
-        // 设置默认值
+        // 设置默认�?
         if (messageBoard.getStatus() == null) {
             messageBoard.setStatus(1);
         }
@@ -64,10 +64,10 @@ public class MessageBoardServiceImpl extends ServiceImpl<MessageBoardMapper, Mes
         // 验证是否是祝福板主人
         MessageBoard messageBoard = getById(id);
         if (messageBoard == null) {
-            throw new RuntimeException("祝福不存在");
+            throw new RuntimeException("祝福不存�?);
         }
         if (!messageBoard.getOwnerId().equals(ownerId)) {
-            throw new RuntimeException("无权删除该祝福");
+            throw new RuntimeException("无权删除该祝�?);
         }
         return removeById(id);
     }

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjUtil;
@@ -36,7 +36,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @author 鹿梦
+ * @author SnapHive
  * @description 针对表【space(空间)】的数据库操作Service实现
  * @createDate
  */
@@ -62,7 +62,7 @@ public class SpaceServiceImpl extends ServiceImpl<SpaceMapper, Space>
      */
     @Override
     public long addSpace(SpaceAddRequest spaceAddRequest, User loginUser) {
-        // 1. 填充参数默认值
+        // 1. 填充参数默认�?
         // 转换实体类和 DTO
         Space space = new Space();
         BeanUtils.copyProperties(spaceAddRequest, space);
@@ -75,7 +75,7 @@ public class SpaceServiceImpl extends ServiceImpl<SpaceMapper, Space>
         if (space.getSpaceType() == null) {
             space.setSpaceType(SpaceTypeEnum.PRIVATE.getValue());
         }
-        // 填充容量和大小
+        // 填充容量和大�?
         this.fillSpaceBySpaceLevel(space);
         // 2. 校验参数
         this.validSpace(space, true);
@@ -85,7 +85,7 @@ public class SpaceServiceImpl extends ServiceImpl<SpaceMapper, Space>
         if (SpaceLevelEnum.COMMON.getValue() != space.getSpaceLevel() && !userService.isAdmin(loginUser)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "无权限创建指定级别的空间");
         }
-        // 4. 控制用户创建空间的数量
+        // 4. 控制用户创建空间的数�?
         String lock = String.valueOf(userId).intern();
         synchronized (lock) {
             Long newSpaceId = transactionTemplate.execute(status -> {
@@ -95,7 +95,7 @@ public class SpaceServiceImpl extends ServiceImpl<SpaceMapper, Space>
                             .eq(Space::getUserId, userId)
                             .eq(Space::getSpaceType, SpaceTypeEnum.PRIVATE.getValue())
                             .exists();
-                    ThrowUtils.throwIf(exists, ErrorCode.OPERATION_ERROR, "每个用户只能创建一个私有空间");
+                    ThrowUtils.throwIf(exists, ErrorCode.OPERATION_ERROR, "每个用户只能创建一个私有空�?);
                 }
                 // 判断公共空间数量是否超限
                 else if (SpaceTypeEnum.TEAM.getValue() == space.getSpaceType()) {
@@ -103,7 +103,7 @@ public class SpaceServiceImpl extends ServiceImpl<SpaceMapper, Space>
                             .eq(Space::getUserId, userId)
                             .eq(Space::getSpaceType, SpaceTypeEnum.TEAM.getValue())
                             .count();
-                    ThrowUtils.throwIf(count >= 10, ErrorCode.OPERATION_ERROR, "每个用户最多只能创建10个团队空间");
+                    ThrowUtils.throwIf(count >= 10, ErrorCode.OPERATION_ERROR, "每个用户最多只能创�?0个团队空�?);
                 }
 
                 // 创建空间
@@ -116,7 +116,7 @@ public class SpaceServiceImpl extends ServiceImpl<SpaceMapper, Space>
                     spaceUser.setSpaceId(space.getId());
                     spaceUser.setUserId(userId);
                     spaceUser.setSpaceRole(SpaceRoleEnum.ADMIN.getValue());
-                    spaceUser.setStatus(1);  // 设置为已通过状态
+                    spaceUser.setStatus(1);  // 设置为已通过状�?
                     result = spaceUserService.save(spaceUser);
                     ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR, "创建团队成员记录失败");
                 }
@@ -130,13 +130,13 @@ public class SpaceServiceImpl extends ServiceImpl<SpaceMapper, Space>
     @Override
     public void validSpace(Space space, boolean add) {
         ThrowUtils.throwIf(space == null, ErrorCode.PARAMS_ERROR);
-        // 从对象中取值
+        // 从对象中取�?
         String spaceName = space.getSpaceName();
         Integer spaceLevel = space.getSpaceLevel();
         SpaceLevelEnum spaceLevelEnum = SpaceLevelEnum.getEnumByValue(spaceLevel);
         Integer spaceType = space.getSpaceType();
         SpaceTypeEnum spaceTypeEnum = SpaceTypeEnum.getEnumByValue(spaceType);
-        // 创建时校验
+        // 创建时校�?
         if (add) {
             if (StrUtil.isBlank(spaceName)) {
                 throw new BusinessException(ErrorCode.PARAMS_ERROR, "空间名称不能为空");
@@ -154,11 +154,11 @@ public class SpaceServiceImpl extends ServiceImpl<SpaceMapper, Space>
         }
         // 修改数据时，空间级别进行校验
         if (spaceLevel != null && spaceLevelEnum == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "空间级别不存在");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "空间级别不存�?);
         }
         // 修改数据时，空间类别进行校验
         if (spaceType != null && spaceTypeEnum == null) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "空间类别不存在");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "空间类别不存�?);
         }
     }
 
@@ -212,7 +212,7 @@ public class SpaceServiceImpl extends ServiceImpl<SpaceMapper, Space>
         if (spaceQueryRequest == null) {
             return queryWrapper;
         }
-        // 从对象中取值
+        // 从对象中取�?
         Long id = spaceQueryRequest.getId();
         Long userId = spaceQueryRequest.getUserId();
         String spaceName = spaceQueryRequest.getSpaceName();
@@ -282,7 +282,7 @@ public class SpaceServiceImpl extends ServiceImpl<SpaceMapper, Space>
         boolean result = super.updateById(entity);
         if (result) {
             // 更新ES
-            // 获取完整的空间信息
+            // 获取完整的空间信�?
             Space updatedSpace = this.getById(entity.getId());
             // 转换为ES实体
             EsSpace esSpace = new EsSpace();

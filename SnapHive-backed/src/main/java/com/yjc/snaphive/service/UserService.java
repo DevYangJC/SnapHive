@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author 鹿梦
+ * @author SnapHive
  * @description 针对表【user(用户)】的数据库操作Service
  * @createDate 2024-12-10 10:39:52
  */
@@ -38,15 +38,15 @@ public interface UserService extends IService<User> {
      * @param email 邮箱
      * @param userPassword 用户密码
      * @param checkPassword 校验密码
-     * @param code 验证码
-     * @return 新用户 id
+     * @param code 验证�?
+     * @return 新用�?id
      */
     long userRegister(String email, String userPassword, String checkPassword, String code);
 
     /**
      * 用户登录
      *
-     * @param accountOrEmail 账号或邮箱
+     * @param accountOrEmail 账号或邮�?
      * @param userPassword 用户密码
      * @param request
      * @return 脱敏后的用户信息
@@ -78,7 +78,7 @@ public interface UserService extends IService<User> {
     LoginUserVO getLoginUserVO(User user);
 
     /**
-     * 判断是否是登录态
+     * 判断是否是登录�?
      */
     User isLogin(HttpServletRequest request);
 
@@ -124,12 +124,12 @@ public interface UserService extends IService<User> {
     /**
      * 添加用户签到记录
      * @param userId 用户 id
-     * @return 当前用户是否已签到成功
+     * @return 当前用户是否已签到成�?
      */
     boolean addUserSignIn(long userId);
 
     /**
-     * 获取用户某个年份的签到记录
+     * 获取用户某个年份的签到记�?
      *
      * @param userId 用户 id
      * @param year   年份（为空表示当前年份）
@@ -140,15 +140,15 @@ public interface UserService extends IService<User> {
     /**
      * 发送邮箱验证码
      * @param email 邮箱
-     * @param type 验证码类型
+     * @param type 验证码类�?
      * @param request HTTP请求
      */
     void sendEmailCode(String email, String type, HttpServletRequest request);
 
     /**
      * 修改绑定邮箱
-     * @param newEmail 新邮箱
-     * @param code 验证码
+     * @param newEmail 新邮�?
+     * @param code 验证�?
      * @param request HTTP请求
      * @return 是否修改成功
      */
@@ -157,9 +157,9 @@ public interface UserService extends IService<User> {
     /**
      * 重置密码
      * @param email 邮箱
-     * @param newPassword 新密码
+     * @param newPassword 新密�?
      * @param checkPassword 确认密码
-     * @param code 验证码
+     * @param code 验证�?
      * @return 是否重置成功
      */
     boolean resetPassword(String email, String newPassword, String checkPassword, String code);

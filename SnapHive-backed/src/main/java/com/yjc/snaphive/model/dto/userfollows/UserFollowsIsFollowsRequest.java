@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.userfollows;
+﻿package com.yjc.snaphive.model.dto.userfollows;
 
 import lombok.Data;
 

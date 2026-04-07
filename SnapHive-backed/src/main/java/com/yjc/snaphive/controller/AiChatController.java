@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.yjc.snaphive.service.IDeepSeekService;
 import org.springframework.web.bind.annotation.PostMapping;

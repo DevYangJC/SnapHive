@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket.disruptor;
+﻿package com.yjc.snaphive.manager.websocket.disruptor;
 
 import cn.hutool.core.thread.ThreadFactoryBuilder;
 import com.lmax.disruptor.dsl.Disruptor;
@@ -18,7 +18,7 @@ public class PictureEditEventDisruptorConfig {
 
     @Bean("pictureEditEventDisruptor")
     public Disruptor<PictureEditEvent> messageModelRingBuffer() {
-        // 定义 ringBuffer 的大小
+        // 定义 ringBuffer 的大�?
         int bufferSize = 1024 * 256;
         // 创建 disruptor
         Disruptor<PictureEditEvent> disruptor = new Disruptor<>(
@@ -26,7 +26,7 @@ public class PictureEditEventDisruptorConfig {
                 bufferSize,
                 ThreadFactoryBuilder.create().setNamePrefix("pictureEditEventDisruptor").build()
         );
-        // 设置消费者
+        // 设置消费�?
         disruptor.handleEventsWithWorkerPool(pictureEditEventWorkHandler);
         // 启动 disruptor
         disruptor.start();

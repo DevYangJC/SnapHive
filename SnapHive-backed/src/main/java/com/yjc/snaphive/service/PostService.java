@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -31,20 +31,20 @@ public interface PostService extends IService<Post> {
     boolean updatePost(Post post);
 
     /**
-     * 获取关注用户的帖子列表
+     * 获取关注用户的帖子列�?
      */
     Page<Post> getFollowPosts(HttpServletRequest request, PostQueryRequest postQueryRequest);
 
     /**
      * 获取帖子榜单
-     * @param id 榜单类型：1-日榜 2-周榜 3-月榜 4-总榜
+     * @param id 榜单类型�?-日榜 2-周榜 3-月榜 4-总榜
      */
     List<Post> getTop100Post(Long id);
 
     void fillPostInfo(Post post);
 
     /**
-     * 获取帖子浏览量
+     * 获取帖子浏览�?
      */
     long getViewCount(Long postId);
 

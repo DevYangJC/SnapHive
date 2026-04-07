@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -30,12 +30,12 @@ public class Game2048Record implements Serializable {
     private Integer score;
 
     /**
-     * 最大数字
+     * 最大数�?
      */
     private Integer maxTile;
 
     /**
-     * 游戏时长(秒)
+     * 游戏时长(�?
      */
     private Integer gameTime;
 

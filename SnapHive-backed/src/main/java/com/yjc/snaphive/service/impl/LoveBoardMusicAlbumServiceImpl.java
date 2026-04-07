@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -38,11 +38,11 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
     @Resource
     private AudioFileService audioFileService;
 
-    private static final int MAX_ALBUM_CAPACITY = 100; // 专栏最大音频数量
-    private static final int MAX_USER_ALBUMS = 20; // 用户最大专栏数量
+    private static final int MAX_ALBUM_CAPACITY = 100; // 专栏最大音频数�?
+    private static final int MAX_USER_ALBUMS = 20; // 用户最大专栏数�?
 
     /**
-     * 检查用户专栏数量是否达到上限
+     * 检查用户专栏数量是否达到上�?
      * @param userId 用户ID
      * @return 是否达到上限
      */
@@ -62,7 +62,7 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
-        // 检查用户专栏数量是否达到上限
+        // 检查用户专栏数量是否达到上�?
         if (!checkUserAlbumLimit(userId)) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "您的专栏数量已达到上限（" + MAX_USER_ALBUMS + "个）");
         }
@@ -94,7 +94,7 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
-        // 检查专栏是否存在且属于该用户
+        // 检查专栏是否存在且属于该用�?
         LoveBoardMusicAlbum album = this.getById(id);
         if (album == null || !album.getUserId().equals(userId) || !album.getLoveBoardId().equals(loveBoardId)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
@@ -112,7 +112,7 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
-        // 检查专栏是否存在且属于该用户
+        // 检查专栏是否存在且属于该用�?
         LoveBoardMusicAlbum oldAlbum = this.getById(loveBoardMusicAlbum.getId());
         if (oldAlbum == null || !oldAlbum.getUserId().equals(userId)
                 || !oldAlbum.getLoveBoardId().equals(loveBoardId)) {
@@ -136,15 +136,15 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
 
-        // 如果是公开专栏，直接返回
+        // 如果是公开专栏，直接返�?
         if (album.getIsPublic() == 1) {
             return album;
         }
 
-        // 如果是私密专栏，所有人都需要验证密码
+        // 如果是私密专栏，所有人都需要验证密�?
         if (StringUtils.isNotBlank(album.getPassword())) {
             if (StringUtils.isBlank(password)) {
-                throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "请输入专栏密码");
+                throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "请输入专栏密�?);
             }
             // 对输入的密码进行MD5加密后再比较
             String encryptedPassword = DigestUtil.md5Hex(password);
@@ -158,7 +158,7 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
 
     @Override
     public List<AudioFileVO> getAlbumAudios(Long albumId, Long userId, String password) {
-        // 先检查专栏访问权限（包括密码验证）
+        // 先检查专栏访问权限（包括密码验证�?
         LoveBoardMusicAlbum album = this.getMusicAlbumById(albumId, userId, password);
 
         // 查询专栏内的音频
@@ -220,7 +220,7 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
-        // 检查专栏是否存在且属于该用户
+        // 检查专栏是否存在且属于该用�?
         LoveBoardMusicAlbum album = this.getById(albumId);
         if (album == null || !album.getUserId().equals(userId)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
@@ -230,7 +230,7 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
         String encryptedPassword = DigestUtil.md5Hex(newPassword);
         // 设置密码
         album.setPassword(encryptedPassword);
-        album.setIsPublic(0); // 设置密码后变为私密专栏
+        album.setIsPublic(0); // 设置密码后变为私密专�?
         return this.updateById(album);
     }
 
@@ -242,19 +242,19 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
-        // 检查专栏是否存在且属于该用户
+        // 检查专栏是否存在且属于该用�?
         LoveBoardMusicAlbum album = this.getById(albumId);
         if (album == null || !album.getUserId().equals(userId)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
 
-        // 验证旧密码
+        // 验证旧密�?
         String encryptedOldPassword = DigestUtil.md5Hex(oldPassword);
         if (!encryptedOldPassword.equals(album.getPassword())) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "旧密码错误");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "旧密码错�?);
         }
 
-        // 加密新密码
+        // 加密新密�?
         String encryptedNewPassword = DigestUtil.md5Hex(newPassword);
         // 更新密码
         album.setPassword(encryptedNewPassword);
@@ -268,13 +268,13 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
-        // 检查专栏是否存在且属于该用户
+        // 检查专栏是否存在且属于该用�?
         LoveBoardMusicAlbum album = this.getById(albumId);
         if (album == null || !album.getUserId().equals(userId)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
 
-        // 验证旧密码
+        // 验证旧密�?
         String encryptedOldPassword = DigestUtil.md5Hex(oldPassword);
         if (!encryptedOldPassword.equals(album.getPassword())) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码错误");
@@ -293,13 +293,13 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
-        // 检查专栏是否存在且属于该用户
+        // 检查专栏是否存在且属于该用�?
         LoveBoardMusicAlbum album = this.getById(albumId);
         if (album == null || !album.getUserId().equals(userId)) {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "无权操作该专栏");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "无权操作该专�?);
         }
 
-        // 检查音频是否存在且属于该专栏
+        // 检查音频是否存在且属于该专�?
         AudioFile audioFile = audioFileService.getById(audioId);
         if (audioFile == null || !audioFile.getSpaceId().equals(albumId)) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "音频不存在或不属于该专栏");
@@ -334,10 +334,10 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
-        // 检查专栏是否存在且属于该用户
+        // 检查专栏是否存在且属于该用�?
         LoveBoardMusicAlbum musicAlbum = this.getById(musicUploadRequest.getAlbumId());
         if (musicAlbum == null || musicAlbum.getIsDelete() == 1) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "音乐专栏不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "音乐专栏不存�?);
         }
 
         // 检查专栏所有权
@@ -345,17 +345,17 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "无权上传音乐到该专栏");
         }
 
-        // 检查专栏音频数量是否达到上限
+        // 检查专栏音频数量是否达到上�?
         if (!checkAlbumCapacity(musicUploadRequest.getAlbumId())) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "专栏音频数量已达到上限（" + MAX_ALBUM_CAPACITY + "首）");
         }
 
         try {
-            // 设置默认值
+            // 设置默认�?
             String title = musicUploadRequest.getTitle();
             if (StringUtils.isBlank(title)) {
                 title = musicUploadRequest.getFile().getOriginalFilename();
-                // 移除文件扩展名
+                // 移除文件扩展�?
                 if (title != null && title.contains(".")) {
                     title = title.substring(0, title.lastIndexOf("."));
                 }
@@ -383,7 +383,7 @@ public class LoveBoardMusicAlbumServiceImpl extends ServiceImpl<LoveBoardMusicAl
                 audioFileService.updateById(audioFile);
             }
 
-            // 确保返回完整的数据
+            // 确保返回完整的数�?
             if (audioFileVO != null) {
                 audioFileVO.setDuration(audioFileVO.getDuration() != null ? audioFileVO.getDuration() : 0);
                 audioFileVO.setViewCount(0L);

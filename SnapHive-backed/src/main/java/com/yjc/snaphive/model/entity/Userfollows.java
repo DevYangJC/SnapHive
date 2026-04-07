@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -32,18 +32,18 @@ public class Userfollows implements Serializable {
     private Long followingId;
 
     /**
-     * 关注状态，0 表示取消关注，1 表示关注
+     * 关注状态，0 表示取消关注�? 表示关注
      */
     private Integer followStatus;
 
     /**
-     * 是否为双向关注，0 表示单向，1 表示双向
+     * 是否为双向关注，0 表示单向�? 表示双向
      */
     private Integer isMutual;
 
 
     /**
-     * 最后交互时间
+     * 最后交互时�?
      */
     private Date lastInteractionTime;
 
@@ -63,7 +63,7 @@ public class Userfollows implements Serializable {
     private Date updateTime;
 
     /**
-     * 是否删除，0 表示未删除，1 表示已删除
+     * 是否删除�? 表示未删除，1 表示已删�?
      */
     private Integer isDelete;
 

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -21,7 +21,7 @@ public interface AudioFileService extends IService<AudioFile> {
      * @param userId      用户ID
      * @param title       音频标题
      * @param description 音频描述
-     * @param artist      艺术家
+     * @param artist      艺术�?
      * @param album       专辑
      * @param genre       流派
      * @param spaceId     空间ID

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager;
+﻿package com.yjc.snaphive.manager;
 
 import com.yjc.snaphive.constant.CrawlerConstant;
 import com.yjc.snaphive.exception.BusinessException;
@@ -44,21 +44,21 @@ public class CrawlerManager {
     private String adminEmail;
 
     /**
-     * 检测普通请求
+     * 检测普通请�?
      */
     public void detectNormalRequest(HttpServletRequest request) {
         detectRequest(request, CrawlerConstant.WARN_COUNT, CrawlerConstant.BAN_COUNT);
     }
 
     /**
-     * 检测高频操作请求
+     * 检测高频操作请�?
      */
     public void detectFrequentRequest(HttpServletRequest request) {
         detectRequest(request, CrawlerConstant.WARN_COUNT / 2, CrawlerConstant.BAN_COUNT / 2);
     }
 
     /**
-     * 检测下载请求
+     * 检测下载请�?
      */
     public void detectDownloadRequest(HttpServletRequest request) {
         String clientIp = getClientIpAddress(request);
@@ -70,7 +70,7 @@ public class CrawlerManager {
     }
 
     /**
-     * 检测浏览请求
+     * 检测浏览请�?
      */
     public boolean detectViewRequest(HttpServletRequest request, Long pictureId) {
         if (request == null) {
@@ -83,7 +83,7 @@ public class CrawlerManager {
     }
 
     /**
-     * 通用请求检测
+     * 通用请求检�?
      */
     private void detectRequest(HttpServletRequest request, int warnCount, int banCount) {
         User loginUser = null;
@@ -101,7 +101,7 @@ public class CrawlerManager {
                 key = String.format("ip:access:%s", identifier);
             }
         } catch (Exception e) {
-            log.info("获取用户信息异常，默认为未登录用户");
+            log.info("获取用户信息异常，默认为未登录用�?);
             identifier = getClientIpAddress(request);
             key = String.format("ip:access:%s", identifier);
         }
@@ -109,7 +109,7 @@ public class CrawlerManager {
         // 统计访问次数
         long count = counterManager.incrAndGetCounter(key, 3, TimeUnit.MINUTES, CrawlerConstant.EXPIRE_TIME);
 
-        // 是否封禁或告警
+        // 是否封禁或告�?
         if (count > banCount) {
             if (loginUser != null) {
                 // 管理员只记录警告日志，不进行封禁
@@ -123,14 +123,14 @@ public class CrawlerManager {
                 updateUser.setUserRole(CrawlerConstant.BAN_ROLE);
                 userService.updateById(updateUser);
 
-                // 发送爬虫警告邮件
+                // 发送爬虫警告邮�?
                 try {
                     sendCrawlerWarningEmail(loginUser, identifier, count);
                 } catch (Exception e) {
-                    log.error("发送爬虫警告邮件失败", e);
+                    log.error("发送爬虫警告邮件失�?, e);
                 }
 
-                throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "访问次数过多，已被封号");
+                throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "访问次数过多，已被封�?);
             } else {
                 // 对于未登录用户，封禁 IP
                 banIp(identifier);
@@ -139,7 +139,7 @@ public class CrawlerManager {
         } else if (count > warnCount) {
             // 记录警告日志
             if (loginUser != null) {
-                log.warn("警告：用户访问频繁, userId={}, count={}", loginUser.getId(), count);
+                log.warn("警告：用户访问频�? userId={}, count={}", loginUser.getId(), count);
             } else {
                 log.warn("警告：IP访问频繁, ip={}, count={}", identifier, count);
             }
@@ -147,7 +147,7 @@ public class CrawlerManager {
     }
 
     /**
-     * 发送爬虫警告邮件
+     * 发送爬虫警告邮�?
      */
     private void sendCrawlerWarningEmail(User user, String ipAddress, long accessCount) throws IOException {
         ClassPathResource resource = new ClassPathResource("html/crawler_warning.html");
@@ -171,7 +171,7 @@ public class CrawlerManager {
                 .replace(":accessCount", String.valueOf(accessCount))
                 .replace(":detectTime", sdf.format(new Date()));
 
-        // 发送邮件
+        // 发送邮�?
         emailSenderUtil.sendReviewEmail(adminEmail, emailContent);
     }
 
@@ -184,7 +184,7 @@ public class CrawlerManager {
     }
 
     /**
-     * 检查IP是否被封禁
+     * 检查IP是否被封�?
      */
     private boolean isIpBanned(String ip) {
         String banKey = String.format("ban:ip:%s", ip);

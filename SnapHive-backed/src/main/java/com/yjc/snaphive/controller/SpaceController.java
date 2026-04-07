@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.annotation.AuthCheck;
@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 鹿梦
+ * SnapHive
  */
 @Slf4j
 @RestController
@@ -71,11 +71,11 @@ public class SpaceController {
         // 判断是否存在
         Space oldSpace = spaceService.getById(id);
         ThrowUtils.throwIf(oldSpace == null, ErrorCode.NOT_FOUND_ERROR);
-        // 仅本人或者管理员可删除
+        // 仅本人或者管理员可删�?
         if (!oldSpace.getUserId().equals(loginUser.getId()) && !userService.isAdmin(loginUser)) {
             throw new BusinessException(ErrorCode.NO_AUTH_ERROR);
         }
-        // 操作数据库
+        // 操作数据�?
         boolean result = spaceService.removeById(id);
         ThrowUtils.throwIf(!result, ErrorCode.OPERATION_ERROR);
         return ResultUtils.success(true);
@@ -120,7 +120,7 @@ public class SpaceController {
         if (spaceUpdateRequest == null || spaceUpdateRequest.getId() <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        // 将实体类和 DTO 进行转换
+        // 将实体类�?DTO 进行转换
         Space space = new Space();
         BeanUtils.copyProperties(spaceUpdateRequest, space);
         // 自动填充数据
@@ -136,7 +136,7 @@ public class SpaceController {
         boolean result = spaceService.updateById(space);
         if (result) {
             // 更新ES
-            // 获取完整的空间信息
+            // 获取完整的空间信�?
             Space updatedSpace = spaceService.getById(id);
             // 转换为ES实体
             EsSpace esSpace = new EsSpace();
@@ -154,27 +154,27 @@ public class SpaceController {
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<Space> getSpaceById(long id, HttpServletRequest request) {
         ThrowUtils.throwIf(id <= 0, ErrorCode.PARAMS_ERROR);
-        // 查询数据库
+        // 查询数据�?
         Space space = spaceService.getById(id);
         ThrowUtils.throwIf(space == null, ErrorCode.NOT_FOUND_ERROR);
-        // 获取封装类
+        // 获取封装�?
         return ResultUtils.success(space);
     }
 
     /**
-     * 根据 id 获取空间（封装类）
+     * 根据 id 获取空间（封装类�?
      */
     @GetMapping("/get/vo")
     public BaseResponse<SpaceVO> getSpaceVOById(long id, HttpServletRequest request) {
         ThrowUtils.throwIf(id <= 0, ErrorCode.PARAMS_ERROR);
-        // 查询数据库
+        // 查询数据�?
         Space space = spaceService.getById(id);
         ThrowUtils.throwIf(space == null, ErrorCode.NOT_FOUND_ERROR);
         SpaceVO spaceVO = spaceService.getSpaceVO(space, request);
         User loginUser = userService.getLoginUser(request);
         List<String> permissionList = spaceUserAuthManager.getPermissionList(space, loginUser);
         spaceVO.setPermissionList(permissionList);
-        // 获取封装类
+        // 获取封装�?
         return ResultUtils.success(spaceVO);
     }
 
@@ -186,14 +186,14 @@ public class SpaceController {
     public BaseResponse<Page<Space>> listSpaceByPage(@RequestBody SpaceQueryRequest spaceQueryRequest) {
         long current = spaceQueryRequest.getCurrent();
         long size = spaceQueryRequest.getPageSize();
-        // 查询数据库
+        // 查询数据�?
         Page<Space> spacePage = spaceService.page(new Page<>(current, size),
                 spaceService.getQueryWrapper(spaceQueryRequest));
         return ResultUtils.success(spacePage);
     }
 
     /**
-     * 分页获取空间列表（封装类）
+     * 分页获取空间列表（封装类�?
      */
     @PostMapping("/list/page/vo")
     public BaseResponse<Page<SpaceVO>> listSpaceVOByPage(@RequestBody SpaceQueryRequest spaceQueryRequest,
@@ -202,15 +202,15 @@ public class SpaceController {
         long size = spaceQueryRequest.getPageSize();
         // 限制爬虫
         ThrowUtils.throwIf(size > 20, ErrorCode.PARAMS_ERROR);
-        // 查询数据库
+        // 查询数据�?
         Page<Space> spacePage = spaceService.page(new Page<>(current, size),
                 spaceService.getQueryWrapper(spaceQueryRequest));
-        // 获取封装类
+        // 获取封装�?
         return ResultUtils.success(spaceService.getSpaceVOPage(spacePage, request));
     }
 
     /**
-     * 编辑空间（给用户使用）
+     * 编辑空间（给用户使用�?
      */
     @PostMapping("/edit")
     public BaseResponse<Boolean> editSpace(@RequestBody SpaceEditRequest spaceEditRequest, HttpServletRequest request) {
@@ -240,7 +240,7 @@ public class SpaceController {
         boolean result = spaceService.updateById(space);
         if (result) {
             // 更新ES
-            // 获取完整的空间信息
+            // 获取完整的空间信�?
             Space updatedSpace = spaceService.getById(id);
             // 转换为ES实体
             EsSpace esSpace = new EsSpace();
@@ -252,7 +252,7 @@ public class SpaceController {
     }
 
     /**
-     * 获取空间级别列表，便于前端展示
+     * 获取空间级别列表，便于前端展�?
      *
      * @return
      */

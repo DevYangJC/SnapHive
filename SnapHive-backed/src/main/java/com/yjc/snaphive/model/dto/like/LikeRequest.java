@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.like;
+﻿package com.yjc.snaphive.model.dto.like;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ public class LikeRequest {
     private Long targetId;
 
     /**
-     * 内容类型：1-图片 2-帖子 3-空间
+     * 内容类型�?-图片 2-帖子 3-空间
      */
     private Integer targetType;
 

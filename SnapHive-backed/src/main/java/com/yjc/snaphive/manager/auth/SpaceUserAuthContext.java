@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.auth;
+﻿package com.yjc.snaphive.manager.auth;
 
 import com.yjc.snaphive.model.entity.Picture;
 import com.yjc.snaphive.model.entity.Space;
@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * SpaceUserAuthContext
- * 表示用户在特定空间内的授权上下文，包括关联的图片、空间和用户信息。
+ * 表示用户在特定空间内的授权上下文，包括关联的图片、空间和用户信息�?
  */
 @Data
 public class SpaceUserAuthContext {

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.picture;
+﻿package com.yjc.snaphive.model.dto.picture;
 
 import lombok.Data;
 
@@ -16,7 +16,7 @@ public class PictureReviewRequest implements Serializable {
     private Long id;
 
     /**
-     * 审核状态：0-待审核; 1-通过; 2-拒绝
+     * 审核状态：0-待审�? 1-通过; 2-拒绝
      */
     private Integer reviewStatus;
 

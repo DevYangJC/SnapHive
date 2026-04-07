@@ -1,11 +1,11 @@
-package com.yjc.snaphive.model.dto.search;
+﻿package com.yjc.snaphive.model.dto.search;
 
 import lombok.Data;
 
 @Data
 public class SearchRequest {
     /**
-     * 搜索关键词
+     * 搜索关键�?
      */
     private String searchText;
 

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.post;
+﻿package com.yjc.snaphive.model.dto.post;
 
 import com.yjc.snaphive.common.PageRequest;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 public class PostQueryRequest extends PageRequest implements Serializable {
     /**
-     * 搜索词
+     * 搜索�?
      */
     private String searchText;
 
@@ -25,12 +25,12 @@ public class PostQueryRequest extends PageRequest implements Serializable {
     private Long userId;
 
     /**
-     * 审核状态（0-待审核, 1-已发布, 2-拒绝）
+     * 审核状态（0-待审�? 1-已发�? 2-拒绝�?
      */
     private Integer status;
 
     /**
-     * 是否只查询公共数据（默认true）
+     * 是否只查询公共数据（默认true�?
      */
     private Boolean isPublic = true;
 

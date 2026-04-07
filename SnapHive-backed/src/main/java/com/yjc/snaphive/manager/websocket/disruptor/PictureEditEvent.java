@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket.disruptor;
+﻿package com.yjc.snaphive.manager.websocket.disruptor;
 
 import com.yjc.snaphive.manager.websocket.model.PictureEditRequestMessage;
 import com.yjc.snaphive.model.entity.User;
@@ -17,7 +17,7 @@ public class PictureEditEvent {
     private PictureEditRequestMessage pictureEditRequestMessage;
 
     /**
-     * 当前用户的 session
+     * 当前用户�?session
      */
     private WebSocketSession session;
 

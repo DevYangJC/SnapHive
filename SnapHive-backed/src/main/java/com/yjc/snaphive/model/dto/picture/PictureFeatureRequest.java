@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.picture;
+﻿package com.yjc.snaphive.model.dto.picture;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ public class PictureFeatureRequest {
     private Long id;
 
     /**
-     * 是否精选 0-非精选 1-精选
+     * 是否精�?0-非精�?1-精�?
      */
     private Integer isFeature;
 }

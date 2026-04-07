@@ -1,4 +1,4 @@
-package com.yjc.snaphive.common;
+﻿package com.yjc.snaphive.common;
 
 import lombok.Data;
 

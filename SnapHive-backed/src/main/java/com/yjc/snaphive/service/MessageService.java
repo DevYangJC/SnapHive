@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,7 +12,7 @@ import java.util.List;
 
 
 /**
- * @author 鹿梦
+ * @author SnapHive
  * @description 针对表【message(留言板表)】的数据库操作Service
  * @createDate 2025-01-03 16:28:14
  */
@@ -26,7 +26,7 @@ public interface MessageService extends IService<Message> {
     Boolean addMessage(AddMessage addMessage);
 
     /**
-     * 获取前500条留言
+     * 获取�?00条留言
      * @return 留言列表
      */
     List<MessageVO> getTop500();

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 微言表
+ * 微言�?
  */
 @TableName(value = "wei_yan")
 @Data
@@ -30,7 +30,7 @@ public class WeiYan implements Serializable {
     private Long userId;
 
     /**
-     * 点赞数
+     * 点赞�?
      */
     private Long likeCount;
 

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
@@ -76,7 +76,7 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 
 /**
- * @author 鹿梦
+ * @author SnapHive
  * @description 针对表【user(用户)】的数据库操作Service实现
  * @createDate 2024-12-10 10:39:52
  */
@@ -131,7 +131,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      * @param email       邮箱
      * @param userPassword 用户密码
      * @param checkPassword 校验密码
-     * @param code         验证码
+     * @param code         验证�?
      * @return 用户注册成功后的ID
      */
     @Override
@@ -147,18 +147,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码过短");
         }
         if (!userPassword.equals(checkPassword)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "两次输入的密码不一致");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "两次输入的密码不一�?);
         }
 
-        // 校验验证码
+        // 校验验证�?
         String verifyCodeKey = String.format("email:code:verify:register:%s", email);
         String correctCode = stringRedisTemplate.opsForValue().get(verifyCodeKey);
         if (correctCode == null || !correctCode.equals(code)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "验证码错误或已过期");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "验证码错误或已过�?);
         }
 
         synchronized (email.intern()) {
-            // 检查邮箱是否已被注册
+            // 检查邮箱是否已被注�?
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("email", email);
             long count = this.baseMapper.selectCount(queryWrapper);
@@ -166,13 +166,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 throw new BusinessException(ErrorCode.PARAMS_ERROR, "邮箱已被注册");
             }
 
-            // 检查账号是否已被使用
+            // 检查账号是否已被使�?
             String userAccount = email.substring(0, email.indexOf("@")); // 使用邮箱前缀作为账号
             queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("userAccount", userAccount);
             count = this.baseMapper.selectCount(queryWrapper);
             if (count > 0) {
-                // 如果账号已存在，则在后面加上随机数
+                // 如果账号已存在，则在后面加上随机�?
                 userAccount = userAccount + RandomUtil.randomNumbers(4);
             }
 
@@ -183,13 +183,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             user.setUserAccount(userAccount);
             user.setEmail(email);
             user.setUserPassword(encryptPassword);
-            user.setUserName(userAccount); // 使用账号作为默认用户名
+            user.setUserName(userAccount); // 使用账号作为默认用户�?
             user.setUserRole(UserRoleEnum.USER.getValue());
             boolean saveResult = this.save(user);
             if (!saveResult) {
                 throw new BusinessException(ErrorCode.SYSTEM_ERROR, "注册失败，数据库错误");
             }
-            // 删除验证码
+            // 删除验证�?
             stringRedisTemplate.delete(verifyCodeKey);
             return user.getId();
         }
@@ -198,10 +198,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     /**
      * 用户登录
      *
-     * @param accountOrEmail 账号或邮箱
+     * @param accountOrEmail 账号或邮�?
      * @param userPassword  用户密码
      * @param request      HttpServletRequest对象
-     * @return 登录后的用户信息视图对象（LoginUserVO）
+     * @return 登录后的用户信息视图对象（LoginUserVO�?
      */
     @Override
     public LoginUserVO userLogin(String accountOrEmail, String userPassword, HttpServletRequest request) {
@@ -221,18 +221,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                         .or()
                         .eq("email", accountOrEmail));
         User user = this.getOne(queryWrapper);
-        // 用户不存在
+        // 用户不存�?
         if (user == null) {
             log.info("user login failed, accountOrEmail cannot match userPassword");
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户不存在或密码错误");
         }
 
-        // 4. 记录用户登录态
-        // 先设置 Sa-Token 登录态，这样可以确保 Session 中有正确的权限信息
+        // 4. 记录用户登录�?
+        // 先设�?Sa-Token 登录态，这样可以确保 Session 中有正确的权限信�?
         StpKit.SPACE.login(user.getId());
-        // 在 Sa-Token Session 中存入完整的用户信息
+        // �?Sa-Token Session 中存入完整的用户信息
         StpKit.SPACE.getSession().set(UserConstant.USER_LOGIN_STATE, user);
-        // 在 Spring Session 中也存入用户信息（为了兼容旧代码）
+        // �?Spring Session 中也存入用户信息（为了兼容旧代码�?
         request.getSession().setAttribute(UserConstant.USER_LOGIN_STATE, user);
 
         LoginUserVO loginUserVO = new LoginUserVO();
@@ -248,7 +248,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      */
     @Override
     public String getEncryptPassword(String userPassword) {
-        // 加盐，混淆密码
+        // 加盐，混淆密�?
         return SecureUtil.md5(CommonValue.DEFAULT_SALT + userPassword);
     }
 
@@ -257,7 +257,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Override
     public User getLoginUser(HttpServletRequest request) {
         try {
-            // 优先从 Sa-Token 中获取登录信息
+            // 优先�?Sa-Token 中获取登录信�?
             if (StpKit.SPACE.isLogin()) {
                 User user = (User) StpKit.SPACE.getSession().get(UserConstant.USER_LOGIN_STATE);
                 if (user != null) {
@@ -265,7 +265,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 }
             }
 
-            // 如果 Sa-Token 中没有，尝试从 Spring Session 中获取（兼容旧代码）
+            // 如果 Sa-Token 中没有，尝试�?Spring Session 中获取（兼容旧代码）
             Object userObj = request.getSession().getAttribute(UserConstant.USER_LOGIN_STATE);
             User currentUser = (User) userObj;
             if (currentUser == null || currentUser.getId() == null) {
@@ -359,11 +359,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         // 判断是否已经登录
         Object userObj = request.getSession().getAttribute(UserConstant.USER_LOGIN_STATE);
         if (userObj == null) {
-            throw new BusinessException(ErrorCode.OPERATION_ERROR, "未登录");
+            throw new BusinessException(ErrorCode.OPERATION_ERROR, "未登�?);
         }
-        // 移除 Spring Session 登录态
+        // 移除 Spring Session 登录�?
         request.getSession().removeAttribute(UserConstant.USER_LOGIN_STATE);
-        // 移除 Sa-Token 登录态
+        // 移除 Sa-Token 登录�?
         if (StpKit.SPACE.isLogin()) {
             StpKit.SPACE.logout();
         }
@@ -376,12 +376,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Async("asyncExecutor")
     public void asyncDeleteUserData(Long userId) {
         try {
-            // 1. 删除用户发布的图片
+            // 1. 删除用户发布的图�?
             QueryWrapper<Picture> pictureQueryWrapper = new QueryWrapper<>();
             pictureQueryWrapper.eq("userId", userId);
             List<Picture> pictureList = pictureService.list(pictureQueryWrapper);
             if (!pictureList.isEmpty()) {
-                // 删除数据库记录
+                // 删除数据库记�?
                 pictureService.remove(pictureQueryWrapper);
                 // 删除ES中的图片记录
                 List<Long> pictureIds = pictureList.stream()
@@ -390,7 +390,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 esPictureDao.deleteAllById(pictureIds);
             }
 
-            // 2. 删除用户发布的帖子
+            // 2. 删除用户发布的帖�?
             QueryWrapper<Post> postQueryWrapper = new QueryWrapper<>();
             postQueryWrapper.eq("userId", userId);
             List<Post> postList = postService.list(postQueryWrapper);
@@ -420,7 +420,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             log.info("用户相关数据删除完成, userId={}", userId);
         } catch (Exception e) {
             log.error("删除用户相关数据失败, userId={}", userId, e);
-            // 这里不抛出异常，因为是异步操作，主流程已经完成
+            // 这里不抛出异常，因为是异步操作，主流程已经完�?
         }
     }
 
@@ -452,19 +452,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数不能为空");
         }
         if(!userModifyPassWord.getNewPassword().equals(userModifyPassWord.getCheckPassword())){
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "两次输入的密码不一致");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "两次输入的密码不一�?);
         }
         if(userModifyPassWord.getNewPassword().length() < 8){
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "新密码长度不能小于8位");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "新密码长度不能小�?�?);
         }
-        //查询是否有这个用户
+        //查询是否有这个用�?
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("id", userModifyPassWord.getId());
         String encryptPassword = getEncryptPassword(userModifyPassWord.getOldPassword());
         queryWrapper.eq("userPassword", encryptPassword);
         User user = userMapper.selectOne(queryWrapper);
         if(user == null){
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "原密码错误");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "原密码错�?);
         }
 
         user.setUserPassword(getEncryptPassword(userModifyPassWord.getNewPassword()));
@@ -489,19 +489,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         //判断用户是否存在
         User user = userMapper.selectById(id);
         if(user == null){
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "用户不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "用户不存�?);
         }
         //判断用户是否登录
         User loginUser = getLoginUser(request);
         if(loginUser == null || !loginUser.getId().equals(id)){
-            throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR, "用户未登录");
+            throw new BusinessException(ErrorCode.NOT_LOGIN_ERROR, "用户未登�?);
         }
         //判断文件是否为空
         if(multipartFile == null){
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "文件不能为空");
         }
         //判断文件类型
-        // 上传图片，得到图片信息
+        // 上传图片，得到图片信�?
         // 按照用户 id 划分目录
         String uploadPathPrefix = String.format("public/%s", loginUser.getId());
         UploadPictureResult uploadPictureResult = fileManager.uploadPicture(multipartFile, uploadPathPrefix);
@@ -520,7 +520,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Override
     public Map<String, String> getCaptcha() {
-        // 仅包含数字的字符集
+        // 仅包含数字的字符�?
         String characters = "0123456789";
         // 生成 4 位数字验证码
         RandomGenerator randomGenerator = new RandomGenerator(characters, 4);
@@ -534,10 +534,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         String base64Captcha = Base64.getEncoder().encodeToString(captchaBytes);
         String captchaCode = shearCaptcha.getCode();
 
-        // 使用 Hutool 的 MD5 加密
+        // 使用 Hutool �?MD5 加密
         String encryptedCaptcha = DigestUtil.md5Hex(captchaCode);
 
-        // 将加密后的验证码和 Base64 编码的图片存储到 Redis 中，设置过期时间为 5 分钟（300 秒）
+        // 将加密后的验证码�?Base64 编码的图片存储到 Redis 中，设置过期时间�?5 分钟�?00 秒）
         stringRedisTemplate.opsForValue().set("captcha:" + encryptedCaptcha, captchaCode, 300, TimeUnit.SECONDS);
 
         Map<String, String> data = new HashMap<>();
@@ -549,7 +549,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     /**
      * 添加用户签到记录
      * @param userId 用户 id
-     * @return 当前用户是否已签到成功
+     * @return 当前用户是否已签到成�?
      */
     @Override
     public boolean addUserSignIn(long userId) {
@@ -557,16 +557,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         int currentYear = date.getYear();
         String redisKey = RedisConstant.getUserSignInRedisKey(currentYear, userId);
 
-        // 获取 Redis 的 BitMap
+        // 获取 Redis �?BitMap
         RBitSet signInBitSet = redissonClient.getBitSet(redisKey);
         int dayOfYear = date.getDayOfYear();
 
-        // 查询当天有没有签到
+        // 查询当天有没有签�?
         if (!signInBitSet.get(dayOfYear)) {
             // 如果当前未签到，则设置Redis
             signInBitSet.set(dayOfYear, true);
 
-            // 设置 Redis 键的过期时间到当年最后一天
+            // 设置 Redis 键的过期时间到当年最后一�?
             LocalDate endOfYear = LocalDate.of(currentYear, 12, 31);
             Duration timeUntilEndOfYear = Duration.between(
                     LocalDateTime.now(),
@@ -579,7 +579,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
     /**
-     * 获取用户某个年份的签到记录
+     * 获取用户某个年份的签到记�?
      *
      * @param userId 用户 id
      * @param year   年份（为空表示当前年份）
@@ -637,7 +637,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                     }
                 }
 
-                // 设置过期时间到年底
+                // 设置过期时间到年�?
                 LocalDate endOfYear = LocalDate.of(year, 12, 31);
                 Duration timeUntilEndOfYear = Duration.between(
                         LocalDateTime.now(),
@@ -647,7 +647,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             }
         }
 
-        // 从Redis的bitmap中获取签到记录
+        // 从Redis的bitmap中获取签到记�?
         BitSet bitSet = signInBitSet.asBitSet();
         int index = bitSet.nextSetBit(0);
         while (index >= 0) {
@@ -667,29 +667,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 return true;
             }
         }
-        throw new BusinessException(ErrorCode.PARAMS_ERROR, "验证码错误");
+        throw new BusinessException(ErrorCode.PARAMS_ERROR, "验证码错�?);
     }
 
     /**
-     * 校验用户相关输入参数的合法性
+     * 校验用户相关输入参数的合法�?
      *
      * @param userAccount   用户账户
      * @param userPassword  用户密码
-     * @param checkPassword 校验密码（注册时需要，登录时传null）
-     * @param isRegister    是否为注册操作
+     * @param checkPassword 校验密码（注册时需要，登录时传null�?
+     * @param isRegister    是否为注册操�?
      */
     private void validateUserInputParams(String userAccount, String userPassword, String checkPassword, boolean isRegister) {
         if (StrUtil.hasBlank(userAccount, userPassword) || (isRegister && StrUtil.hasBlank(checkPassword))) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数不能为空");
         }
         if (userAccount.length() < 4) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账号长度不能小于4位");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户账号长度不能小于4�?);
         }
         if (userPassword.length() < 8) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户密码长度不能小于8位");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "用户密码长度不能小于8�?);
         }
         if (isRegister &&!userPassword.equals(checkPassword)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "两次输入的密码不一致");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "两次输入的密码不一�?);
         }
     }
 
@@ -737,7 +737,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         boolean result = super.updateById(entity);
         if (result) {
             // 更新ES
-            // 获取完整的用户信息
+            // 获取完整的用户信�?
             User updatedUser = this.getById(entity.getId());
             // 转换为ES实体
             EsUser esUser = new EsUser();
@@ -753,7 +753,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "参数为空");
         }
 
-        // 检测高频操作
+        // 检测高频操�?
         crawlerManager.detectFrequentRequest(request);
 
         // 获取客户端IP
@@ -761,10 +761,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         String ipKey = String.format("email:code:ip:%s", clientIp);
         String emailKey = String.format("email:code:email:%s", email);
 
-        // 检查IP是否频繁请求验证码
+        // 检查IP是否频繁请求验证�?
         String ipCount = stringRedisTemplate.opsForValue().get(ipKey);
         if (ipCount != null && Integer.parseInt(ipCount) >= 5) {
-            throw new BusinessException(ErrorCode.TOO_MANY_REQUEST, "请求验证码过于频繁，请稍后再试");
+            throw new BusinessException(ErrorCode.TOO_MANY_REQUEST, "请求验证码过于频繁，请稍后再�?);
         }
 
         // 检查邮箱是否频繁请求验证码
@@ -773,25 +773,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ErrorCode.TOO_MANY_REQUEST, "该邮箱请求验证码过于频繁，请稍后再试");
         }
 
-        // 生成验证码
+        // 生成验证�?
         String code = RandomUtil.randomNumbers(6);
 
         // 发送验证码
         try {
             emailSenderUtil.sendEmail(email, code);
         } catch (Exception e) {
-            log.error("发送邮件失败", e);
+            log.error("发送邮件失�?, e);
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "发送验证码失败");
         }
 
-        // 记录IP和邮箱的请求次数，设置1小时过期
+        // 记录IP和邮箱的请求次数，设�?小时过期
         stringRedisTemplate.opsForValue().increment(ipKey, 1);
         stringRedisTemplate.expire(ipKey, 1, TimeUnit.HOURS);
 
         stringRedisTemplate.opsForValue().increment(emailKey, 1);
         stringRedisTemplate.expire(emailKey, 1, TimeUnit.HOURS);
 
-        // 将验证码存入Redis，设置5分钟过期
+        // 将验证码存入Redis，设�?分钟过期
         String verifyCodeKey = String.format("email:code:verify:%s:%s", type, email);
         stringRedisTemplate.opsForValue().set(verifyCodeKey, code, 5, TimeUnit.MINUTES);
     }
@@ -806,11 +806,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "邮箱格式错误");
         }
 
-        // 2. 校验验证码
+        // 2. 校验验证�?
         String verifyCodeKey = String.format("email:code:verify:changeEmail:%s", newEmail);
         String correctCode = stringRedisTemplate.opsForValue().get(verifyCodeKey);
         if (correctCode == null || !correctCode.equals(code)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "验证码错误或已过期");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "验证码错误或已过�?);
         }
 
         // 3. 获取当前登录用户
@@ -822,7 +822,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             queryWrapper.eq("email", newEmail);
             long count = this.baseMapper.selectCount(queryWrapper);
             if (count > 0) {
-                throw new BusinessException(ErrorCode.PARAMS_ERROR, "该邮箱已被使用");
+                throw new BusinessException(ErrorCode.PARAMS_ERROR, "该邮箱已被使�?);
             }
 
             // 5. 更新邮箱
@@ -834,7 +834,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 throw new BusinessException(ErrorCode.SYSTEM_ERROR, "修改邮箱失败");
             }
 
-            // 6. 删除验证码
+            // 6. 删除验证�?
             stringRedisTemplate.delete(verifyCodeKey);
             return true;
         }
@@ -854,17 +854,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
         // 3. 校验密码
         if (newPassword.length() < 8) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码长度不能小于8位");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "密码长度不能小于8�?);
         }
         if (!newPassword.equals(checkPassword)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "两次输入的密码不一致");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "两次输入的密码不一�?);
         }
 
-        // 4. 校验验证码
+        // 4. 校验验证�?
         String verifyCodeKey = String.format("email:code:verify:resetPassword:%s", email);
         String correctCode = stringRedisTemplate.opsForValue().get(verifyCodeKey);
         if (correctCode == null || !correctCode.equals(code)) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "验证码错误或已过期");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "验证码错误或已过�?);
         }
 
         // 5. 查询用户是否存在
@@ -872,7 +872,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         queryWrapper.eq("email", email);
         User user = this.getOne(queryWrapper);
         if (user == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "用户不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "用户不存�?);
         }
 
         // 6. 更新密码
@@ -883,7 +883,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         boolean result = this.updateById(updateUser);
 
         if (result) {
-            // 7. 删除验证码
+            // 7. 删除验证�?
             stringRedisTemplate.delete(verifyCodeKey);
 
         }
@@ -898,18 +898,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
 
-        // 2. 校验管理员权限
+        // 2. 校验管理员权�?
         if (!UserConstant.ADMIN_ROLE.equals(admin.getUserRole())) {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "非管理员不能执行此操作");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "非管理员不能执行此操�?);
         }
 
         // 3. 获取目标用户信息
         User targetUser = this.getById(userId);
         if (targetUser == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "用户不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "用户不存�?);
         }
 
-        // 4. 检查当前状态是否需要变更
+        // 4. 检查当前状态是否需要变�?
         boolean isBanned = CrawlerConstant.BAN_ROLE.equals(targetUser.getUserRole());
         if (isUnban == isBanned) {
             // 5. 更新用户角色
@@ -949,10 +949,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
             return result;
         } else {
-            // 状态已经是目标状态
+            // 状态已经是目标状�?
             String operation = isUnban ? "解封" : "封禁";
             throw new BusinessException(ErrorCode.OPERATION_ERROR,
-                    String.format("该用户当前%s不需要%s", isUnban ? "未被封禁" : "已被封禁", operation));
+                    String.format("该用户当�?s不需�?s", isUnban ? "未被封禁" : "已被封禁", operation));
         }
     }
 
@@ -964,11 +964,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
 
         try (HSSFWorkbook workbook = new HSSFWorkbook()) {
-            // 1. 创建工作表
+            // 1. 创建工作�?
             HSSFSheet sheet = workbook.createSheet("Sheet1");
 
             // 2. 创建表头
-            String[] headers = {"用户ID", "账号", "邮箱", "昵称", "角色", "创建时间", "状态"};
+            String[] headers = {"用户ID", "账号", "邮箱", "昵称", "角色", "创建时间", "状�?};
             HSSFRow headerRow = sheet.createRow(0);
 
             for (int i = 0; i < headers.length; i++) {
@@ -997,11 +997,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 dataRow.createCell(6).setCellValue(getUserStatusText(user.getUserRole()));
             }
 
-            // 5. 设置响应头
+            // 5. 设置响应�?
             httpResponse.setContentType("application/vnd.ms-excel;charset=utf-8");
             httpResponse.setCharacterEncoding("UTF-8");
 
-            // 6. 处理文件名
+            // 6. 处理文件�?
             String fileName = generateExportFileName(exportRequest.getType(),
                     exportRequest.getStartTime(), exportRequest.getEndTime());
             httpResponse.setHeader("Content-Disposition",
@@ -1020,27 +1020,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      */
     private String getUserRoleText(String role) {
         if (UserConstant.ADMIN_ROLE.equals(role)) {
-            return "管理员";
+            return "管理�?;
         } else if (UserConstant.DEFAULT_ROLE.equals(role)) {
-            return "普通用户";
+            return "普通用�?;
         } else if (CrawlerConstant.BAN_ROLE.equals(role)) {
-            return "已封禁";
+            return "已封�?;
         }
         return "未知";
     }
 
     /**
-     * 获取用户状态文本
+     * 获取用户状态文�?
      */
     private String getUserStatusText(String role) {
         if (CrawlerConstant.BAN_ROLE.equals(role)) {
-            return "已封禁";
+            return "已封�?;
         }
         return "正常";
     }
 
     /**
-     * 生成导出文件名
+     * 生成导出文件�?
      */
     private String generateExportFileName(Integer type, Date startTime, Date endTime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -1064,7 +1064,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 if (startTime != null && endTime != null) {
                     periodStr = sdf.format(startTime) + "-" + sdf.format(endTime);
                 } else {
-                    periodStr = "自定义";
+                    periodStr = "自定�?;
                 }
                 break;
             default:
@@ -1084,27 +1084,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
         // 根据类型设置时间范围
         switch (request.getType()) {
-            case 1: // 天
+            case 1: // �?
                 calendar.set(Calendar.HOUR_OF_DAY, 0);
                 calendar.set(Calendar.MINUTE, 0);
                 calendar.set(Calendar.SECOND, 0);
                 queryWrapper.ge("createTime", calendar.getTime());
                 break;
-            case 2: // 周
+            case 2: // �?
                 calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
                 calendar.set(Calendar.HOUR_OF_DAY, 0);
                 calendar.set(Calendar.MINUTE, 0);
                 calendar.set(Calendar.SECOND, 0);
                 queryWrapper.ge("createTime", calendar.getTime());
                 break;
-            case 3: // 月
+            case 3: // �?
                 calendar.set(Calendar.DAY_OF_MONTH, 1);
                 calendar.set(Calendar.HOUR_OF_DAY, 0);
                 calendar.set(Calendar.MINUTE, 0);
                 calendar.set(Calendar.SECOND, 0);
                 queryWrapper.ge("createTime", calendar.getTime());
                 break;
-            case 4: // 年
+            case 4: // �?
                 calendar.set(Calendar.MONTH, Calendar.JANUARY);
                 calendar.set(Calendar.DAY_OF_MONTH, 1);
                 calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -1112,7 +1112,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 calendar.set(Calendar.SECOND, 0);
                 queryWrapper.ge("createTime", calendar.getTime());
                 break;
-            case 5: // 自定义
+            case 5: // 自定�?
                 if (request.getStartTime() != null) {
                     queryWrapper.ge("createTime", request.getStartTime());
                 }

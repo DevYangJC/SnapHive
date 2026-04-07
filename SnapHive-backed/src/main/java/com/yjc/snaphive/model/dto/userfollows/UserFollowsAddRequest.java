@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.userfollows;
+﻿package com.yjc.snaphive.model.dto.userfollows;
 
 import lombok.Data;
 
@@ -17,7 +17,7 @@ public class UserFollowsAddRequest {
 
 
     /**
-     * 关注状态，0 表示取消关注，1 表示关注
+     * 关注状态，0 表示取消关注�? 表示关注
      */
     private Integer followStatus;
 }

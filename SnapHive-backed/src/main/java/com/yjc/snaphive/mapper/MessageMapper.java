@@ -1,4 +1,4 @@
-package com.yjc.snaphive.mapper;
+﻿package com.yjc.snaphive.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yjc.snaphive.model.entity.Message;
@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 /**
- * @author 鹿梦
+ * @author SnapHive
  * @description 针对表【message(留言板表)】的数据库操作Mapper
  * @createDate 2025-01-03 16:28:14
  * @Entity generator.domain.Message

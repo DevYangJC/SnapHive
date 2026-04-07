@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.user;
+﻿package com.yjc.snaphive.model.dto.user;
 
 import lombok.Data;
 
@@ -18,7 +18,7 @@ public class UserResetPasswordRequest implements Serializable {
     private String email;
 
     /**
-     * 新密码
+     * 新密�?
      */
     private String newPassword;
 
@@ -28,7 +28,7 @@ public class UserResetPasswordRequest implements Serializable {
     private String checkPassword;
 
     /**
-     * 验证码
+     * 验证�?
      */
     private String code;
 }

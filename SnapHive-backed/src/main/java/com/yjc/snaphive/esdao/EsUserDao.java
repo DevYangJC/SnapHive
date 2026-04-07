@@ -1,4 +1,4 @@
-package com.yjc.snaphive.esdao;
+﻿package com.yjc.snaphive.esdao;
 
 import com.yjc.snaphive.model.entity.es.EsUser;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
@@ -16,12 +16,12 @@ public interface EsUserDao extends ElasticsearchRepository<EsUser, Long> {
     Optional<EsUser> findByUserAccount(String userAccount);
 
     /**
-     * 根据用户名模糊查询
+     * 根据用户名模糊查�?
      */
     List<EsUser> findByUserNameContaining(String userName);
 
     /**
-     * 根据用户简介模糊查询
+     * 根据用户简介模糊查�?
      */
     List<EsUser> findByUserProfileContaining(String userProfile);
 
@@ -31,7 +31,7 @@ public interface EsUserDao extends ElasticsearchRepository<EsUser, Long> {
     List<EsUser> findByUserRole(String userRole);
 
     /**
-     * 根据用户名或简介模糊查询
+     * 根据用户名或简介模糊查�?
      */
     List<EsUser> findByUserNameContainingOrUserProfileContaining(String userName, String userProfile);
 

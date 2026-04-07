@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.auth;
+﻿package com.yjc.snaphive.manager.auth;
 
 import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.util.StrUtil;
@@ -72,7 +72,7 @@ public class SpaceUserAuthManager {
         if (loginUser == null) {
             return new ArrayList<>();
         }
-        // 管理员权限
+        // 管理员权�?
         List<String> ADMIN_PERMISSIONS = getPermissionsByRole(SpaceRoleEnum.ADMIN.getValue());
         // 公共图库
         if (space == null) {
@@ -85,17 +85,17 @@ public class SpaceUserAuthManager {
         if (spaceTypeEnum == null) {
             return new ArrayList<>();
         }
-        // 根据空间获取对应的权限
+        // 根据空间获取对应的权�?
         switch (spaceTypeEnum) {
             case PRIVATE:
-                // 私有空间，仅本人或管理员有所有权限
+                // 私有空间，仅本人或管理员有所有权�?
                 if (space.getUserId().equals(loginUser.getId()) || userService.isAdmin(loginUser)) {
                     return ADMIN_PERMISSIONS;
                 } else {
                     return new ArrayList<>();
                 }
             case TEAM:
-                // 团队空间，查询 SpaceUser 并获取角色和权限
+                // 团队空间，查�?SpaceUser 并获取角色和权限
                 SpaceUser spaceUser = spaceUserService.lambdaQuery()
                         .eq(SpaceUser::getSpaceId, space.getId())
                         .eq(SpaceUser::getUserId, loginUser.getId())

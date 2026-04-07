@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.space.analyze;
+﻿package com.yjc.snaphive.model.dto.space.analyze;
 
 import lombok.Data;
 
@@ -21,7 +21,7 @@ public class SpaceAnalyzeRequest implements Serializable {
     private boolean queryPublic;
 
     /**
-     * 全空间分析
+     * 全空间分�?
      */
     private boolean queryAll;
 

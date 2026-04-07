@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -25,7 +25,7 @@ public class Picture implements Serializable {
     private String url;
 
     /**
-     * 缩略图 url
+     * 缩略�?url
      */
     private String thumbnailUrl;
 
@@ -35,7 +35,7 @@ public class Picture implements Serializable {
     private String name;
 
     /**
-     * 简介
+     * 简�?
      */
     private String introduction;
 
@@ -45,7 +45,7 @@ public class Picture implements Serializable {
     private String category;
 
     /**
-     * 标签（JSON 数组）
+     * 标签（JSON 数组�?
      */
     private String tags;
 
@@ -75,7 +75,7 @@ public class Picture implements Serializable {
     private String picFormat;
 
     /**
-     * 图片主色调
+     * 图片主色�?
      */
     private String picColor;
 
@@ -85,22 +85,22 @@ public class Picture implements Serializable {
     private Long userId;
 
     /**
-     * 评论数
+     * 评论�?
      */
     private Long commentCount;
 
     /**
-     * 点赞数
+     * 点赞�?
      */
     private Long likeCount;
 
     /**
-     * 分享数
+     * 分享�?
      */
     private Long shareCount;
 
     /**
-     * 审核状态：0-待审核; 1-通过; 2-拒绝
+     * 审核状态：0-待审�? 1-通过; 2-拒绝
      */
     private Integer reviewStatus;
 
@@ -110,7 +110,7 @@ public class Picture implements Serializable {
     private String reviewMessage;
 
     /**
-     * 审核人 ID
+     * 审核�?ID
      */
     private Long reviewerId;
 
@@ -146,18 +146,18 @@ public class Picture implements Serializable {
     private Integer isDelete;
 
     /**
-     * 浏览量
+     * 浏览�?
      */
     private Long viewCount;
 
     /**
-     * 是否精选 0-非精选 1-精选
+     * 是否精�?0-非精�?1-精�?
      */
     @TableField("IsFeature")
     private Integer isFeature;
 
     /**
-     * 是否允许下载：0-禁止下载 1-允许下载
+     * 是否允许下载�?-禁止下载 1-允许下载
      */
     @TableField("IsDownload")
     private Integer isDownload;

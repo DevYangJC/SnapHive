@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -29,9 +29,9 @@ public class CategoryController {
    private CategoryService categoryService;
 
    /**
-    * 分页获取分类列表（管理员）
+    * 分页获取分类列表（管理员�?
     * @param pageRequest 分页请求参数
-    * @param type 分类类型（1-图片分类，2-帖子分类，3-音频分类）
+    * @param type 分类类型�?-图片分类�?-帖子分类�?-音频分类�?
     * @return 分类列表（包含统计信息）
     */
    @PostMapping("/list/page/vo")
@@ -60,8 +60,8 @@ public class CategoryController {
    }
 
    /**
-    * 获取指定类型的分类列表
-    * @param type 分类类型（1-图片分类，2-帖子分类，3-音频分类）
+    * 获取指定类型的分类列�?
+    * @param type 分类类型�?-图片分类�?-帖子分类�?-音频分类�?
     * @return 分类名称列表
     */
    @GetMapping("/list/type/{type}")
@@ -72,7 +72,7 @@ public class CategoryController {
    /**
     * 添加新分类（管理员）
     * @param categoryName 分类名称
-    * @param type 分类类型（1-图片分类，2-帖子分类，3-音频分类）
+    * @param type 分类类型�?-图片分类�?-帖子分类�?-音频分类�?
     * @return 添加结果
     */
    @PostMapping("/add")
@@ -83,13 +83,13 @@ public class CategoryController {
       if (!Objects.equals(type, CategoryConstant.PICTURE_CATEGORY)
               && !Objects.equals(type, CategoryConstant.POST_CATEGORY)
               && !Objects.equals(type, CategoryConstant.AUDIO_CATEGORY)) {
-         return (BaseResponse<Boolean>) ResultUtils.error(40000, "分类类型不合法");
+         return (BaseResponse<Boolean>) ResultUtils.error(40000, "分类类型不合�?);
       }
       return ResultUtils.success(categoryService.addCategory(categoryName, type));
    }
 
    /**
-    * 删除分类（管理员）
+    * 删除分类（管理员�?
     * @param categoryId 分类ID
     * @return 删除结果
     */
@@ -100,10 +100,10 @@ public class CategoryController {
    }
 
    /**
-    * 搜索分类（管理员）
-    * @param categoryName 分类名称关键词
-    * @param type 分类类型（1-图片分类，2-帖子分类，3-音频分类）
-    * @return 匹配的分类列表
+    * 搜索分类（管理员�?
+    * @param categoryName 分类名称关键�?
+    * @param type 分类类型�?-图片分类�?-帖子分类�?-音频分类�?
+    * @return 匹配的分类列�?
     */
    @PostMapping("/search")
    @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)

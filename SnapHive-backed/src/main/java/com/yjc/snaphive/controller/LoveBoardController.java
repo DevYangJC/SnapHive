@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.yjc.snaphive.common.BaseResponse;
@@ -93,7 +93,7 @@ public class LoveBoardController {
         if (id <= 0) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        // 获取当前登录用户（如果有）
+        // 获取当前登录用户（如果有�?
         User loginUser = userService.isLogin(request);
         Long loginUserId = loginUser != null ? loginUser.getId() : null;
         LoveBoard loveBoard = loveBoardService.getLoveBoardById(id, loginUserId);
@@ -101,7 +101,7 @@ public class LoveBoardController {
     }
 
     /**
-     * 获取当前用户的恋爱画板
+     * 获取当前用户的恋爱画�?
      *
      * @param request
      * @return

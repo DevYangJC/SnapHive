@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.user;
+﻿package com.yjc.snaphive.model.dto.user;
 
 import lombok.Data;
 
@@ -26,7 +26,7 @@ public class UserAddRequest implements Serializable {
     private String userAvatar;
 
     /**
-     * 用户简介
+     * 用户简�?
      */
     private String userProfile;
 

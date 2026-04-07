@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.vo;
+﻿package com.yjc.snaphive.model.vo;
 
 import com.yjc.snaphive.model.entity.AudioFile;
 import lombok.Data;
@@ -24,7 +24,7 @@ public class AudioFileVO implements Serializable {
     private Long userId;
 
     /**
-     * 文件名
+     * 文件�?
      */
     private String fileName;
 
@@ -39,7 +39,7 @@ public class AudioFileVO implements Serializable {
     private Long fileSize;
 
     /**
-     * 音频时长(秒)
+     * 音频时长(�?
      */
     private Integer duration;
 
@@ -64,7 +64,7 @@ public class AudioFileVO implements Serializable {
     private String description;
 
     /**
-     * 艺术家/作者
+     * 艺术�?作�?
      */
     private String artist;
 
@@ -84,7 +84,7 @@ public class AudioFileVO implements Serializable {
     private Long viewCount;
 
     /**
-     * 点赞数
+     * 点赞�?
      */
     private Long likeCount;
 
@@ -104,7 +104,7 @@ public class AudioFileVO implements Serializable {
     private UserVO user;
 
     /**
-     * 是否已点赞 0-未点赞 1-已点赞
+     * 是否已点�?0-未点�?1-已点�?
      */
     private Integer isLiked;
 

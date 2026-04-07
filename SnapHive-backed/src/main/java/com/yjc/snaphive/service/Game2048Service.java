@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yjc.snaphive.model.dto.game2048.SaveGameRecordRequest;
@@ -22,7 +22,7 @@ public interface Game2048Service extends IService<Game2048Record> {
     Integer getUserHighestScore(Long userId);
 
     /**
-     * 获取排行榜
+     * 获取排行�?
      */
     List<Game2048RecordVO> getRankingList(Integer limit);
 

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.vo.space.analyze;
+﻿package com.yjc.snaphive.model.vo.space.analyze;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +25,7 @@ public class SpaceCategoryAnalyzeResponse implements Serializable {
     private Long count;
 
     /**
-     * 分类图片总大小
+     * 分类图片总大�?
      */
     private Long totalSize;
 

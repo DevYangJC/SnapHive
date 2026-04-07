@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity.es;
+﻿package com.yjc.snaphive.model.entity.es;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -35,13 +35,13 @@ public class EsSpace implements Serializable {
     private String spaceName;
 
     /**
-     * 空间类型：0-私有 1-团队
+     * 空间类型�?-私有 1-团队
      */
     @Field(type = FieldType.Integer)
     private Integer spaceType;
 
     /**
-     * 空间级别：0-普通版 1-专业版 2-旗舰版
+     * 空间级别�?-普通版 1-专业�?2-旗舰�?
      */
     @Field(type = FieldType.Integer)
     private Integer spaceLevel;

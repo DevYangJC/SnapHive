@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.activity;
+﻿package com.yjc.snaphive.model.dto.activity;
 
 import com.yjc.snaphive.model.dto.post.PostAttachmentRequest;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.share;
+﻿package com.yjc.snaphive.model.dto.share;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ public class ShareRequest {
     private Long targetId;
 
     /**
-     * 内容类型：1-图片 2-帖子
+     * 内容类型�?-图片 2-帖子
      */
     private Integer targetType;
 

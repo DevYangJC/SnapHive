@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket.model;
+﻿package com.yjc.snaphive.manager.websocket.model;
 
 import lombok.Getter;
 
@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public enum ChatMessageTypeEnum {
 
-    CHAT("发送聊天消息", "CHAT"),
+    CHAT("发送聊天消�?, "CHAT"),
     JOIN("加入聊天", "JOIN"),
     LEAVE("离开聊天", "LEAVE"),
     HISTORY("历史消息", "HISTORY"),

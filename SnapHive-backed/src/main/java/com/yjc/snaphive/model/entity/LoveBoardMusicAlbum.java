@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 恋爱板音乐专栏
+ * 恋爱板音乐专�?
  */
 @TableName(value = "love_board_music_album")
 @Data
@@ -45,7 +45,7 @@ public class LoveBoardMusicAlbum implements Serializable {
     private String description;
 
     /**
-     * 是否公开[0-私密，1-公开]
+     * 是否公开[0-私密�?-公开]
      */
     private Integer isPublic;
 

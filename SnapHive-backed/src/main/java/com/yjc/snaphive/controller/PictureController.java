@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -70,13 +70,13 @@ public class PictureController {
      */
     private final Cache<String, String> LOCAL_CACHE = Caffeine.newBuilder()
             .initialCapacity(1024)
-            .maximumSize(10_000L) // 最大 10000 条
-            // 缓存 5 分钟后移除
+            .maximumSize(10_000L) // 最�?10000 �?
+            // 缓存 5 分钟后移�?
             .expireAfterWrite(Duration.ofMinutes(5))
             .build();
 
     /**
-     * 上传图片（可重新上传）
+     * 上传图片（可重新上传�?
      */
     @PostMapping("/upload")
     @SaSpaceCheckPermission(value = SpaceUserPermissionConstant.PICTURE_UPLOAD)
@@ -133,10 +133,10 @@ public class PictureController {
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
     public BaseResponse<Picture> getPictureById(long id, HttpServletRequest request) {
         ThrowUtils.throwIf(id <= 0, ErrorCode.PARAMS_ERROR);
-        // 查询数据库
+        // 查询数据�?
         Picture picture = pictureService.getById(id);
         ThrowUtils.throwIf(picture == null, ErrorCode.NOT_FOUND_ERROR);
-        // 获取封装类
+        // 获取封装�?
         return ResultUtils.success(picture);
     }
 
@@ -159,7 +159,7 @@ public class PictureController {
     }
 
     /**
-     * 根据 id 获取图片（封装类）
+     * 根据 id 获取图片（封装类�?
      */
     @GetMapping("/get/vo")
     public BaseResponse<PictureVO> getPictureVOById(long id, HttpServletRequest request) {
@@ -174,14 +174,14 @@ public class PictureController {
     public BaseResponse<Page<Picture>> listPictureByPage(@RequestBody PictureQueryRequest pictureQueryRequest) {
         long current = pictureQueryRequest.getCurrent();
         long size = pictureQueryRequest.getPageSize();
-        // 查询数据库
+        // 查询数据�?
         Page<Picture> picturePage = pictureService.page(new Page<>(current, size),
                 pictureService.getQueryWrapper(pictureQueryRequest));
         return ResultUtils.success(picturePage);
     }
 
     /**
-     * 分页获取图片列表（封装类，有缓存）
+     * 分页获取图片列表（封装类，有缓存�?
      */
     @PostMapping("/list/page/vo/cache")
     public BaseResponse<Page<PictureVO>> listPictureVOByPageWithCache(
@@ -191,7 +191,7 @@ public class PictureController {
     }
 
     /**
-     * 分页获取图片列表（封装类）
+     * 分页获取图片列表（封装类�?
      */
     @PostMapping("/list/page/vo")
     public BaseResponse<Page<PictureVO>> listPictureVOByPage(@RequestBody PictureQueryRequest pictureQueryRequest,
@@ -207,17 +207,17 @@ public class PictureController {
 
         // 1. 参数校验
         long size = pictureQueryRequest.getPageSize();
-        ThrowUtils.throwIf(size > 50, ErrorCode.PARAMS_ERROR, "每页最多显示50条");
+        ThrowUtils.throwIf(size > 50, ErrorCode.PARAMS_ERROR, "每页最多显�?0�?);
 
-        // 2. 反爬检测
+        // 2. 反爬检�?
         crawlerManager.detectNormalRequest(request);
 
-        // 3. 执行查询并返回结果
+        // 3. 执行查询并返回结�?
         return ResultUtils.success(pictureService.listPictureVOByPage(pictureQueryRequest, request));
     }
 
     /**
-     * 编辑图片（给用户使用）
+     * 编辑图片（给用户使用�?
      */
     @PostMapping("/edit")
     @SaSpaceCheckPermission(value = SpaceUserPermissionConstant.PICTURE_EDIT)
@@ -259,7 +259,7 @@ public class PictureController {
     }
 
     /**
-     * 批量抓取并创建图片
+     * 批量抓取并创建图�?
      */
     @PostMapping("/upload/batch")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
@@ -337,10 +337,10 @@ public class PictureController {
     }
 
     /**
-     * top100的数据
+     * top100的数�?
      */
     /**
-     * top100 的数据
+     * top100 的数�?
      */
     @GetMapping("/top100/{id}")
     public BaseResponse<List<PictureVO>> getTop100Picture(@PathVariable Long id) {
@@ -372,7 +372,7 @@ public class PictureController {
     }
 
     /**
-     * 设置图片精选状态
+     * 设置图片精选状�?
      */
     @PostMapping("/feature")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)
@@ -387,7 +387,7 @@ public class PictureController {
     }
 
     /**
-     * 获取精选图片列表
+     * 获取精选图片列�?
      */
     @PostMapping("/feature/list")
     public BaseResponse<Page<PictureVO>> getFeaturePicture(@RequestBody PictureQueryRequest pictureQueryRequest,

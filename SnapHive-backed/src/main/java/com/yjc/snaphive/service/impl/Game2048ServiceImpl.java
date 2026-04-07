@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yjc.snaphive.exception.ErrorCode;
@@ -36,11 +36,11 @@ public class Game2048ServiceImpl extends ServiceImpl<Game2048Mapper, Game2048Rec
 
         ThrowUtils.throwIf(score == null || score < 0, ErrorCode.PARAMS_ERROR, "分数无效");
         ThrowUtils.throwIf(maxTile == null || maxTile < 2 || (maxTile & (maxTile - 1)) != 0,
-                ErrorCode.PARAMS_ERROR, "最大数字无效");
+                ErrorCode.PARAMS_ERROR, "最大数字无�?);
         ThrowUtils.throwIf(gameTime == null || gameTime < 0, ErrorCode.PARAMS_ERROR, "游戏时长无效");
         ThrowUtils.throwIf(moveCount == null || moveCount < 0, ErrorCode.PARAMS_ERROR, "移动次数无效");
 
-        // 检查是否存在相同记录
+        // 检查是否存在相同记�?
         Game2048Record existingRecord = lambdaQuery()
                 .eq(Game2048Record::getUserId, loginUser.getId())
                 .eq(Game2048Record::getScore, score)
@@ -83,7 +83,7 @@ public class Game2048ServiceImpl extends ServiceImpl<Game2048Mapper, Game2048Rec
         if (limit == null || limit <= 0) {
             limit = 10;
         }
-        // 限制最大查询数量
+        // 限制最大查询数�?
         limit = Math.min(limit, 100);
         // 修改为获取每个用户的最高分记录
         return game2048Mapper.getRankingListByHighestScore(limit);
@@ -93,17 +93,17 @@ public class Game2048ServiceImpl extends ServiceImpl<Game2048Mapper, Game2048Rec
     public Map<String, Object> getUserGameHistory(Long userId, Integer current, Integer pageSize) {
         ThrowUtils.throwIf(userId == null || userId <= 0, ErrorCode.PARAMS_ERROR);
 
-        // 默认值处理
+        // 默认值处�?
         if (current == null || current < 1) {
             current = 1;
         }
         if (pageSize == null || pageSize < 1) {
             pageSize = 10;
         }
-        // 限制每页最大条数
+        // 限制每页最大条�?
         pageSize = Math.min(pageSize, 100);
 
-        // 计算偏移量
+        // 计算偏移�?
         int offset = (current - 1) * pageSize;
 
         // 获取数据

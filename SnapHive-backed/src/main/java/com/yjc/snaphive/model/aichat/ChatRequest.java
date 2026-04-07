@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.aichat;
+﻿package com.yjc.snaphive.model.aichat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

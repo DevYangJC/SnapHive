@@ -1,4 +1,4 @@
-package com.yjc.snaphive.utils;
+﻿package com.yjc.snaphive.utils;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class RateLimiter {
      */
     public boolean allowMessageAdd(String ip) {
         String key = RATE_LIMITER_PREFIX + MESSAGE_ADD_PREFIX + ip;
-        return checkRate(key, 5, 60); // 每60秒最多5次
+        return checkRate(key, 5, 60); // �?0秒最�?�?
     }
 
     /**
@@ -32,14 +32,14 @@ public class RateLimiter {
      */
     public boolean allowMessageQuery(String ip) {
         String key = RATE_LIMITER_PREFIX + MESSAGE_QUERY_PREFIX + ip;
-        return checkRate(key, 30, 60); // 每60秒最多30次
+        return checkRate(key, 30, 60); // �?0秒最�?0�?
     }
 
     /**
-     * 检查访问频率
+     * 检查访问频�?
      * @param key Redis key
      * @param limit 限制次数
-     * @param seconds 时间窗口（秒）
+     * @param seconds 时间窗口（秒�?
      * @return 是否允许访问
      */
     private boolean checkRate(String key, int limit, int seconds) {

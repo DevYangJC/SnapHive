@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.user;
+﻿package com.yjc.snaphive.model.dto.user;
 
 
 import com.yjc.snaphive.common.PageRequest;
@@ -31,7 +31,7 @@ public class UserQueryRequest extends PageRequest implements Serializable {
     private String userAccount;
 
     /**
-     * 简介
+     * 简�?
      */
     private String userProfile;
 

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.picture;
+﻿package com.yjc.snaphive.model.dto.picture;
 
 import lombok.Data;
 
@@ -22,7 +22,7 @@ public class PictureEditRequest implements Serializable {
     private String name;
 
     /**
-     * 简介
+     * 简�?
      */
     private String introduction;
 
@@ -37,7 +37,7 @@ public class PictureEditRequest implements Serializable {
     private List<String> tags;
 
     /**
-     * 是否允许下载：0-禁止下载 1-允许下载
+     * 是否允许下载�?-禁止下载 1-允许下载
      */
     private Integer isDownload;
 

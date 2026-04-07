@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager;
+﻿package com.yjc.snaphive.manager;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
@@ -46,7 +46,7 @@ public class FileManager {
         // 图片上传地址
         String uuid = RandomUtil.randomString(16);
         String originalFilename = multipartFile.getOriginalFilename();
-        // 自己拼接文件上传路径，而不是使用原始文件名称，可以增强安全性
+        // 自己拼接文件上传路径，而不是使用原始文件名称，可以增强安全�?
         String uploadFilename = String.format("%s_%s.%s", DateUtil.formatDate(new Date()), uuid,
                 FileUtil.getSuffix(originalFilename));
         String uploadPath = String.format("/%s/%s", uploadPathPrefix, uploadFilename);
@@ -74,7 +74,7 @@ public class FileManager {
             // 返回可访问的地址
             return uploadPictureResult;
         } catch (Exception e) {
-            log.error("图片上传到对象存储失败", e);
+            log.error("图片上传到对象存储失�?, e);
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "上传失败");
         } finally {
             // 临时文件清理

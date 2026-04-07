@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.activity;
+﻿package com.yjc.snaphive.model.dto.activity;
 
 import com.yjc.snaphive.common.PageRequest;
 import lombok.Data;
@@ -11,22 +11,22 @@ import lombok.EqualsAndHashCode;
 @Data
 public class ActivityQueryRequest extends PageRequest {
     /**
-     * 搜索词
+     * 搜索�?
      */
     private String searchText;
 
     /**
-     * 状态
+     * 状�?
      */
     private Integer status;
 
     /**
-     * 是否只看未过期
+     * 是否只看未过�?
      */
     private Boolean notExpired;
 
     /**
-     * 是否公开查询（不需要管理员权限）
+     * 是否公开查询（不需要管理员权限�?
      */
     private Boolean isPublic;
 }

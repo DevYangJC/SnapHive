@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.yjc.snaphive.model.dto.snake.GameRankingRequest;
 import com.yjc.snaphive.model.dto.snake.SaveGameRecordRequest;
@@ -14,7 +14,7 @@ public interface SnakeGameService {
      * 保存游戏记录
      * @param request 游戏记录请求
      * @param loginUser 当前登录用户
-     * @return 保存的记录
+     * @return 保存的记�?
      */
     SnakeGameRecord saveGameRecord(SaveGameRecordRequest request, User loginUser);
 
@@ -26,9 +26,9 @@ public interface SnakeGameService {
     UserHighestScoreVO getUserAllHighestScores(Long userId);
 
     /**
-     * 获取排行榜
-     * @param request 排行榜请求
-     * @return 排行榜记录列表
+     * 获取排行�?
+     * @param request 排行榜请�?
+     * @return 排行榜记录列�?
      */
     List<SnakeGameRecord> getRankingList(GameRankingRequest request);
 }

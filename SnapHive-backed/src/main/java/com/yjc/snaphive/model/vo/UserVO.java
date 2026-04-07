@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.vo;
+﻿package com.yjc.snaphive.model.vo;
 
 import lombok.Data;
 
@@ -37,7 +37,7 @@ public class UserVO implements Serializable {
     private String email;
 
     /**
-     * 用户简介
+     * 用户简�?
      */
     private String userProfile;
 

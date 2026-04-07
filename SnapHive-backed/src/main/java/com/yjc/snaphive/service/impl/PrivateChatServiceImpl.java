@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -68,14 +68,14 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
             // 如果当前用户是接收者，需要交换未读消息数
             if (chat.getTargetUserId().equals(userId)) {
                 targetId = chat.getUserId();
-                // 交换未读消息数
+                // 交换未读消息�?
                 Integer temp = chat.getUserUnreadCount();
                 chat.setUserUnreadCount(chat.getTargetUserUnreadCount());
                 chat.setTargetUserUnreadCount(temp);
-                chat.setIsSender(false);  // 设置当前用户是接收者
+                chat.setIsSender(false);  // 设置当前用户是接收�?
             } else {
                 targetId = chat.getTargetUserId();
-                chat.setIsSender(true);   // 设置当前用户是发送者
+                chat.setIsSender(true);   // 设置当前用户是发送�?
             }
 
             User targetUser = userService.getById(targetId);
@@ -104,7 +104,7 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
         PrivateChat privateChat = this.getOne(queryWrapper);
 
         if (privateChat == null) {
-            // 创建新私聊
+            // 创建新私�?
             privateChat = new PrivateChat();
             privateChat.setUserId(userId);
             privateChat.setTargetUserId(targetUserId);
@@ -116,7 +116,7 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
             followsQuery.eq("followerId", userId)
                     .eq("followingId", targetUserId)
                     .eq("followStatus", 1)
-                    .eq("isMutual", 1)  // 使用 isMutual 字段，该字段已经表示了双向关注状态
+                    .eq("isMutual", 1)  // 使用 isMutual 字段，该字段已经表示了双向关注状�?
                     .eq("isDelete", 0);
 
             boolean isFriend = userFollowsService.count(followsQuery) > 0;
@@ -131,7 +131,7 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
             }
         }
 
-        // 更新最后消息
+        // 更新最后消�?
         privateChat.setLastMessage(content);
         privateChat.setLastMessageTime(new Date());
         // 增加目标用户的未读消息数
@@ -145,7 +145,7 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
         chatMessage.setReceiverId(targetUserId);
         chatMessage.setContent(content);
         chatMessage.setType(1);  // 私聊类型
-        chatMessage.setStatus(0);  // 未读状态
+        chatMessage.setStatus(0);  // 未读状�?
         chatMessageService.save(chatMessage);
 
         return privateChat;
@@ -154,7 +154,7 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
 
     @Override
     public void incrementUnreadCount(long userId, long targetUserId, boolean isUser) {
-        // 查找或创建私聊记录
+        // 查找或创建私聊记�?
         QueryWrapper<PrivateChat> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userId", userId)
                 .eq("targetUserId", targetUserId);
@@ -194,14 +194,14 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
         }
 
         this.update()
-                .set("userUnreadCount", 0)  // 清除发送者的未读消息数
+                .set("userUnreadCount", 0)  // 清除发送者的未读消息�?
                 .eq("userId", userId)
                 .eq("targetUserId", targetUserId)
                 .update();
 
-        // 同时处理可能存在的反向记录
+        // 同时处理可能存在的反向记�?
         this.update()
-                .set("targetUserUnreadCount", 0)  // 清除接收者的未读消息数
+                .set("targetUserUnreadCount", 0)  // 清除接收者的未读消息�?
                 .eq("userId", targetUserId)
                 .eq("targetUserId", userId)
                 .update();
@@ -209,23 +209,23 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
 
     @Override
     public boolean checkIsFriend(long userId, long targetUserId) {
-        // 检查是否互相关注
+        // 检查是否互相关�?
         QueryWrapper<Userfollows> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("followerId", userId)
                 .eq("followingId", targetUserId)
                 .eq("followStatus", 1)
                 .eq("isMutual", 1)
-                .eq("isDelete", 0);  // 添加未删除条件
+                .eq("isDelete", 0);  // 添加未删除条�?
 
         return userFollowsService.count(queryWrapper) > 0;
     }
 
     @Override
     public void updateChatType(long userId, long targetUserId, boolean isFriend) {
-        // 准备更新的聊天类型
+        // 准备更新的聊天类�?
         int chatType = isFriend ? 1 : 0;
 
-        // 同时更新两个方向的记录
+        // 同时更新两个方向的记�?
         this.update()
                 .set("chatType", chatType)
                 .and(wrap -> wrap
@@ -249,14 +249,14 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
         final Integer chatType = privateChatQueryRequest.getChatType();
         final String searchText = privateChatQueryRequest.getSearchText();
 
-        // 查询与当前用户相关的聊天记录，并且排除自己和自己的对话
+        // 查询与当前用户相关的聊天记录，并且排除自己和自己的对�?
         queryWrapper.and(wrap ->
                 wrap.eq("userId", userId).ne("targetUserId", userId)
                         .or()
                         .eq("targetUserId", userId).ne("userId", userId)
         );
 
-        // 如果指定了目标用户，则只查询与该用户的对话
+        // 如果指定了目标用户，则只查询与该用户的对�?
         if (targetUserId != null && targetUserId > 0) {
             queryWrapper.and(wrap ->
                     wrap.eq("targetUserId", targetUserId).eq("userId", userId)
@@ -265,17 +265,17 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
             );
         }
 
-        // 如果指定了聊天类型（私聊/好友），则按类型筛选
+        // 如果指定了聊天类型（私聊/好友），则按类型筛�?
         if (chatType != null) {
             queryWrapper.eq("chatType", chatType);
         }
 
-        // 搜索最后一条消息
+        // 搜索最后一条消�?
         if (StrUtil.isNotBlank(searchText)) {
             queryWrapper.like("lastMessage", searchText);
         }
 
-        // 未删除
+        // 未删�?
         queryWrapper.eq("isDelete", 0);
         // 按最后消息时间倒序
         queryWrapper.orderByDesc("lastMessageTime");
@@ -293,7 +293,7 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
         }
         final Long currentUserId = loginUser.getId();
 
-        // 填充目标用户信息并处理未读消息数和聊天名称
+        // 填充目标用户信息并处理未读消息数和聊天名�?
         if (privateChatPage.getRecords() != null) {
             privateChatPage.getRecords().forEach(chat -> {
                 Long targetId;
@@ -301,16 +301,16 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
                 // 如果当前用户是接收者，需要交换未读消息数和使用对应的聊天名称
                 if (chat.getTargetUserId().equals(currentUserId)) {
                     targetId = chat.getUserId();
-                    // 交换未读消息数
+                    // 交换未读消息�?
                     Integer temp = chat.getUserUnreadCount();
                     chat.setUserUnreadCount(chat.getTargetUserUnreadCount());
                     chat.setTargetUserUnreadCount(temp);
-                    chat.setIsSender(false);  // 设置当前用户是接收者
+                    chat.setIsSender(false);  // 设置当前用户是接收�?
                     // 使用目标用户的自定义聊天名称
                     chatName = chat.getTargetUserChatName();
                 } else {
                     targetId = chat.getTargetUserId();
-                    chat.setIsSender(true);   // 设置当前用户是发送者
+                    chat.setIsSender(true);   // 设置当前用户是发送�?
                     // 使用用户的自定义聊天名称
                     chatName = chat.getUserChatName();
                 }
@@ -329,7 +329,7 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
                     log.warn("User not found for targetId: {}", targetId);
                 }
 
-                // 设置显示的聊天名称
+                // 设置显示的聊天名�?
                 if (chat.getIsSender()) {
                     chat.setUserChatName(chatName);
                 } else {
@@ -356,9 +356,9 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
 
         Page<ChatMessage> messagePage = chatMessageService.page(new Page<>(page, size), queryWrapper);
 
-        // 填充发送者信息
+        // 填充发送者信�?
         messagePage.getRecords().forEach(message -> {
-            // 填充发送者信息
+            // 填充发送者信�?
             User sender = userService.getById(message.getSenderId());
             sender.setUserPassword(null);
             message.setSender(sender);
@@ -373,14 +373,14 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
         // 获取私聊记录
         PrivateChat privateChat = this.getById(privateChatId);
         if (privateChat == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "私聊记录不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "私聊记录不存�?);
         }
 
         // 根据当前用户ID确定接收者ID
         Long receiverId;
         if (privateChat.getUserId().equals(sender.getId())) {
             receiverId = privateChat.getTargetUserId();
-            // 获取私聊聊天室在线人数
+            // 获取私聊聊天室在线人�?
             Set<WebSocketSession> sessions = ChatWebSocketServer.getPrivateChatSessions(privateChatId);
             boolean bothOnline = sessions != null && sessions.size() == 2;
             // 只有在双方不都在线时才增加未读消息数
@@ -389,7 +389,7 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
             }
         } else if (privateChat.getTargetUserId().equals(sender.getId())) {
             receiverId = privateChat.getUserId();
-            // 获取私聊聊天室在线人数
+            // 获取私聊聊天室在线人�?
             Set<WebSocketSession> sessions = ChatWebSocketServer.getPrivateChatSessions(privateChatId);
             boolean bothOnline = sessions != null && sessions.size() == 2;
             // 只有在双方不都在线时才增加未读消息数
@@ -397,12 +397,12 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
                 privateChat.setUserUnreadCount(privateChat.getUserUnreadCount() + 1);
             }
         } else {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "您不是该私聊的参与者");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "您不是该私聊的参与�?);
         }
         chatMessage.setReceiverId(receiverId);
         chatMessage.setSenderId(sender.getId());
 
-        // 更新私聊记录的最后一句内容
+        // 更新私聊记录的最后一句内�?
         privateChat.setLastMessage(chatMessage.getContent());
         privateChat.setLastMessageTime(new Date());
 
@@ -416,20 +416,20 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
         // 获取私聊记录
         PrivateChat privateChat = this.getById(privateChatId);
         if (privateChat == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "私聊记录不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "私聊记录不存�?);
         }
 
-        // 校验权限，只有私聊参与者才能删除
+        // 校验权限，只有私聊参与者才能删�?
         if (!privateChat.getUserId().equals(loginUser.getId())
                 && !privateChat.getTargetUserId().equals(loginUser.getId())) {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "您不是该私聊的参与者");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "您不是该私聊的参与�?);
         }
 
         // 1. 删除私聊记录
         boolean success = this.removeById(privateChatId);
 
         if (success) {
-            // 2. 删除相关的聊天消息
+            // 2. 删除相关的聊天消�?
             QueryWrapper<ChatMessage> messageQueryWrapper = new QueryWrapper<>();
             messageQueryWrapper.eq("privateChatId", privateChatId)
                     .eq("type", 1);  // 私聊类型
@@ -445,16 +445,16 @@ public class PrivateChatServiceImpl extends ServiceImpl<PrivateChatMapper, Priva
         // 获取私聊记录
         PrivateChat privateChat = this.getById(privateChatId);
         if (privateChat == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "私聊记录不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "私聊记录不存�?);
         }
 
-        // 根据当前用户身份更新对应的聊天名称
+        // 根据当前用户身份更新对应的聊天名�?
         if (privateChat.getUserId().equals(loginUser.getId())) {
             privateChat.setUserChatName(chatName);
         } else if (privateChat.getTargetUserId().equals(loginUser.getId())) {
             privateChat.setTargetUserChatName(chatName);
         } else {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "您不是该私聊的参与者");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "您不是该私聊的参与�?);
         }
 
         this.updateById(privateChat);

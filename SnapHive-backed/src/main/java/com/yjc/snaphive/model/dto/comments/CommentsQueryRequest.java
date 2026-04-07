@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.comments;
+﻿package com.yjc.snaphive.model.dto.comments;
 
 
 import com.yjc.snaphive.common.PageRequest;
@@ -18,7 +18,7 @@ public class CommentsQueryRequest extends PageRequest implements Serializable {
     private Long targetId;
 
     /**
-     * 评论目标类型：1-图片 2-帖子，默认为1(图片)
+     * 评论目标类型�?-图片 2-帖子，默认为1(图片)
      */
     private Integer targetType ;
 

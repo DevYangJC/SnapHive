@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author 鹿梦
+ * @author SnapHive
  * @description 针对表【tag(标签)】的数据库操作Service实现
  * @createDate 2024-12-13 17:37:29
  */
@@ -58,13 +58,13 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
 
     @Override
     public List<TagVO> searchTag(String tagName) {
-        // 创建查询条件包装器
+        // 创建查询条件包装�?
         QueryWrapper<Tag> queryWrapper = new QueryWrapper<>();
-        // 使用like进行模糊查询，匹配标签名称包含输入的tagName的记录
+        // 使用like进行模糊查询，匹配标签名称包含输入的tagName的记�?
         queryWrapper.like("tagName", tagName);
         // 从数据库中查询符合条件的Tag实体列表
         List<Tag> tagList = baseMapper.selectList(queryWrapper);
-        // 将查询到的Tag实体列表转换为TagVO列表并返回
+        // 将查询到的Tag实体列表转换为TagVO列表并返�?
         return listTagVOByPage(tagList);
     }
 }

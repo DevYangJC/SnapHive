@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.privatechat;
+﻿package com.yjc.snaphive.model.dto.privatechat;
 
 import com.yjc.snaphive.common.PageRequest;
 import lombok.Data;
@@ -19,7 +19,7 @@ public class PrivateChatQueryRequest extends PageRequest implements Serializable
     private Long targetUserId;
 
     /**
-     * 聊天类型：0-私信 1-好友
+     * 聊天类型�?-私信 1-好友
      */
     private Integer chatType;
 

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -31,12 +31,12 @@ public interface SpaceService extends IService<Space> {
      * 校验空间
      *
      * @param space
-     * @param add   是否为创建时检验
+     * @param add   是否为创建时检�?
      */
     void validSpace(Space space, boolean add);
 
     /**
-     * 获取空间包装类（单条）
+     * 获取空间包装类（单条�?
      *
      * @param space
      * @param request
@@ -45,7 +45,7 @@ public interface SpaceService extends IService<Space> {
     SpaceVO getSpaceVO(Space space, HttpServletRequest request);
 
     /**
-     * 获取空间包装类（分页）
+     * 获取空间包装类（分页�?
      *
      * @param spacePage
      * @param request

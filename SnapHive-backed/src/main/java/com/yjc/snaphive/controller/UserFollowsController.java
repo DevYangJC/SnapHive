@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.common.BaseResponse;
@@ -30,7 +30,7 @@ public class UserFollowsController {
    private PictureService pictureService;
 
    /**
-    * 关注、取关
+    * 关注、取�?
     */
    @PostMapping("/adduserfollows")
    public BaseResponse<Boolean> addUserFollows(@RequestBody UserFollowsAddRequest userFollowsAddRequest){
@@ -54,7 +54,7 @@ public class UserFollowsController {
    }
 
    /**
-    * 得到关注和粉丝数量
+    * 得到关注和粉丝数�?
     */
    @PostMapping("/getfollowandfanscount/{id}")
    public BaseResponse<FollowersAndFansVO> getFollowAndFansCount(@PathVariable Long id){
@@ -63,7 +63,7 @@ public class UserFollowsController {
    }
 
    /**
-    * 得到关注或者粉丝的公共的图片数据
+    * 得到关注或者粉丝的公共的图片数�?
     */
    @PostMapping("/getfolloworfanpicture")
    public BaseResponse<Page<PictureVO>> getFollowOrFanPicture(@RequestBody PictureQueryRequest pictureQueryRequest, HttpServletRequest request){
@@ -78,10 +78,10 @@ public class UserFollowsController {
       pictureQueryRequest.setNullSpaceId(true);
       pictureQueryRequest.setReviewStatus(PictureReviewStatusEnum.PASS.getValue());
 
-      // 查询数据库
+      // 查询数据�?
       Page<Picture> picturePage = pictureService.page(new Page<>(current, size),
               pictureService.getQueryWrapper(pictureQueryRequest));
-      // 获取封装类
+      // 获取封装�?
       return ResultUtils.success(pictureService.getPictureVOPage(picturePage, request));
    }
 }

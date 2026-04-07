@@ -1,10 +1,10 @@
-package com.yjc.snaphive.model.enums;
+﻿package com.yjc.snaphive.model.enums;
 
 import cn.hutool.core.util.ObjUtil;
 import lombok.Getter;
 
 /**
- * 空间类型枚举类
+ * 空间类型枚举�?
  */
 @Getter
 public enum SpaceTypeEnum {

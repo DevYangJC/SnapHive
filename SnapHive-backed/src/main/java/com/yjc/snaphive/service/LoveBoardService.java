@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yjc.snaphive.model.entity.LoveBoard;
@@ -42,15 +42,15 @@ public interface LoveBoardService extends IService<LoveBoard> {
     /**
      * 检查用户是否已经创建过恋爱画板
      * @param userId 用户ID
-     * @return 是否已创建
+     * @return 是否已创�?
      */
     boolean hasLoveBoard(long userId);
 
     /**
-     * 检查用户是否是恋爱板的所有者
+     * 检查用户是否是恋爱板的所有�?
      * @param loveBoardId 恋爱板ID
      * @param userId 用户ID
-     * @return 是否是所有者
+     * @return 是否是所有�?
      */
     boolean isLoveBoardOwner(long loveBoardId, long userId);
 }

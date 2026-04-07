@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -37,7 +37,7 @@ public class SpaceUser implements Serializable {
     private String spaceRole;
 
     /**
-     * 审核状态：0-待审核 1-已通过 2-已拒绝
+     * 审核状态：0-待审�?1-已通过 2-已拒�?
      */
     private Integer status;
 

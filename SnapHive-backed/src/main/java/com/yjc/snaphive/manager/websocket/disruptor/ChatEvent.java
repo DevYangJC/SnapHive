@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket.disruptor;
+﻿package com.yjc.snaphive.manager.websocket.disruptor;
 
 import com.yjc.snaphive.model.entity.ChatMessage;
 import com.yjc.snaphive.model.entity.User;
@@ -17,7 +17,7 @@ public class ChatEvent {
     private ChatMessage chatMessage;
 
     /**
-     * 当前用户的 session
+     * 当前用户�?session
      */
     private WebSocketSession session;
 
@@ -32,7 +32,7 @@ public class ChatEvent {
     private Long targetId;
 
     /**
-     * 目标类型(1-私聊 2-图片聊天室 3-空间聊天)
+     * 目标类型(1-私聊 2-图片聊天�?3-空间聊天)
      */
     private Integer targetType;
 

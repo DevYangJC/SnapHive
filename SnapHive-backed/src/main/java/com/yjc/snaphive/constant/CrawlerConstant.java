@@ -1,4 +1,4 @@
-package com.yjc.snaphive.constant;
+﻿package com.yjc.snaphive.constant;
 
 public class CrawlerConstant {
     public static final int WARN_COUNT = 150;

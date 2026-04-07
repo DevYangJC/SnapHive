@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.common.BaseResponse;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * 恋爱板音乐专栏接口
+ * 恋爱板音乐专栏接�?
  */
 @RestController
 @RequestMapping("/love-board/music-album")
@@ -178,7 +178,7 @@ public class LoveBoardMusicAlbumController {
     }
 
     /**
-     * 上传音乐到专栏
+     * 上传音乐到专�?
      */
     @PostMapping("/upload")
     public BaseResponse<AudioFileVO> uploadMusicToAlbum(

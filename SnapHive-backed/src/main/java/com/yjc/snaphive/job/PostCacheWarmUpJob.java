@@ -1,4 +1,4 @@
-package com.yjc.snaphive.job;
+﻿package com.yjc.snaphive.job;
 
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -36,7 +36,7 @@ public class PostCacheWarmUpJob implements CommandLineRunner {
     @Override
     public void run(String... args) {
         try {
-            log.info("开始帖子数据缓存预热");
+            log.info("开始帖子数据缓存预�?);
             warmUpPostCache();
             warmUpTop100Cache();
             log.info("帖子数据缓存预热完成");
@@ -54,15 +54,15 @@ public class PostCacheWarmUpJob implements CommandLineRunner {
         queryWrapper.eq("status", 1)
                 .eq("isDelete", 0)
                 .orderByDesc("viewCount", "likeCount", "commentCount")
-                .last("LIMIT 1000"); // 限制数量，避免数据太多
+                .last("LIMIT 1000"); // 限制数量，避免数据太�?
 
         List<Post> posts = postMapper.selectList(queryWrapper);
 
-        // 按每页20条数据进行分页缓存
+        // 按每�?0条数据进行分页缓�?
         int pageSize = 20;
         int totalPages = (posts.size() + pageSize - 1) / pageSize;
 
-        for (int i = 1; i <= Math.min(totalPages, 5); i++) { // 只缓存前5页
+        for (int i = 1; i <= Math.min(totalPages, 5); i++) { // 只缓存前5�?
             int start = (i - 1) * pageSize;
             int end = Math.min(start + pageSize, posts.size());
             List<Post> pageData = posts.subList(start, end);

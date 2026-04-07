@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.common.BaseResponse;
@@ -48,7 +48,7 @@ public class ShareRecordController {
     }
 
     /**
-     * 获取分享状态
+     * 获取分享状�?
      */
     @GetMapping("/status/{targetType}/{targetId}")
     public BaseResponse<Boolean> getShareStatus(
@@ -75,7 +75,7 @@ public class ShareRecordController {
     }
 
     /**
-     * 获取用户被分享历史
+     * 获取用户被分享历�?
      */
     @PostMapping("/history")
     public BaseResponse<Page<ShareRecordVO>> getShareHistory(@RequestBody ShareQueryRequest shareQueryRequest,

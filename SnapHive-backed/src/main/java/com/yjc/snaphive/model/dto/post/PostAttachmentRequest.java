@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.post;
+﻿package com.yjc.snaphive.model.dto.post;
 
 import lombok.Data;
 

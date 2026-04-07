@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.yjc.snaphive.common.BaseResponse;
 import com.yjc.snaphive.common.ResultUtils;
@@ -69,7 +69,7 @@ public class MessageCenterController {
         ThrowUtils.throwIf(loginUser == null, ErrorCode.NOT_LOGIN_ERROR);
 
         try {
-            // 清除所有类型的未读状态
+            // 清除所有类型的未读状�?
             commentsService.clearAllUnreadComments(loginUser.getId());
             likeRecordService.clearAllUnreadLikes(loginUser.getId());
             shareRecordService.clearAllUnreadShares(loginUser.getId());

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.yjc.snaphive.common.BaseResponse;
 import com.yjc.snaphive.common.ResultUtils;
@@ -28,10 +28,10 @@ public class SearchController {
     }
 
     /**
-     * 获取热门搜索关键词
+     * 获取热门搜索关键�?
      * @param type 搜索类型 (picture/user/post/space)
-     * @param size 返回数量，默认9个
-     * @return 热门搜索关键词列表
+     * @param size 返回数量，默�?�?
+     * @return 热门搜索关键词列�?
      */
     @GetMapping("/hot")
     public BaseResponse<List<String>> getHotSearchKeywords(
@@ -42,7 +42,7 @@ public class SearchController {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "搜索类型不能为空");
         }
         if (size <= 0 || size > 100) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "size必须在1-100之间");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "size必须�?-100之间");
         }
 
         // 校验搜索类型

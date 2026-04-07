@@ -1,7 +1,7 @@
-package com.yjc.snaphive.exception;
+﻿package com.yjc.snaphive.exception;
 
 /**
- * 异常处理工具类
+ * 异常处理工具�?
  */
 public class ThrowUtils {
 
@@ -21,7 +21,7 @@ public class ThrowUtils {
      * 条件成立则抛异常
      *
      * @param condition 条件
-     * @param errorCode 错误码
+     * @param errorCode 错误�?
      */
     public static void throwIf(boolean condition, ErrorCode errorCode) {
         throwIf(condition, new BusinessException(errorCode));
@@ -31,7 +31,7 @@ public class ThrowUtils {
      * 条件成立则抛异常
      *
      * @param condition 条件
-     * @param errorCode 错误码
+     * @param errorCode 错误�?
      * @param message 错误信息
      */
     public static void throwIf(boolean condition, ErrorCode errorCode, String message) {

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.sharding;
+﻿package com.yjc.snaphive.manager.sharding;
 
 import com.baomidou.mybatisplus.extension.toolkit.SqlRunner;
 import com.yjc.snaphive.model.entity.Space;
@@ -35,16 +35,16 @@ public class DynamicShardingManager {
 
     private static final String LOGIC_TABLE_NAME = "picture";
 
-    private static final String DATABASE_NAME = "logic_db"; // 配置文件中的数据库名称
+    private static final String DATABASE_NAME = "logic_db"; // 配置文件中的数据库名�?
 
     @PostConstruct
     public void initialize() {
-        log.info("初始化动态分表配置...");
+        log.info("初始化动态分表配�?..");
         updateShardingTableNodes();
     }
 
     /**
-     * 获取所有动态表名，包括初始表 picture 和分表 picture_{spaceId}
+     * 获取所有动态表名，包括初始�?picture 和分�?picture_{spaceId}
      */
     private Set<String> fetchAllPictureTableNames() {
         // 为了测试方便，直接对所有团队空间分表（实际上线改为仅对旗舰版生效）
@@ -57,12 +57,12 @@ public class DynamicShardingManager {
         Set<String> tableNames = spaceIds.stream()
                 .map(spaceId -> LOGIC_TABLE_NAME + "_" + spaceId)
                 .collect(Collectors.toSet());
-        tableNames.add(LOGIC_TABLE_NAME); // 添加初始逻辑表
+        tableNames.add(LOGIC_TABLE_NAME); // 添加初始逻辑�?
         return tableNames;
     }
 
     /**
-     * 更新 ShardingSphere 的 actual-data-nodes 动态表名配置
+     * 更新 ShardingSphere �?actual-data-nodes 动态表名配�?
      */
     private void updateShardingTableNodes() {
         Set<String> tableNames = fetchAllPictureTableNames();
@@ -70,7 +70,7 @@ public class DynamicShardingManager {
         String newActualDataNodes = tableNames.stream()
                 .map(tableName -> "yuemu_picture." + tableName) // 确保前缀合法
                 .collect(Collectors.joining(","));
-        log.info("动态分表 actual-data-nodes 配置: {}", newActualDataNodes);
+        log.info("动态分�?actual-data-nodes 配置: {}", newActualDataNodes);
 
         ContextManager contextManager = getContextManager();
         ShardingSphereRuleMetaData ruleMetaData = contextManager.getMetaDataContexts()
@@ -101,17 +101,17 @@ public class DynamicShardingManager {
             contextManager.reloadDatabase(DATABASE_NAME);
             log.info("动态分表规则更新成功！");
         } else {
-            log.error("未找到 ShardingSphere 的分片规则配置，动态分表更新失败。");
+            log.error("未找�?ShardingSphere 的分片规则配置，动态分表更新失败�?);
         }
     }
 
     /**
-     * 动态创建空间图片分表
+     * 动态创建空间图片分�?
      *
      * @param space
      */
     public void createSpacePictureTable(Space space) {
-        // 仅为旗舰版团队空间创建分表
+        // 仅为旗舰版团队空间创建分�?
         if (space.getSpaceType() == SpaceTypeEnum.TEAM.getValue() && space.getSpaceLevel() == SpaceLevelEnum.FLAGSHIP.getValue()) {
             Long spaceId = space.getId();
             String tableName = LOGIC_TABLE_NAME + "_" + spaceId;
@@ -123,7 +123,7 @@ public class DynamicShardingManager {
                 updateShardingTableNodes();
             } catch (Exception e) {
                 e.printStackTrace();
-                log.error("创建图片空间分表失败，空间 id = {}", space.getId());
+                log.error("创建图片空间分表失败，空�?id = {}", space.getId());
             }
         }
     }

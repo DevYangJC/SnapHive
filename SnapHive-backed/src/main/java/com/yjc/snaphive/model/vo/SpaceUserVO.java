@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.vo;
+﻿package com.yjc.snaphive.model.vo;
 
 import com.yjc.snaphive.model.entity.SpaceUser;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 空间成员响应类
+ * 空间成员响应�?
  */
 @Data
 public class SpaceUserVO implements Serializable {
@@ -54,7 +54,7 @@ public class SpaceUserVO implements Serializable {
     private SpaceVO space;
 
     /**
-     * 审核状态：0-待审核 1-通过 2-拒绝
+     * 审核状态：0-待审�?1-通过 2-拒绝
      */
     private Integer status;
 

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -16,7 +16,7 @@ public class SearchKeyword {
     private String id;
 
     /**
-     * 搜索关键词
+     * 搜索关键�?
      */
     @Field(type = FieldType.Text, analyzer = "ik_max_word")
     private String keyword;

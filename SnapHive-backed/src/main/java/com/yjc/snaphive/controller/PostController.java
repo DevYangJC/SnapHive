@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.common.BaseResponse;
@@ -102,7 +102,7 @@ public class PostController {
      */
     @GetMapping("/get/{id}")
     public BaseResponse<Post> getPostById(@PathVariable Long id, HttpServletRequest request) {
-        // 检测爬虫
+        // 检测爬�?
         crawlerManager.detectNormalRequest(request);
 
         User loginUser = userService.getLoginUser(request);
@@ -145,7 +145,7 @@ public class PostController {
         LikeRequest likeRequest = new LikeRequest();
         likeRequest.setTargetId(id);
         likeRequest.setTargetType(2);  // 2表示帖子类型
-        likeRequest.setIsLiked(true);  // 自动判断是点赞还是取消
+        likeRequest.setIsLiked(true);  // 自动判断是点赞还是取�?
 
         likeRecordService.doLike(likeRequest, loginUser.getId());
         return ResultUtils.success(true);
@@ -163,7 +163,7 @@ public class PostController {
     }
 
     /**
-     * 获取当前用户的所有帖子
+     * 获取当前用户的所有帖�?
      */
     @PostMapping("/my/list")
     public BaseResponse<Page<Post>> listMyPosts(@RequestBody PostQueryRequest postQueryRequest,
@@ -179,12 +179,12 @@ public class PostController {
     }
 
     /**
-     * 获取关注用户的帖子列表
+     * 获取关注用户的帖子列�?
      */
     @PostMapping("/follow")
     public BaseResponse<Page<Post>> getFollowPosts(@RequestBody PostQueryRequest postQueryRequest,
                                                    HttpServletRequest request) {
-        // 检测爬虫
+        // 检测爬�?
         crawlerManager.detectNormalRequest(request);
         return ResultUtils.success(postService.getFollowPosts(request, postQueryRequest));
     }
@@ -194,23 +194,23 @@ public class PostController {
      */
     @GetMapping("/top100/{id}")
     public BaseResponse<List<Post>> getTop100Post(@PathVariable Long id, HttpServletRequest request) {
-        // 检测爬虫
+        // 检测爬�?
         crawlerManager.detectNormalRequest(request);
 
-        // 构建 Redis 缓存的 key
+        // 构建 Redis 缓存�?key
         String cacheKey = RedisConstant.TOP_100_POST_REDIS_KEY_PREFIX + id;
 
-        // 先从 Redis 缓存中获取数据
+        // 先从 Redis 缓存中获取数�?
         String cachedValue = stringRedisTemplate.opsForValue().get(cacheKey);
         if (cachedValue != null) {
             List<Post> postList = JSONUtil.toList(cachedValue, Post.class);
             return ResultUtils.success(postList);
         }
 
-        // 缓存未命中，调用服务层方法获取数据
+        // 缓存未命中，调用服务层方法获取数�?
         List<Post> postList = postService.getTop100Post(id);
 
-        // 设置缓存，添加随机过期时间防止缓存雪崩
+        // 设置缓存，添加随机过期时间防止缓存雪�?
         int cacheExpireTime = (int) (RedisConstant.TOP_100_POST_REDIS_KEY_EXPIRE_TIME
                 + RandomUtil.randomInt(0, 6000));
         stringRedisTemplate.opsForValue().set(cacheKey, JSONUtil.toJsonStr(postList),

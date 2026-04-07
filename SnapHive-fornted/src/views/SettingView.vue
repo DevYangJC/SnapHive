@@ -93,7 +93,7 @@
                     <div class="icon-wrapper about-bg">
                       <InfoCircleOutlined class="button-icon" />
                     </div>
-                    <span class="button-text">关于悦木</span>
+                    <span class="button-text">关于SnapHive</span>
                   </div>
                 </a-button>
 
@@ -269,19 +269,19 @@
           </template>
         </a-modal>
 
-        <!-- 关于悦木模态框 -->
+        <!-- 关于SnapHive模态框 -->
         <div v-if="aboutUsOpen" class="custom-modal about-modal">
           <div class="modal-overlay" @click="aboutUsOpen = false"></div>
           <div class="modal-container">
             <div class="modal-header">
-              <h3>关于悦木</h3>
+              <h3>关于SnapHive</h3>
               <div class="close-btn" @click="aboutUsOpen = false">×</div>
             </div>
 
             <div class="modal-body">
               <div class="about-content">
                 <div class="brand-section">
-                  <h2 class="app-name">悦木图片分享</h2>
+                  <h2 class="app-name">SnapHive图片分享</h2>
                   <p class="version">Version 1.0.0</p>
                   <div class="brand-divider"></div>
                 </div>
@@ -293,7 +293,7 @@
                 </div>
 
                 <div class="footer-section">
-                  <p class="copyright">© {{ currentYear }} 鹿梦. All rights reserved.</p>
+                  <p class="copyright">© {{ currentYear }} SnapHive. All rights reserved.</p>
                   <a href="https://beian.miit.gov.cn/" target="_blank" class="icp-link">
                     陇ICP备2024012699号
                   </a>

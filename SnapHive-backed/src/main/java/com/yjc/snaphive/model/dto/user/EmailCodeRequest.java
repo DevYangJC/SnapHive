@@ -1,11 +1,11 @@
-package com.yjc.snaphive.model.dto.user;
+﻿package com.yjc.snaphive.model.dto.user;
 
 import lombok.Data;
 
 import java.io.Serializable;
 
 /**
- * 邮箱验证码请求
+ * 邮箱验证码请�?
  */
 @Data
 public class EmailCodeRequest implements Serializable {

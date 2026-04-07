@@ -11,7 +11,7 @@
       </div>
       <div class="footer-content">
         <p class="copyright">
-          © {{ currentYear }} 鹿梦. All rights reserved. <span style="width: 10px"></span>
+          © {{ currentYear }} SnapHive. All rights reserved. <span style="width: 10px"></span>
           <a href="https://beian.miit.gov.cn/" target="_blank">陇ICP备2024012699号</a>
         </p>
         <div class="disclaimer" :class="{ 'disclaimer-expanded': isFooterExpanded }">

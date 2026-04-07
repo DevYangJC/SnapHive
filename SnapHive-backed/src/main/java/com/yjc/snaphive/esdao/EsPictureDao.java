@@ -1,4 +1,4 @@
-package com.yjc.snaphive.esdao;
+﻿package com.yjc.snaphive.esdao;
 
 import com.yjc.snaphive.model.entity.es.EsPicture;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
@@ -20,12 +20,12 @@ public interface EsPictureDao extends ElasticsearchRepository<EsPicture, Long> {
     List<EsPicture> findByUserId(Long userId);
 
     /**
-     * 根据审核状态查询图片
+     * 根据审核状态查询图�?
      */
     List<EsPicture> findByReviewStatus(Integer reviewStatus);
 
     /**
-     * 根据名称或简介模糊查询
+     * 根据名称或简介模糊查�?
      */
     List<EsPicture> findByNameContainingOrIntroductionContaining(String name, String introduction);
 

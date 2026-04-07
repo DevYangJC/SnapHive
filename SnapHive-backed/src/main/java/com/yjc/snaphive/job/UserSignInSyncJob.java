@@ -1,4 +1,4 @@
-package com.yjc.snaphive.job;
+﻿package com.yjc.snaphive.job;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -34,8 +34,8 @@ public class UserSignInSyncJob {
     private UserMapper userMapper;
 
     /**
-     * 测试环境：0 *除1 * * * ?每2分钟执行一次同步任务
-     * 生产环境: 0 0 2 1 * ? (每月1号凌晨2点执行)
+     * 测试环境�? *�? * * * ?�?分钟执行一次同步任�?
+     * 生产环境: 0 0 2 1 * ? (每月1号凌�?点执�?
      */
     @Scheduled(cron = "0 0 2 1 * ?")
     @Transactional(rollbackFor = Exception.class)
@@ -45,9 +45,9 @@ public class UserSignInSyncJob {
 
             // 获取当前年份（改为同步当前年份的数据，因为用户正在使用的是当前年份）
             int year = LocalDate.now().getYear();
-            log.info("开始同步 {} 年的签到记录", year);
+            log.info("开始同�?{} 年的签到记录", year);
 
-            // 获取所有用户
+            // 获取所有用�?
             List<User> userList = userMapper.selectList(null);
             if (CollUtil.isEmpty(userList)) {
                 log.info("没有需要同步的用户数据");
@@ -65,7 +65,7 @@ public class UserSignInSyncJob {
 
                     RBitSet signInBitSet = redissonClient.getBitSet(redisKey);
                     if (!signInBitSet.isExists()) {
-                        log.debug("用户ID: {} 在Redis中没有签到记录", user.getId());
+                        log.debug("用户ID: {} 在Redis中没有签到记�?, user.getId());
                         continue;
                     }
 
@@ -83,7 +83,7 @@ public class UserSignInSyncJob {
                         record.setId(IdWorker.getId());
                         record.setUserId(user.getId());
                         record.setYear(year);
-                        record.setSignInData(new byte[46]); // 初始化366天的bitmap
+                        record.setSignInData(new byte[46]); // 初始�?66天的bitmap
                         isNewRecord = true;
                         log.info("为用户ID: {} 创建新的签到记录", user.getId());
                     }
@@ -108,23 +108,23 @@ public class UserSignInSyncJob {
                         try {
                             if (isNewRecord) {
                                 userSignInRecordMapper.insert(record);
-                                log.info("用户ID: {} 插入新的签到记录，共 {} 条签到", user.getId(), userRecords);
+                                log.info("用户ID: {} 插入新的签到记录，共 {} 条签�?, user.getId(), userRecords);
                             } else {
                                 userSignInRecordMapper.updateById(record);
-                                log.info("用户ID: {} 更新签到记录，共 {} 条签到", user.getId(), userRecords);
+                                log.info("用户ID: {} 更新签到记录，共 {} 条签�?, user.getId(), userRecords);
                             }
                         } catch (Exception e) {
-                            log.error("保存用户ID: {} 的签到记录失败: {}", user.getId(), e.getMessage(), e);
+                            log.error("保存用户ID: {} 的签到记录失�? {}", user.getId(), e.getMessage(), e);
                             throw e;
                         }
                     }
                 } catch (Exception e) {
                     log.error("处理用户ID: {} 的签到记录时发生错误: {}", user.getId(), e.getMessage(), e);
-                    throw e; // 抛出异常以触发事务回滚
+                    throw e; // 抛出异常以触发事务回�?
                 }
             }
 
-            log.info("{} 年签到记录同步完成, 总处理用户数: {}, 总同步记录数: {}",
+            log.info("{} 年签到记录同步完�? 总处理用户数: {}, 总同步记录数: {}",
                     year, totalUsers, totalRecords);
         } catch (Exception e) {
             log.error("签到记录同步任务执行失败: {}", e.getMessage(), e);

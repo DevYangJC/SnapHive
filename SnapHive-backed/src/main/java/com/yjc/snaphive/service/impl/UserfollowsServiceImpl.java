@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author 鹿梦
+ * @author SnapHive
  * @description 针对表【userfollows】的数据库操作Service实现
  * @createDate 2025-01-14 20:49:17
  */
@@ -55,9 +55,9 @@ public class UserfollowsServiceImpl extends ServiceImpl<UserfollowsMapper, Userf
         ThrowUtils.throwIf(followerId == null || followingId == null || followStatus == null,
                 ErrorCode.PARAMS_ERROR, "参数不能为空");
         ThrowUtils.throwIf(followStatus != 0 && followStatus != 1,
-                ErrorCode.PARAMS_ERROR, "关注状态只能是0或1");
+                ErrorCode.PARAMS_ERROR, "关注状态只能是0�?");
 
-        // 查询是否已存在关注记录
+        // 查询是否已存在关注记�?
         QueryWrapper<Userfollows> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("followerId", followerId)
                 .eq("followingId", followingId)
@@ -77,7 +77,7 @@ public class UserfollowsServiceImpl extends ServiceImpl<UserfollowsMapper, Userf
             }
             userFollows.setFollowStatus(1);
 
-            // 检查是否存在反向关注
+            // 检查是否存在反向关�?
             QueryWrapper<Userfollows> reverseQuery = new QueryWrapper<>();
             reverseQuery.eq("followerId", followingId)
                     .eq("followingId", followerId)
@@ -87,7 +87,7 @@ public class UserfollowsServiceImpl extends ServiceImpl<UserfollowsMapper, Userf
             boolean isMutual = this.count(reverseQuery) > 0;
             userFollows.setIsMutual(isMutual ? 1 : 0);
 
-            // 如果形成了双向关注，更新两条记录的互关状态
+            // 如果形成了双向关注，更新两条记录的互关状�?
             if (isMutual) {
                 this.update()
                         .set("isMutual", 1)
@@ -97,7 +97,7 @@ public class UserfollowsServiceImpl extends ServiceImpl<UserfollowsMapper, Userf
                         .eq("isDelete", 0)
                         .update();
 
-                // 更新私聊类型为好友
+                // 更新私聊类型为好�?
                 privateChatService.updateChatType(followerId, followingId, true);
             }
         } else {
@@ -106,7 +106,7 @@ public class UserfollowsServiceImpl extends ServiceImpl<UserfollowsMapper, Userf
                 userFollows.setFollowStatus(0);
                 userFollows.setIsMutual(0);
 
-                // 更新对方的互关状态
+                // 更新对方的互关状�?
                 this.update()
                         .set("isMutual", 0)
                         .eq("followerId", followingId)
@@ -115,7 +115,7 @@ public class UserfollowsServiceImpl extends ServiceImpl<UserfollowsMapper, Userf
                         .eq("isDelete", 0)
                         .update();
 
-                // 更新私聊类型为普通私信
+                // 更新私聊类型为普通私�?
                 privateChatService.updateChatType(followerId, followingId, false);
             }
         }
@@ -135,7 +135,7 @@ public class UserfollowsServiceImpl extends ServiceImpl<UserfollowsMapper, Userf
         Long followingId = userfollowsQueryRequest.getFollowingId();
         int searchType = userfollowsQueryRequest.getSearchType();
 
-        // 对current和pageSize进行非空和合理性判断
+        // 对current和pageSize进行非空和合理性判�?
         if (current <= 0) {
             current = 1;
         }
@@ -176,7 +176,7 @@ public class UserfollowsServiceImpl extends ServiceImpl<UserfollowsMapper, Userf
 
         List<UserVO> userVOList = userService.getUserVOList(userList);
 
-        // 将分页信息设置到 Page 对象中
+        // 将分页信息设置到 Page 对象�?
         Page<UserVO> page = new Page<>(current, pageSize);
         page.setRecords(userVOList);
         page.setTotal(userfollowsPage.getTotal());
@@ -242,26 +242,26 @@ public class UserfollowsServiceImpl extends ServiceImpl<UserfollowsMapper, Userf
     }
 
     public boolean checkMutualFollow(Long userId1, Long userId2) {
-        // 检查用户 1 关注用户 2 的记录是否存在
+        // 检查用�?1 关注用户 2 的记录是否存�?
         QueryWrapper<Userfollows> queryWrapper1 = new QueryWrapper<>();
         queryWrapper1.eq("followerId", userId1);
         queryWrapper1.eq("followingId", userId2);
         Userfollows follow1 = this.getOne(queryWrapper1);
 
-        // 检查用户 2 关注用户 1 的记录是否存在
+        // 检查用�?2 关注用户 1 的记录是否存�?
         QueryWrapper<Userfollows> queryWrapper2 = new QueryWrapper<>();
         queryWrapper2.eq("followerId", userId2);
         queryWrapper2.eq("followingId", userId1);
         Userfollows follow2 = this.getOne(queryWrapper2);
 
-        // 当用户 1 关注用户 2 且用户 2 关注用户 1 时，认为是双向关注
+        // 当用�?1 关注用户 2 且用�?2 关注用户 1 时，认为是双向关�?
         return follow1!= null && follow2!= null;
     }
 
     private void updateMutualFollow(Long userId1, Long userId2) {
         Date now = new Date();
 
-        // 更新用户 1 关注用户 2 的记录
+        // 更新用户 1 关注用户 2 的记�?
         QueryWrapper<Userfollows> queryWrapper1 = new QueryWrapper<>();
         queryWrapper1.eq("followerId", userId1);
         queryWrapper1.eq("followingId", userId2);
@@ -270,7 +270,7 @@ public class UserfollowsServiceImpl extends ServiceImpl<UserfollowsMapper, Userf
         updateUserfollows1.setLastInteractionTime(now);
         this.update(updateUserfollows1, queryWrapper1);
 
-        // 更新用户 2 关注用户 1 的记录
+        // 更新用户 2 关注用户 1 的记�?
         QueryWrapper<Userfollows> queryWrapper2 = new QueryWrapper<>();
         queryWrapper2.eq("followerId", userId2);
         queryWrapper2.eq("followingId", userId1);

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.user;
+﻿package com.yjc.snaphive.model.dto.user;
 
 import lombok.Data;
 
@@ -12,11 +12,11 @@ public class UserModifyPassWord implements Serializable {
     private Long id;
 
     /**
-     * 原密码
+     * 原密�?
      */
     private String oldPassword;
     /**
-     * 新密码
+     * 新密�?
      */
     private String newPassword;
     /**

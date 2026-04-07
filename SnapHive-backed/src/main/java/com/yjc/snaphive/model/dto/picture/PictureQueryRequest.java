@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.picture;
+﻿package com.yjc.snaphive.model.dto.picture;
 
 
 import com.yjc.snaphive.common.PageRequest;
@@ -27,7 +27,7 @@ public class PictureQueryRequest extends PageRequest implements Serializable {
     private String name;
 
     /**
-     * 简介
+     * 简�?
      */
     private String introduction;
 
@@ -41,7 +41,7 @@ public class PictureQueryRequest extends PageRequest implements Serializable {
      */
     private Long spaceId;
     /**
-     * 是否只查询 spaceId 为 null 的数据
+     * 是否只查�?spaceId �?null 的数�?
      */
     private boolean nullSpaceId;
     /**
@@ -75,7 +75,7 @@ public class PictureQueryRequest extends PageRequest implements Serializable {
     private String picFormat;
 
     /**
-     * 搜索词（同时搜名称、简介等）
+     * 搜索词（同时搜名称、简介等�?
      */
     private String searchText;
 
@@ -84,12 +84,12 @@ public class PictureQueryRequest extends PageRequest implements Serializable {
      */
     private Long userId;
     /**
-     * 审核状态：0-待审核; 1-通过; 2-拒绝
+     * 审核状态：0-待审�? 1-通过; 2-拒绝
      */
     private Integer reviewStatus;
 
     /**
-     * 图片主色调
+     * 图片主色�?
      */
     private String picColor;
 
@@ -99,12 +99,12 @@ public class PictureQueryRequest extends PageRequest implements Serializable {
     private String reviewMessage;
 
     /**
-     * 审核人 ID
+     * 审核�?ID
      */
     private Long reviewerId;
 
     /*
-     * 开始编辑时间
+     * 开始编辑时�?
      */
     private Date startEditTime;
 

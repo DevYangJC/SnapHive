@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket.disruptor;
+﻿package com.yjc.snaphive.manager.websocket.disruptor;
 
 import cn.hutool.json.JSONUtil;
 import com.lmax.disruptor.WorkHandler;
@@ -34,7 +34,7 @@ public class PictureEditEventWorkHandler implements WorkHandler<PictureEditEvent
         WebSocketSession session = pictureEditEvent.getSession();
         User user = pictureEditEvent.getUser();
         Long pictureId = pictureEditEvent.getPictureId();
-        // 获取到消息类别
+        // 获取到消息类�?
         String type = pictureEditRequestMessage.getType();
         PictureEditMessageTypeEnum pictureEditMessageTypeEnum = PictureEditMessageTypeEnum.getEnumByValue(type);
         // 根据消息类型处理消息
@@ -49,7 +49,7 @@ public class PictureEditEventWorkHandler implements WorkHandler<PictureEditEvent
                 pictureEditHandler.handleEditActionMessage(pictureEditRequestMessage, session, user, pictureId);
                 break;
             default:
-                // 其他消息类型，返回错误提示
+                // 其他消息类型，返回错误提�?
                 PictureEditResponseMessage pictureEditResponseMessage = new PictureEditResponseMessage();
                 pictureEditResponseMessage.setType(PictureEditMessageTypeEnum.ERROR.getValue());
                 pictureEditResponseMessage.setMessage("消息类型错误");

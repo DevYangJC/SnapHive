@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.like;
+﻿package com.yjc.snaphive.model.dto.like;
 
 import com.yjc.snaphive.common.PageRequest;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 public class LikeQueryRequest extends PageRequest implements Serializable {
     /**
-     * 目标类型：1-图片 2-帖子
+     * 目标类型�?-图片 2-帖子
      */
     private Integer targetType;
 

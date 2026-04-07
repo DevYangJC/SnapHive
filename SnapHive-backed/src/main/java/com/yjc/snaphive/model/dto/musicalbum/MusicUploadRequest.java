@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.musicalbum;
+﻿package com.yjc.snaphive.model.dto.musicalbum;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,7 +32,7 @@ public class MusicUploadRequest implements Serializable {
     private String description;
 
     /**
-     * 艺术家
+     * 艺术�?
      */
     private String artist;
 

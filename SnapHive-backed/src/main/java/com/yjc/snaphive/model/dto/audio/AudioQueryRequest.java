@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.audio;
+﻿package com.yjc.snaphive.model.dto.audio;
 
 import com.yjc.snaphive.common.PageRequest;
 import lombok.Data;
@@ -19,7 +19,7 @@ public class AudioQueryRequest extends PageRequest implements Serializable {
     private String title;
 
     /**
-     * 艺术家/作者
+     * 艺术�?作�?
      */
     private String artist;
 
@@ -49,7 +49,7 @@ public class AudioQueryRequest extends PageRequest implements Serializable {
     private String sortField;
 
     /**
-     * 排序顺序（ascend 升序 / descend 降序）
+     * 排序顺序（ascend 升序 / descend 降序�?
      */
     private String sortOrder;
 

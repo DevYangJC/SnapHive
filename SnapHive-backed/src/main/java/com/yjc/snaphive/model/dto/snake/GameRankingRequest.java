@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.snake;
+﻿package com.yjc.snaphive.model.dto.snake;
 
 import lombok.Data;
 

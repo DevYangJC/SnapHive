@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.common.BaseResponse;
@@ -58,19 +58,19 @@ public class MessageController {
                                                          HttpServletRequest request) {
         String ip = getIpAddress(request);
         if (!rateLimiter.allowMessageQuery(ip)) {
-            return (BaseResponse<Page<Message>>) ResultUtils.error(ErrorCode.TOO_MANY_REQUEST, "查询太频繁，请稍后再试");
+            return (BaseResponse<Page<Message>>) ResultUtils.error(ErrorCode.TOO_MANY_REQUEST, "查询太频繁，请稍后再�?);
         }
         return ResultUtils.success(messageService.page(messageQueryRequest));
     }
 
     /**
-     * 获取时间排名前500的留言
+     * 获取时间排名�?00的留言
      */
     @PostMapping("/getTop500")
     public BaseResponse<List<MessageVO>> getTop500(HttpServletRequest request) {
         String ip = getIpAddress(request);
         if (!rateLimiter.allowMessageQuery(ip)) {
-            return (BaseResponse<List<MessageVO>>) ResultUtils.error(ErrorCode.TOO_MANY_REQUEST, "查询太频繁，请稍后再试");
+            return (BaseResponse<List<MessageVO>>) ResultUtils.error(ErrorCode.TOO_MANY_REQUEST, "查询太频繁，请稍后再�?);
         }
         return ResultUtils.success(messageService.getTop500());
     }

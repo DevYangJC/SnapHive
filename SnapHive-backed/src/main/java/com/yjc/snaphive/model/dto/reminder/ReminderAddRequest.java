@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.reminder;
+﻿package com.yjc.snaphive.model.dto.reminder;
 
 import lombok.Data;
 

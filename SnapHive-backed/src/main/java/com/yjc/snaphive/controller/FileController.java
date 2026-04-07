@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.qcloud.cos.model.COSObject;
 import com.qcloud.cos.model.COSObjectInputStream;
@@ -75,7 +75,7 @@ public class FileController {
             COSObject cosObject = cosManager.getObject(filepath);
             cosObjectInput = cosObject.getObjectContent();
             byte[] bytes = IOUtils.toByteArray(cosObjectInput);
-            // 设置响应头
+            // 设置响应�?
             response.setContentType("application/octet-stream;charset=UTF-8");
             response.setHeader("Content-Disposition", "attachment; filename=" + filepath);
             // 写入响应
@@ -85,7 +85,7 @@ public class FileController {
             log.error("file download error, filepath = " + filepath, e);
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "下载失败");
         } finally {
-            // 释放流
+            // 释放�?
             if (cosObjectInput != null) {
                 cosObjectInput.close();
             }

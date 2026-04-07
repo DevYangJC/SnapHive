@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.picture;
+﻿package com.yjc.snaphive.model.dto.picture;
 
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class SearchPictureByColorRequest implements Serializable {
 
     /**
-     * 图片主色调
+     * 图片主色�?
      */
     private String picColor;
 

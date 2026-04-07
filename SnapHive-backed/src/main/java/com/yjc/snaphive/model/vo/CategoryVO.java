@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.vo;
+﻿package com.yjc.snaphive.model.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
@@ -20,7 +20,7 @@ public class CategoryVO implements Serializable {
     private String categoryName;
 
     /**
-     * 分类类型：0-图片分类 1-帖子分类
+     * 分类类型�?-图片分类 1-帖子分类
      */
     private Integer type;
 

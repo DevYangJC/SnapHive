@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 
 import com.yjc.snaphive.common.BaseResponse;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
 
     /**
-     * 健康检查
+     * 健康检�?
      */
     @GetMapping("/health")
     public BaseResponse<String> health() {

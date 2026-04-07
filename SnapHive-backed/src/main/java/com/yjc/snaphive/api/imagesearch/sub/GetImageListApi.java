@@ -1,4 +1,4 @@
-package com.yjc.snaphive.api.imagesearch.sub;
+﻿package com.yjc.snaphive.api.imagesearch.sub;
 
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 
 /**
- * 获取图片列表（step 3）
+ * 获取图片列表（step 3�?
  */
 @Slf4j
 public class GetImageListApi {
@@ -35,7 +35,7 @@ public class GetImageListApi {
 
             // 处理响应
             if (statusCode == 200) {
-                // 解析 JSON 数据并处理
+                // 解析 JSON 数据并处�?
                 return processResponse(body);
             } else {
                 throw new BusinessException(ErrorCode.OPERATION_ERROR, "接口调用失败");
@@ -49,7 +49,7 @@ public class GetImageListApi {
     /**
      * 处理接口响应内容
      *
-     * @param responseBody 接口返回的JSON字符串
+     * @param responseBody 接口返回的JSON字符�?
      */
     private static List<ImageSearchResult> processResponse(String responseBody) {
         // 解析响应对象

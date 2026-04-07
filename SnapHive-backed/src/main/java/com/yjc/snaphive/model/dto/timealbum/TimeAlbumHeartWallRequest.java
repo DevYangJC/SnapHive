@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.timealbum;
+﻿package com.yjc.snaphive.model.dto.timealbum;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;

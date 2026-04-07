@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 恋爱画板实体类
+ * 恋爱画板实体�?
  */
 @TableName(value = "love_board")
 @Data
@@ -55,12 +55,12 @@ public class LoveBoard implements Serializable {
     private String timing;
 
     /**
-     * 倒计时标题
+     * 倒计时标�?
      */
     private String countdownTitle;
 
     /**
-     * 倒计时时间
+     * 倒计时时�?
      */
     private String countdownTime;
 
@@ -75,7 +75,7 @@ public class LoveBoard implements Serializable {
     private String familyInfo;
 
     /**
-     * 点赞数
+     * 点赞�?
      */
     private Long likeCount;
 

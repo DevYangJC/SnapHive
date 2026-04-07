@@ -1,4 +1,4 @@
-package com.yjc.snaphive.job;
+﻿package com.yjc.snaphive.job;
 
 import cn.hutool.core.util.RandomUtil;
 import com.yjc.snaphive.constant.RedisConstant;
@@ -26,11 +26,11 @@ public class PictureCacheWarmUpJob {
 
     /**
      * 定时更新图片榜单数据
-     * 每半小时执行一次 (0分和30分)
+     * 每半小时执行一�?(0分和30�?
      */
     @Scheduled(cron = "0 0/30 * * * ?")
     public void warmUpTop100Cache() {
-        log.info("开始更新图片榜单数据");
+        log.info("开始更新图片榜单数�?);
         try {
             // 预热四种榜单：日榜、周榜、月榜、总榜
             for (long i = 1; i <= 4; i++) {
@@ -38,7 +38,7 @@ public class PictureCacheWarmUpJob {
 
                 List<PictureVO> pictureVOList = pictureService.getTop100Picture(i);
 
-                // 更新缓存，设置过期时间为35分钟（比更新间隔多5分钟）
+                // 更新缓存，设置过期时间为35分钟（比更新间隔�?分钟�?
                 int cacheExpireTime = 35 * 60 + RandomUtil.randomInt(0, 300);
                 stringRedisTemplate.opsForValue().set(
                     cacheKey,
@@ -61,13 +61,13 @@ public class PictureCacheWarmUpJob {
     private String getRankName(long rankId) {
         switch ((int) rankId) {
             case 1:
-                return "日";
+                return "�?;
             case 2:
-                return "周";
+                return "�?;
             case 3:
-                return "月";
+                return "�?;
             case 4:
-                return "总";
+                return "�?;
             default:
                 return "未知";
         }

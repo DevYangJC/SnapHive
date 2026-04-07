@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -22,27 +22,27 @@ public interface LikeRecordService extends IService<LikeRecord> {
     List<LikeRecordVO> getAndClearUnreadLikes(Long userId);
 
     /**
-     * 获取用户的点赞历史（分页）
+     * 获取用户的点赞历史（分页�?
      */
     Page<LikeRecordVO> getUserLikeHistory(LikeQueryRequest likeQueryRequest, Long userId);
 
     /**
-     * 检查内容是否已被用户点赞
+     * 检查内容是否已被用户点�?
      */
     boolean isContentLiked(Long targetId, Integer targetType, Long userId);
 
     /**
-     * 获取用户未读点赞数
+     * 获取用户未读点赞�?
      */
     long getUnreadLikesCount(Long userId);
 
     /**
-     * 清除用户所有未读点赞状态
+     * 清除用户所有未读点赞状�?
      */
     void clearAllUnreadLikes(Long userId);
 
     /**
-     * 获取用户自己的点赞历史（分页）
+     * 获取用户自己的点赞历史（分页�?
      */
     Page<LikeRecordVO> getMyLikeHistory(LikeQueryRequest likeQueryRequest, Long userId);
 

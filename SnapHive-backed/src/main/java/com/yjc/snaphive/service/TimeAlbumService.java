@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yjc.snaphive.model.dto.timealbum.TimeAlbumHeartWallRequest;
@@ -51,14 +51,14 @@ public interface TimeAlbumService extends IService<TimeAlbum> {
     TimeAlbum getTimeAlbumById(long id, Long userId, String password);
 
     /**
-     * 上传爱心墙图片
+     * 上传爱心墙图�?
      * @param request 上传请求
      * @param loginUserId 当前登录用户ID
-     * @return 上传的图片列表
+     * @return 上传的图片列�?
      */
     List<PictureVO> uploadHeartWallPictures(TimeAlbumHeartWallRequest request, long loginUserId);
     /**
-     * 获取爱心墙图片列表
+     * 获取爱心墙图片列�?
      * @param albumId 相册ID
      * @param userId 用户ID（可选）
      * @param password 访问密码（非所有者访问私密相册时需要）
@@ -67,7 +67,7 @@ public interface TimeAlbumService extends IService<TimeAlbum> {
     List<Picture> getHeartWallPictures(long albumId, Long userId, String password);
 
     /**
-     * 删除爱心墙照片
+     * 删除爱心墙照�?
      * @param pictureId 照片ID
      * @param albumId 相册ID
      * @param loginUser 当前登录用户
@@ -78,7 +78,7 @@ public interface TimeAlbumService extends IService<TimeAlbum> {
     /**
      * 设置相册密码
      * @param albumId 相册ID
-     * @param password 新密码
+     * @param password 新密�?
      * @param loginUserId 当前登录用户ID
      * @return 是否成功
      */
@@ -87,8 +87,8 @@ public interface TimeAlbumService extends IService<TimeAlbum> {
     /**
      * 修改相册密码
      * @param albumId 相册ID
-     * @param oldPassword 原密码
-     * @param newPassword 新密码
+     * @param oldPassword 原密�?
+     * @param newPassword 新密�?
      * @param loginUserId 当前登录用户ID
      * @return 是否成功
      */

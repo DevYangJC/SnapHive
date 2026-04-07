@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.auth.model;
+﻿package com.yjc.snaphive.manager.auth.model;
 
 /**
  * 空间成员权限常量

@@ -1,11 +1,11 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yjc.snaphive.model.entity.MessageBoard;
 
 /**
- * 祝福板服务接口
+ * 祝福板服务接�?
  */
 public interface MessageBoardService extends IService<MessageBoard> {
 
@@ -20,7 +20,7 @@ public interface MessageBoardService extends IService<MessageBoard> {
     /**
      * 分页获取祝福列表
      *
-     * @param current 当前页
+     * @param current 当前�?
      * @param size    每页大小
      * @param ownerId 祝福板主人ID
      * @return 祝福列表
@@ -36,10 +36,10 @@ public interface MessageBoardService extends IService<MessageBoard> {
     boolean likeMessage(Long id);
 
     /**
-     * 修改祝福状态
+     * 修改祝福状�?
      *
      * @param id     祝福ID
-     * @param status 状态 0-隐藏 1-显示
+     * @param status 状�?0-隐藏 1-显示
      * @return 是否成功
      */
     boolean updateMessageStatus(Long id, Integer status);

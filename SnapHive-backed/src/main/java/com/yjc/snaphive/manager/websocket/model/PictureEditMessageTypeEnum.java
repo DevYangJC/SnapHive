@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.websocket.model;
+﻿package com.yjc.snaphive.manager.websocket.model;
 
 import lombok.Getter;
 
@@ -9,9 +9,9 @@ import lombok.Getter;
 public enum PictureEditMessageTypeEnum {
 
     INFO("发送通知", "INFO"),
-    ERROR("发送错误", "ERROR"),
-    ENTER_EDIT("进入编辑状态", "ENTER_EDIT"),
-    EXIT_EDIT("退出编辑状态", "EXIT_EDIT"),
+    ERROR("发送错�?, "ERROR"),
+    ENTER_EDIT("进入编辑状�?, "ENTER_EDIT"),
+    EXIT_EDIT("退出编辑状�?, "EXIT_EDIT"),
     EDIT_ACTION("执行编辑操作", "EDIT_ACTION");
 
     private final String text;

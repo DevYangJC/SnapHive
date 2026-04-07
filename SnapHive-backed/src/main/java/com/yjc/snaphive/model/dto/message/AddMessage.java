@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.message;
+﻿package com.yjc.snaphive.model.dto.message;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

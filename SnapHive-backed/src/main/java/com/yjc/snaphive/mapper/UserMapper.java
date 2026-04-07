@@ -1,11 +1,11 @@
-package com.yjc.snaphive.mapper;
+﻿package com.yjc.snaphive.mapper;
 
 import com.yjc.snaphive.model.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Select;
 
 /**
-* @author 鹿梦
+* @author SnapHive
 * @description 针对表【user(用户)】的数据库操作Mapper
 * @createDate 2024-12-10 10:39:52
 * @Entity generator.domain.User

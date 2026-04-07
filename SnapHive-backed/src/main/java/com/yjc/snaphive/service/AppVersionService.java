@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yjc.snaphive.model.entity.AppVersion;
@@ -8,12 +8,12 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 public interface AppVersionService extends IService<AppVersion> {
     /**
-     * 获取最新版本信息
+     * 获取最新版本信�?
      */
     AppVersion getLatestVersion();
 
     /**
-     * 上传新版本
+     * 上传新版�?
      */
     void uploadNewVersion(MultipartFile file, AppVersion appVersion, User loginUser);
 

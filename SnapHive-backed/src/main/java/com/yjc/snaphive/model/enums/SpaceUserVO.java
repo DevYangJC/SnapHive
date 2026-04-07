@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.enums;
+﻿package com.yjc.snaphive.model.enums;
 
 import com.yjc.snaphive.model.entity.SpaceUser;
 import com.yjc.snaphive.model.vo.SpaceVO;
@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 空间成员响应类
+ * 空间成员响应�?
  */
 @Data
 public class SpaceUserVO implements Serializable {

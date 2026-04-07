@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -10,8 +10,8 @@ import com.yjc.snaphive.model.entity.User;
 import javax.servlet.http.HttpServletRequest;
 
 /**
-* @author 鹿梦
-* @description 针对表【activity(活动表)】的数据库操作Service
+* @author SnapHive
+* @description 针对表【activity(活动�?】的数据库操作Service
 * @createDate 2024-03-20
 */
 public interface ActivityService extends IService<Activity> {
@@ -36,12 +36,12 @@ public interface ActivityService extends IService<Activity> {
     Activity getActivityDetail(Long id, User loginUser, HttpServletRequest request);
 
     /**
-     * 获取活动浏览量
+     * 获取活动浏览�?
      */
     long getViewCount(Long activityId);
 
     /**
-     * 填充活动信息（用户、附件等）
+     * 填充活动信息（用户、附件等�?
      */
     void fillActivityInfo(Activity activity);
 

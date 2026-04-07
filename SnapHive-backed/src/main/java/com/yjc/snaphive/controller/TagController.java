@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -26,7 +26,7 @@ public class TagController {
     @Resource
     private TagService tagService;
     /**
-     * 获取所有标签
+     * 获取所有标�?
      */
     @PostMapping("list/page/vo")
     @AuthCheck(mustRole = UserConstant.ADMIN_ROLE)

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -35,7 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 时光相册服务实现类
+ * 时光相册服务实现�?
  */
 @Service
 public class TimeAlbumServiceImpl extends ServiceImpl<TimeAlbumMapper, TimeAlbum>
@@ -87,7 +87,7 @@ public class TimeAlbumServiceImpl extends ServiceImpl<TimeAlbumMapper, TimeAlbum
 
     @Override
     public boolean deleteTimeAlbum(long id, long loginUserId, long loveBoardId) {
-        // 校验相册是否存在且属于当前用户和恋爱板
+        // 校验相册是否存在且属于当前用户和恋爱�?
         TimeAlbum timeAlbum = this.getById(id);
         if (timeAlbum == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
@@ -105,7 +105,7 @@ public class TimeAlbumServiceImpl extends ServiceImpl<TimeAlbumMapper, TimeAlbum
         if (timeAlbum == null || timeAlbum.getId() == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR);
         }
-        // 校验相册是否存在且属于当前用户和恋爱板
+        // 校验相册是否存在且属于当前用户和恋爱�?
         TimeAlbum oldTimeAlbum = this.getById(timeAlbum.getId());
         if (oldTimeAlbum == null) {
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
@@ -125,20 +125,20 @@ public class TimeAlbumServiceImpl extends ServiceImpl<TimeAlbumMapper, TimeAlbum
             throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
         }
 
-        // 如果是公开相册，直接返回
+        // 如果是公开相册，直接返�?
         if (timeAlbum.getIsPublic() == 1) {
             return timeAlbum;
         }
 
-        // 如果是私密相册
-        // 1. 如果是所有者访问
+        // 如果是私密相�?
+        // 1. 如果是所有者访�?
         if (userId != null && userId.equals(timeAlbum.getUserId())) {
             return timeAlbum;
         }
 
-        // 2. 如果是其他人访问，需要验证密码
+        // 2. 如果是其他人访问，需要验证密�?
         if (StringUtils.isBlank(password)) {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "请输入相册密码");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "请输入相册密�?);
         }
 
         // 对输入的密码进行MD5加密后再比较
@@ -164,29 +164,29 @@ public class TimeAlbumServiceImpl extends ServiceImpl<TimeAlbumMapper, TimeAlbum
         if (albumId != null) {
             TimeAlbum timeAlbum = this.getById(albumId);
             if (timeAlbum == null) {
-                throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "相册不存在");
+                throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "相册不存�?);
             }
             if (!timeAlbum.getUserId().equals(loginUser.getId())) {
-                throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "没有权限操作该相册");
+                throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "没有权限操作该相�?);
             }
         }
 
-        // 上传图片，得到图片信息
+        // 上传图片，得到图片信�?
         String uploadPathPrefix = String.format("album/%s", albumId);
 
-        // 根据 inputSource 的类型区分上传方式
+        // 根据 inputSource 的类型区分上传方�?
         PictureUploadTemplate pictureUploadTemplate = filePictureUpload;
         if (inputSource instanceof String) {
             pictureUploadTemplate = urlPictureUpload;
         }
         UploadPictureResult uploadPictureResult = pictureUploadTemplate.uploadPicture(inputSource, uploadPathPrefix);
 
-        // 构造要入库的图片信息
+        // 构造要入库的图片信�?
         Picture picture = new Picture();
         picture.setSpaceId(albumId); // 使用相册id作为空间id
         picture.setUrl(uploadPictureResult.getUrl());
         picture.setThumbnailUrl(uploadPictureResult.getThumbnailUrl());
-        // 支持外层传递图片名称
+        // 支持外层传递图片名�?
         String picName = uploadPictureResult.getPicName();
         if (StrUtil.isNotBlank(pictureUploadRequest.getPicName())) {
             picName = pictureUploadRequest.getPicName();
@@ -215,25 +215,25 @@ public class TimeAlbumServiceImpl extends ServiceImpl<TimeAlbumMapper, TimeAlbum
 
     @Override
     public boolean deleteHeartWallPicture(long pictureId, long albumId, User loginUser) {
-        // 校验相册是否存在且属于当前用户
+        // 校验相册是否存在且属于当前用�?
         TimeAlbum timeAlbum = this.getById(albumId);
         if (timeAlbum == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "相册不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "相册不存�?);
         }
         if (!timeAlbum.getUserId().equals(loginUser.getId())) {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "没有权限操作该相册");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "没有权限操作该相�?);
         }
 
         // 校验照片是否存在且属于该相册
         Picture picture = pictureService.getById(pictureId);
         if (picture == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "照片不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "照片不存�?);
         }
         if (!picture.getSpaceId().equals(albumId)) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "照片不属于该相册");
         }
 
-        // 直接使用 MyBatis-Plus 的删除方法
+        // 直接使用 MyBatis-Plus 的删除方�?
         return pictureService.removeById(pictureId);
     }
 
@@ -247,28 +247,28 @@ public class TimeAlbumServiceImpl extends ServiceImpl<TimeAlbumMapper, TimeAlbum
         // 获取登录用户信息
         User loginUser = userService.getById(loginUserId);
         if (loginUser == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "用户不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "用户不存�?);
         }
 
-        // 校验相册是否存在且属于当前用户
+        // 校验相册是否存在且属于当前用�?
         TimeAlbum timeAlbum = this.getById(request.getAlbumId());
         if (timeAlbum == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "相册不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "相册不存�?);
         }
         if (!timeAlbum.getUserId().equals(loginUserId)) {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "没有权限操作该相册");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "没有权限操作该相�?);
         }
 
-        // 检查照片数量限制
+        // 检查照片数量限�?
         QueryWrapper<Picture> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("spaceId", request.getAlbumId());
         long currentCount = pictureService.count(queryWrapper);
         int newCount = request.getFiles().size();
         if (currentCount + newCount > 100) {
-            throw new BusinessException(ErrorCode.OPERATION_ERROR, "相册照片数量已达上限（100张）");
+            throw new BusinessException(ErrorCode.OPERATION_ERROR, "相册照片数量已达上限�?00张）");
         }
 
-        // 如果是覆盖模式，先删除原有的爱心墙图片
+        // 如果是覆盖模式，先删除原有的爱心墙图�?
         if (Boolean.TRUE.equals(request.getOverride())) {
             List<Picture> oldPictures = pictureService.list(queryWrapper);
             if (!oldPictures.isEmpty()) {
@@ -293,10 +293,10 @@ public class TimeAlbumServiceImpl extends ServiceImpl<TimeAlbumMapper, TimeAlbum
 
     @Override
     public List<Picture> getHeartWallPictures(long albumId, Long userId, String password) {
-        // 校验相册是否存在并检查访问权限
+        // 校验相册是否存在并检查访问权�?
         TimeAlbum timeAlbum = this.getTimeAlbumById(albumId, userId, password);
 
-        // 查询爱心墙图片
+        // 查询爱心墙图�?
         QueryWrapper<Picture> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("spaceId", albumId)
                 .orderByAsc("id");
@@ -314,23 +314,23 @@ public class TimeAlbumServiceImpl extends ServiceImpl<TimeAlbumMapper, TimeAlbum
         // 获取相册信息
         TimeAlbum timeAlbum = this.getById(albumId);
         if (timeAlbum == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "相册不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "相册不存�?);
         }
 
         // 验证权限
         if (!timeAlbum.getUserId().equals(loginUserId)) {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "没有权限操作该相册");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "没有权限操作该相�?);
         }
 
-        // 只有当相册是公开的（isPublic = 1）时才允许设置密码
+        // 只有当相册是公开的（isPublic = 1）时才允许设置密�?
         if (timeAlbum.getIsPublic() == 0) {
-            throw new BusinessException(ErrorCode.OPERATION_ERROR, "相册已设置密码，请使用修改密码功能");
+            throw new BusinessException(ErrorCode.OPERATION_ERROR, "相册已设置密码，请使用修改密码功�?);
         }
 
         // 加密密码
         String encryptedPassword = DigestUtil.md5Hex(password);
         timeAlbum.setPassword(encryptedPassword);
-        // 设置为私密相册
+        // 设置为私密相�?
         timeAlbum.setIsPublic(0);
 
         return this.updateById(timeAlbum);
@@ -346,18 +346,18 @@ public class TimeAlbumServiceImpl extends ServiceImpl<TimeAlbumMapper, TimeAlbum
         // 获取相册信息
         TimeAlbum timeAlbum = this.getById(albumId);
         if (timeAlbum == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "相册不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "相册不存�?);
         }
 
         // 验证权限
         if (!timeAlbum.getUserId().equals(loginUserId)) {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "没有权限操作该相册");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "没有权限操作该相�?);
         }
 
-        // 验证原密码
+        // 验证原密�?
         String encryptedOldPassword = DigestUtil.md5Hex(oldPassword);
         if (!encryptedOldPassword.equals(timeAlbum.getPassword())) {
-            throw new BusinessException(ErrorCode.PARAMS_ERROR, "原密码错误");
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "原密码错�?);
         }
 
         // 加密新密码并更新
@@ -377,12 +377,12 @@ public class TimeAlbumServiceImpl extends ServiceImpl<TimeAlbumMapper, TimeAlbum
         // 获取相册信息
         TimeAlbum timeAlbum = this.getById(albumId);
         if (timeAlbum == null) {
-            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "相册不存在");
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR, "相册不存�?);
         }
 
         // 验证权限
         if (!timeAlbum.getUserId().equals(loginUserId)) {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "没有权限操作该相册");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "没有权限操作该相�?);
         }
 
         // 验证密码

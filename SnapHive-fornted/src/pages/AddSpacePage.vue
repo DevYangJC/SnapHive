@@ -45,7 +45,7 @@
       </template>
       <a-typography-paragraph>
         * 目前仅支持开通普通版，如需升级空间，请联系
-        <a href="http://my.lumenglover.com" target="_blank" class="link">鹿梦</a>
+        <a href="http://my.lumenglover.com" target="_blank" class="link">SnapHive</a>
       </a-typography-paragraph>
       <a-typography-paragraph v-for="spaceLevel in spaceLevelList" class="level-item">
         {{ spaceLevel.text }}：大小 {{ formatSize(spaceLevel.maxSize) }}，数量

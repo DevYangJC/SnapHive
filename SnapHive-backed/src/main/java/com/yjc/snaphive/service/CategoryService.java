@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yjc.snaphive.model.entity.Category;
@@ -7,7 +7,7 @@ import com.yjc.snaphive.model.vo.CategoryVO;
 import java.util.List;
 
 /**
- * @author 鹿梦
+ * @author SnapHive
  * @description 针对表【category(分类)】的数据库操作Service
  * @createDate 2024-12-13 17:37:23
  */
@@ -21,8 +21,8 @@ public interface CategoryService extends IService<Category> {
     }
 
     /**
-     * 获取指定类型的分类列表
-     * @param type 分类类型：0-图片分类 1-帖子分类
+     * 获取指定类型的分类列�?
+     * @param type 分类类型�?-图片分类 1-帖子分类
      */
     List<String> listCategoryByType(Integer type);
 
@@ -38,7 +38,7 @@ public interface CategoryService extends IService<Category> {
     }
 
     /**
-     * 根据名称和类型查找分类
+     * 根据名称和类型查找分�?
      */
     List<CategoryVO> findCategory(String categoryName, Integer type);
 
@@ -50,7 +50,7 @@ public interface CategoryService extends IService<Category> {
     }
 
     /**
-     * 添加指定类型的分类
+     * 添加指定类型的分�?
      */
     boolean addCategory(String categoryName, Integer type);
 }

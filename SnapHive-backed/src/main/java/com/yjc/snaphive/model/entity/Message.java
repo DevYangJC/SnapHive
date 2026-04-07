@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -38,7 +38,7 @@ public class Message implements Serializable {
     private Date updateTime;
 
     /**
-     * 是否删除(0-未删除 1-已删除)
+     * 是否删除(0-未删�?1-已删�?
      */
     private Integer isDelete;
 

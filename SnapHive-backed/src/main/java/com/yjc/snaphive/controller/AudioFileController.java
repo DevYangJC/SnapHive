@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.common.BaseResponse;
@@ -40,8 +40,8 @@ public class AudioFileController {
             HttpServletRequest httpRequest) {
         // 获取当前登录用户
         Long userId = userService.getLoginUser(httpRequest).getId();
-        // 记录上传开始
-        log.info("开始上传音频文件, filename={}, userId={}", file.getOriginalFilename(), userId);
+        // 记录上传开�?
+        log.info("开始上传音频文�? filename={}, userId={}", file.getOriginalFilename(), userId);
 
         AudioFileVO audioFileVO = audioFileService.uploadAudio(file, userId,
                 request.getTitle(), request.getDescription(),
@@ -65,7 +65,7 @@ public class AudioFileController {
             @ApiParam(value = "音频文件ID", required = true) @PathVariable Long id,
             HttpServletRequest request) {
         Long userId = userService.getLoginUser(request).getId();
-        log.info("开始删除音频文件, fileId={}, userId={}", id, userId);
+        log.info("开始删除音频文�? fileId={}, userId={}", id, userId);
         boolean result = audioFileService.deleteAudio(id, userId);
         log.info("音频文件删除{}, fileId={}", result ? "成功" : "失败", id);
         return ResultUtils.success(result);

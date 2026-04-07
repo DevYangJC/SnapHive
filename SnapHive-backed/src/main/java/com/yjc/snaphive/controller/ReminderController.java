@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.common.BaseResponse;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 
 /**
- * 提醒事项控制器
- * 提供添加、查询、切换状态和删除提醒事项的功能
+ * 提醒事项控制�?
+ * 提供添加、查询、切换状态和删除提醒事项的功�?
  *
  * @author lumenglover
  */
@@ -36,10 +36,10 @@ public class ReminderController {
 
     /**
      * 添加提醒事项
-     * 为当前登录用户创建一个新的提醒事项
+     * 为当前登录用户创建一个新的提醒事�?
      *
      * @param reminderAddRequest 提醒事项创建请求，包含内容和提醒时间
-     * @param request HTTP请求对象，用于获取当前登录用户信息
+     * @param request HTTP请求对象，用于获取当前登录用户信�?
      * @return 新创建的提醒事项ID
      */
     @PostMapping("/add")
@@ -52,12 +52,12 @@ public class ReminderController {
 
     /**
      * 分页获取提醒事项
-     * 支持按日期、完成状态、收藏状态、重要状态筛选
+     * 支持按日期、完成状态、收藏状态、重要状态筛�?
      * 支持自定义排序，默认按重要程度和提醒时间排序
      *
      * @param reminderQueryRequest 查询参数
      * @param request HTTP请求对象
-     * @return 分页的提醒事项列表
+     * @return 分页的提醒事项列�?
      */
     @PostMapping("/list/page")
     public BaseResponse<Page<ReminderVO>> listReminderByPage(@RequestBody ReminderQueryRequest reminderQueryRequest,
@@ -69,7 +69,7 @@ public class ReminderController {
 
     /**
      * 获取今日提醒事项
-     * 支持分页和自定义排序，默认按重要程度和提醒时间排序
+     * 支持分页和自定义排序，默认按重要程度和提醒时间排�?
      *
      * @param reminderQueryRequest 查询参数
      * @param request HTTP请求对象
@@ -85,7 +85,7 @@ public class ReminderController {
     }
 
     /**
-     * 切换提醒事项的完成状态
+     * 切换提醒事项的完成状�?
      *
      * @param id 提醒事项ID
      * @param request HTTP请求对象
@@ -100,7 +100,7 @@ public class ReminderController {
     }
 
     /**
-     * 切换提醒事项的收藏状态
+     * 切换提醒事项的收藏状�?
      *
      * @param id 提醒事项ID
      * @param request HTTP请求对象
@@ -115,7 +115,7 @@ public class ReminderController {
     }
 
     /**
-     * 切换提醒事项的重要状态
+     * 切换提醒事项的重要状�?
      *
      * @param id 提醒事项ID
      * @param request HTTP请求对象

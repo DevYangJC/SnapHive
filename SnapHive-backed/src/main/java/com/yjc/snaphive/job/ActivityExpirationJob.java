@@ -1,4 +1,4 @@
-package com.yjc.snaphive.job;
+﻿package com.yjc.snaphive.job;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.yjc.snaphive.model.entity.Activity;
@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 /**
- * 活动过期检查定时任务
+ * 活动过期检查定时任�?
  */
 @Component
 @Slf4j
@@ -21,14 +21,14 @@ public class ActivityExpirationJob {
     private ActivityService activityService;
 
     /**
-     * 每天凌晨1点执行过期检查
+     * 每天凌晨1点执行过期检�?
      */
     @Scheduled(cron = "0 0 1 * * ?")
     public void checkExpiredActivities() {
         try {
-            log.info("开始检查过期活动");
+            log.info("开始检查过期活�?);
 
-            // 更新所有已过期但未标记的活动
+            // 更新所有已过期但未标记的活�?
             UpdateWrapper<Activity> updateWrapper = new UpdateWrapper<>();
             updateWrapper.eq("isExpired", 0)  // 未标记过期的
                     .lt("expireTime", new Date())  // 过期时间早于当前时间
@@ -38,7 +38,7 @@ public class ActivityExpirationJob {
 
             log.info("过期活动检查完成，更新状态：{}", success);
         } catch (Exception e) {
-            log.error("过期活动检查任务失败", e);
+            log.error("过期活动检查任务失�?, e);
         }
     }
 }

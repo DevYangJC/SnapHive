@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.userfollows;
+﻿package com.yjc.snaphive.model.dto.userfollows;
 
 import com.yjc.snaphive.common.PageRequest;
 import lombok.Data;
@@ -20,7 +20,7 @@ public class UserfollowsQueryRequest extends PageRequest implements Serializable
      */
     private Long followingId;
     /**
-     * 搜索类型,0为关注，1为粉丝
+     * 搜索类型,0为关注，1为粉�?
      */
     private Integer searchType;
 

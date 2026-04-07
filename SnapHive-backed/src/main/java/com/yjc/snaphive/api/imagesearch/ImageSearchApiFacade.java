@@ -1,4 +1,4 @@
-package com.yjc.snaphive.api.imagesearch;
+﻿package com.yjc.snaphive.api.imagesearch;
 
 import com.yjc.snaphive.api.imagesearch.model.ImageSearchResult;
 import com.yjc.snaphive.api.imagesearch.sub.GetImageFirstUrlApi;

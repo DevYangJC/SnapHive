@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
@@ -55,16 +55,16 @@ public class DeepSeekServiceImpl implements IDeepSeekService {
     @Override
     public String generateResponse(String query, HttpServletRequest request) {
         Long userId = getUserIdFromRequest(request);
-        ThrowUtils.throwIf(userId == null, ErrorCode.NOT_LOGIN_ERROR, "用户未登录");
+        ThrowUtils.throwIf(userId == null, ErrorCode.NOT_LOGIN_ERROR, "用户未登�?);
 
-        // 检查是否超过每日限制
+        // 检查是否超过每日限�?
         String today = java.time.LocalDate.now().toString();
         String countKey = String.format(DAILY_MESSAGE_COUNT_KEY, userId, today);
         String countStr = stringRedisTemplate.opsForValue().get(countKey);
         if (countStr != null) {
             int count = Integer.parseInt(countStr);
             ThrowUtils.throwIf(count >= DAILY_MESSAGE_LIMIT,
-                    ErrorCode.OPERATION_ERROR, "已达到今日消息上限(100条)，请明天再来");
+                    ErrorCode.OPERATION_ERROR, "已达到今日消息上�?100�?，请明天再来");
         }
 
         try {
@@ -79,22 +79,22 @@ public class DeepSeekServiceImpl implements IDeepSeekService {
                     .header("Accept", "application/json")
                     .execute();
 
-            // 获取并日志记录响应内容
+            // 获取并日志记录响应内�?
             String resp = execute.body();
             log.info("deepseek response: {}", resp);
 
-            // 检查响应是否有效
+            // 检查响应是否有�?
             ThrowUtils.throwIf(!resp.startsWith("{"),
                     ErrorCode.SYSTEM_ERROR, "Invalid JSON response: " + resp);
 
-            // 解析响应并提取内容
+            // 解析响应并提取内�?
             ChatResponse chatResponse = JSONUtil.toBean(resp, ChatResponse.class);
             String response = extractResponse(chatResponse);
 
             // 增加用户今日消息计数
             incrementDailyMessageCount(userId);
 
-            // 保存对话到 Redis
+            // 保存对话�?Redis
             saveChatMessage(userId, query, response);
 
             // 检查是否需要同步到 MySQL
@@ -127,7 +127,7 @@ public class DeepSeekServiceImpl implements IDeepSeekService {
                     .orderByDesc("createTime");
             Page<AiChat> dbChats = aiChatMapper.selectPage(dbPage, queryWrapper);
 
-            // 3. 转换为VO对象并按对话对重新排序
+            // 3. 转换为VO对象并按对话对重新排�?
             List<AiChatVO> voList = new ArrayList<>();
             List<AiChat> records = dbChats.getRecords();
 
@@ -137,23 +137,23 @@ public class DeepSeekServiceImpl implements IDeepSeekService {
                     AiChat userMessage = records.get(i);
                     AiChat aiMessage = records.get(i + 1);
 
-                    // 确保 AI 的回答在前
+                    // 确保 AI 的回答在�?
                     if ("assistant".equals(aiMessage.getRole())) {
-                        // 添加AI的回答
+                        // 添加AI的回�?
                         AiChatVO aiVo = new AiChatVO();
                         aiVo.setContent(aiMessage.getContent());
                         aiVo.setRole(aiMessage.getRole());
                         aiVo.setCreateTime(aiMessage.getCreateTime());
                         voList.add(aiVo);
 
-                        // 添加用户的问题
+                        // 添加用户的问�?
                         AiChatVO userVo = new AiChatVO();
                         userVo.setContent(userMessage.getContent());
                         userVo.setRole(userMessage.getRole());
                         userVo.setCreateTime(userMessage.getCreateTime());
                         voList.add(userVo);
                     } else {
-                        // 如果顺序不对，交换
+                        // 如果顺序不对，交�?
                         AiChatVO userVo = new AiChatVO();
                         userVo.setContent(userMessage.getContent());
                         userVo.setRole(userMessage.getRole());
@@ -218,12 +218,12 @@ public class DeepSeekServiceImpl implements IDeepSeekService {
         String cacheKey = String.format(CHAT_CACHE_KEY, userId);
 
         try {
-            // 保存用户的问题
+            // 保存用户的问�?
             AiChat userMessage = new AiChat(userId, query, "user", new Date());
             String userMessageJson = JSONUtil.toJsonStr(userMessage);
             stringRedisTemplate.opsForList().rightPush(cacheKey, userMessageJson);
 
-            // 保存AI的回复
+            // 保存AI的回�?
             AiChat aiMessage = new AiChat(userId, response, "assistant", new Date());
             String aiMessageJson = JSONUtil.toJsonStr(aiMessage);
             stringRedisTemplate.opsForList().rightPush(cacheKey, aiMessageJson);
@@ -260,7 +260,7 @@ public class DeepSeekServiceImpl implements IDeepSeekService {
     }
 
     /**
-     * 检查用户今日消息数量是否超限
+     * 检查用户今日消息数量是否超�?
      */
     private boolean isOverDailyLimit(Long userId) {
         String today = java.time.LocalDate.now().toString();

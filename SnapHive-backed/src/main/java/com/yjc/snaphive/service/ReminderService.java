@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service;
+﻿package com.yjc.snaphive.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -21,17 +21,17 @@ public interface ReminderService extends IService<Reminder> {
     Page<ReminderVO> getReminderVOPage(ReminderQueryRequest reminderQueryRequest, Long userId);
 
     /**
-     * 切换提醒事项完成状态
+     * 切换提醒事项完成状�?
      */
     boolean toggleReminder(Long id, Long userId);
 
     /**
-     * 切换收藏状态
+     * 切换收藏状�?
      */
     boolean toggleStarred(Long id, Long userId);
 
     /**
-     * 切换重要状态
+     * 切换重要状�?
      */
     boolean toggleImportant(Long id, Long userId);
 

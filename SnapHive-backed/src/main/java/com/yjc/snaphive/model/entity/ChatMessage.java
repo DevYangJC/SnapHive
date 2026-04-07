@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.entity;
+﻿package com.yjc.snaphive.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -43,13 +43,13 @@ public class ChatMessage implements Serializable {
     private Integer isDelete;
 
     /**
-     * 回复的消息内容（非数据库字段）
+     * 回复的消息内容（非数据库字段�?
      */
     @TableField(exist = false)
     private ChatMessage replyMessage;
 
     /**
-     * 发送者信息（非数据库字段）
+     * 发送者信息（非数据库字段�?
      */
     @TableField(exist = false)
     private User sender;

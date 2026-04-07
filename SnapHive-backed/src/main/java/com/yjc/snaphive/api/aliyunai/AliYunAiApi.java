@@ -1,4 +1,4 @@
-package com.yjc.snaphive.api.aliyunai;
+﻿package com.yjc.snaphive.api.aliyunai;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;
@@ -24,7 +24,7 @@ public class AliYunAiApi {
     // 创建任务地址
     public static final String CREATE_OUT_PAINTING_TASK_URL = "https://dashscope.aliyuncs.com/api/v1/services/aigc/image2image/out-painting";
 
-    // 查询任务状态
+    // 查询任务状�?
     public static final String GET_OUT_PAINTING_TASK_URL = "https://dashscope.aliyuncs.com/api/v1/tasks/%s";
 
 
@@ -38,10 +38,10 @@ public class AliYunAiApi {
         if (createOutPaintingTaskRequest == null) {
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "扩图参数为空");
         }
-        // 发送请求
+        // 发送请�?
         HttpRequest httpRequest = HttpRequest.post(CREATE_OUT_PAINTING_TASK_URL)
                 .header("Authorization", "Bearer " + apiKey)
-                // 必须开启异步处理
+                // 必须开启异步处�?
                 .header("X-DashScope-Async", "enable")
                 .header("Content-Type", "application/json")
                 .body(JSONUtil.toJsonStr(createOutPaintingTaskRequest));
@@ -55,14 +55,14 @@ public class AliYunAiApi {
             if (createOutPaintingTaskResponse.getCode() != null) {
                 String errorMessage = createOutPaintingTaskResponse.getMessage();
                 log.error("请求异常：{}", errorMessage);
-                throw new BusinessException(ErrorCode.OPERATION_ERROR, "AI 扩图失败，" + errorMessage);
+                throw new BusinessException(ErrorCode.OPERATION_ERROR, "AI 扩图失败�? + errorMessage);
             }
             return createOutPaintingTaskResponse;
         }
     }
 
     /**
-     * 查询创建的任务结果
+     * 查询创建的任务结�?
      *
      * @param taskId
      * @return

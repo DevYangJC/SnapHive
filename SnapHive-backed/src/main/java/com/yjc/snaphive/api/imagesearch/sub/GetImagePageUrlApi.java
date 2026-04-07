@@ -1,4 +1,4 @@
-package com.yjc.snaphive.api.imagesearch.sub;
+﻿package com.yjc.snaphive.api.imagesearch.sub;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 获取以图搜图页面地址（step 1）
+ * 获取以图搜图页面地址（step 1�?
  */
 @Slf4j
 public class GetImagePageUrlApi {
@@ -38,13 +38,13 @@ public class GetImagePageUrlApi {
         formData.put("tn", "pc");
         formData.put("from", "pc");
         formData.put("image_source", "PC_UPLOAD_URL");
-        // 获取当前时间戳
+        // 获取当前时间�?
         long uptime = System.currentTimeMillis();
         // 请求地址
         String url = "https://graph.baidu.com/upload?uptime=" + uptime;
         String acsToken = "jmM4zyI8OUixvSuWh0sCy4xWbsttVMZb9qcRTmn6SuNWg0vCO7N0s6Lffec+IY5yuqHujHmCctF9BVCGYGH0H5SH/H3VPFUl4O4CP1jp8GoAzuslb8kkQQ4a21Tebge8yhviopaiK66K6hNKGPlWt78xyyJxTteFdXYLvoO6raqhz2yNv50vk4/41peIwba4lc0hzoxdHxo3OBerHP2rfHwLWdpjcI9xeu2nJlGPgKB42rYYVW50+AJ3tQEBEROlg/UNLNxY+6200B/s6Ryz+n7xUptHFHi4d8Vp8q7mJ26yms+44i8tyiFluaZAr66/+wW/KMzOhqhXCNgckoGPX1SSYwueWZtllIchRdsvCZQ8tFJymKDjCf3yI/Lw1oig9OKZCAEtiLTeKE9/CY+Crp8DHa8Tpvlk2/i825E3LuTF8EQfzjcGpVnR00Lb4/8A";
         try {
-            // 2. 发送请求
+            // 2. 发送请�?
             HttpResponse httpResponse = HttpRequest.post(url)
                     .form(formData)
                     .header("Acs-Token", acsToken)
@@ -62,7 +62,7 @@ public class GetImagePageUrlApi {
                 throw new BusinessException(ErrorCode.OPERATION_ERROR, "接口调用失败");
             }
             Map<String, Object> data = (Map<String, Object>) result.get("data");
-            // 对 URL 进行解码
+            // �?URL 进行解码
             String rawUrl = (String) data.get("url");
             String searchResultUrl = URLUtil.decode(rawUrl, StandardCharsets.UTF_8);
             // 如果 URL 为空

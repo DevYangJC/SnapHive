@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager;
+﻿package com.yjc.snaphive.manager;
 
 import cn.hutool.core.io.FileUtil;
 import com.yjc.snaphive.config.CosClientConfig;
@@ -24,7 +24,7 @@ public class CosManager {
     /**
      * 上传对象
      *
-     * @param key  唯一键
+     * @param key  唯一�?
      * @param file 文件
      */
     public PutObjectResult putObject(String key, File file) {
@@ -36,7 +36,7 @@ public class CosManager {
     /**
      * 下载对象
      *
-     * @param key 唯一键
+     * @param key 唯一�?
      */
     public COSObject getObject(String key) {
         GetObjectRequest getObjectRequest = new GetObjectRequest(cosClientConfig.getBucket(), key);
@@ -46,19 +46,19 @@ public class CosManager {
     /**
      * 上传对象（附带图片信息）
      *
-     * @param key  唯一键
+     * @param key  唯一�?
      * @param file 文件
      */
     public PutObjectResult putPictureObject(String key, File file) {
         PutObjectRequest putObjectRequest = new PutObjectRequest(cosClientConfig.getBucket(), key,
                 file);
-        // 对图片进行处理（获取基本信息也被视作为一种图片的处理）
+        // 对图片进行处理（获取基本信息也被视作为一种图片的处理�?
         PicOperations picOperations = new PicOperations();
         // 1 表示返回原图信息
         picOperations.setIsPicInfo(1);
         // 图片处理规则列表
         List<PicOperations.Rule> rules = new ArrayList<>();
-        // 1. 图片压缩（转成 webp 格式）
+        // 1. 图片压缩（转�?webp 格式�?
         String webpKey = FileUtil.mainName(key) + ".webp";
         PicOperations.Rule compressRule = new PicOperations.Rule();
         compressRule.setFileId(webpKey);
@@ -72,11 +72,11 @@ public class CosManager {
             String thumbnailKey = FileUtil.mainName(key) + "_thumbnail." + FileUtil.getSuffix(key);
             thumbnailRule.setFileId(thumbnailKey);
             thumbnailRule.setBucket(cosClientConfig.getBucket());
-            // 缩放规则 /thumbnail/<Width>x<Height>>（如果大于原图宽高，则不处理）
+            // 缩放规则 /thumbnail/<Width>x<Height>>（如果大于原图宽高，则不处理�?
             thumbnailRule.setRule(String.format("imageMogr2/thumbnail/%sx%s>", 384, 384));
             rules.add(thumbnailRule);
         }
-        // 构造处理参数
+        // 构造处理参�?
         picOperations.setRules(rules);
         putObjectRequest.setPicOperations(picOperations);
         return cosClient.putObject(putObjectRequest);
@@ -85,14 +85,14 @@ public class CosManager {
     /**
      * 上传音频对象
      *
-     * @param key  唯一键
+     * @param key  唯一�?
      * @param file 文件
      */
     public PutObjectResult putAudioObject(String key, File file) {
         PutObjectRequest putObjectRequest = new PutObjectRequest(cosClientConfig.getBucket(), key, file);
-        // 设置存储类型为标准存储
+        // 设置存储类型为标准存�?
         putObjectRequest.setStorageClass(StorageClass.Standard);
-        // 设置文件的 Content-Type
+        // 设置文件�?Content-Type
         ObjectMetadata metadata = new ObjectMetadata();
         String contentType = "audio/" + FileUtil.getSuffix(key);
         metadata.setContentType(contentType);
@@ -104,7 +104,7 @@ public class CosManager {
     /**
      * 删除对象
      *
-     * @param key 唯一键
+     * @param key 唯一�?
      */
     public void deleteObject(String key) {
         cosClient.deleteObject(cosClientConfig.getBucket(), key);

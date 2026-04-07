@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.space;
+﻿package com.yjc.snaphive.model.dto.space;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ import lombok.Data;
 public class SpaceLevel {
 
     /**
-     * 值
+     * �?
      */
     private int value;
 
@@ -21,12 +21,12 @@ public class SpaceLevel {
     private String text;
 
     /**
-     * 最大数量
+     * 最大数�?
      */
     private long maxCount;
 
     /**
-     * 最大容量
+     * 最大容�?
      */
     private long maxSize;
 }

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.job;
+﻿package com.yjc.snaphive.job;
 
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -55,7 +55,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
     private Date lastSyncTime = new Date();
 
     /**
-     * 应用启动时执行全量同步
+     * 应用启动时执行全量同�?
      */
     @Override
     public void run(String... args) {
@@ -83,12 +83,12 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
     }
 
     /**
-     * 每10分钟执行一次图片增量同步，随机延迟0-30秒
+     * �?0分钟执行一次图片增量同步，随机延迟0-30�?
      */
     @Scheduled(fixedDelay = 600000)
     public void incrementalSyncPictures() {
         try {
-            // 随机延迟0-30秒
+            // 随机延迟0-30�?
             Thread.sleep(RandomUtil.randomInt(0, 30) * 1000);
             log.info("开始增量同步图片数据到ES");
             Date currentTime = new Date();
@@ -101,12 +101,12 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
     }
 
     /**
-     * 每10分钟执行一次用户增量同步，固定延迟2分钟，随机延迟0-30秒
+     * �?0分钟执行一次用户增量同步，固定延迟2分钟，随机延�?-30�?
      */
     @Scheduled(fixedDelay = 600000, initialDelay = 120000)
     public void incrementalSyncUsers() {
         try {
-            // 随机延迟0-30秒
+            // 随机延迟0-30�?
             Thread.sleep(RandomUtil.randomInt(0, 30) * 1000L);
             log.info("开始增量同步用户数据到ES");
             Date currentTime = new Date();
@@ -119,12 +119,12 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
     }
 
     /**
-     * 每10分钟执行一次帖子增量同步，固定延迟4分钟，随机延迟0-30秒
+     * �?0分钟执行一次帖子增量同步，固定延迟4分钟，随机延�?-30�?
      */
     @Scheduled(fixedDelay = 600000, initialDelay = 240000)
     public void incrementalSyncPosts() {
         try {
-            // 随机延迟0-30秒
+            // 随机延迟0-30�?
             Thread.sleep(RandomUtil.randomInt(0, 30) * 1000L);
             log.info("开始增量同步帖子数据到ES");
             Date currentTime = new Date();
@@ -140,7 +140,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
      * 全量同步空间数据
      */
     private void fullSyncSpaces() {
-        // 分页查询所有未删除的空间
+        // 分页查询所有未删除的空�?
         long current = 1;
         long size = 100;
         long total;
@@ -165,7 +165,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
                         .collect(Collectors.toList());
 
                 elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(SPACE_INDEX));
-                log.info("同步空间数据到ES, 第{}页, 数量: {}", current, spaceList.size());
+                log.info("同步空间数据到ES, 第{}�? 数量: {}", current, spaceList.size());
             }
             current++;
         } while ((current - 1) * size < total);
@@ -178,7 +178,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
      * 增量同步空间数据
      */
     private void incrementalSyncSpaces(Date startTime, Date endTime) {
-        // 查询这段时间内更新的未删除数据
+        // 查询这段时间内更新的未删除数�?
         List<Space> spaces = spaceMapper.selectList(new QueryWrapper<Space>()
                 .ge("updateTime", startTime)
                 .le("updateTime", endTime)
@@ -200,7 +200,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
             log.info("增量同步空间数据到ES, 数量: {}", spaces.size());
         }
 
-        // 处理这段时间内被删除的数据
+        // 处理这段时间内被删除的数�?
         List<Space> deletedSpaces = spaceMapper.selectList(new QueryWrapper<Space>()
                 .ge("updateTime", startTime)
                 .le("updateTime", endTime)
@@ -215,12 +215,12 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
     }
 
     /**
-     * 每10分钟执行一次空间增量同步，固定延迟4分钟，随机延迟0-30秒
+     * �?0分钟执行一次空间增量同步，固定延迟4分钟，随机延�?-30�?
      */
     @Scheduled(fixedDelay = 600000, initialDelay = 240000)
     public void incrementalSyncSpaces() {
         try {
-            // 随机延迟0-30秒
+            // 随机延迟0-30�?
             Thread.sleep(RandomUtil.randomInt(0, 30) * 1000L);
             log.info("开始增量同步空间数据到ES");
             Date currentTime = new Date();
@@ -236,7 +236,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
      * 全量同步图片数据
      */
     private void fullSyncPictures() {
-        // 分批查询所有未删除的图片数据
+        // 分批查询所有未删除的图片数�?
         int batchSize = 1000;
         QueryWrapper<Picture> wrapper = new QueryWrapper<Picture>()
                 .eq("isDelete", 0);
@@ -262,7 +262,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
 
             // 批量保存到ES
             elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(PICTURE_INDEX));
-            log.info("同步图片数据到ES: 第{}批, 数量{}", i + 1, pictures.size());
+            log.info("同步图片数据到ES: 第{}�? 数量{}", i + 1, pictures.size());
         }
 
         // 清理已删除的数据
@@ -273,7 +273,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
      * 全量同步用户数据
      */
     private void fullSyncUsers() {
-        // 分批查询所有未删除的用户数据
+        // 分批查询所有未删除的用户数�?
         int batchSize = 1000;
         QueryWrapper<User> wrapper = new QueryWrapper<User>()
                 .eq("isDelete", 0);
@@ -299,7 +299,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
 
             // 批量保存到ES
             elasticsearchRestTemplate.bulkIndex(queries, IndexCoordinates.of(USER_INDEX));
-            log.info("同步用户数据到ES: 第{}批, 数量{}", i + 1, users.size());
+            log.info("同步用户数据到ES: 第{}�? 数量{}", i + 1, users.size());
         }
 
         // 清理已删除的数据
@@ -310,7 +310,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
      * 全量同步帖子数据
      */
     private void fullSyncPosts() {
-        // 分批查询所有未删除的帖子
+        // 分批查询所有未删除的帖�?
         long current = 1;
         long size = 1000;
         long total;
@@ -346,7 +346,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
      * 增量同步图片数据
      */
     private void incrementalSyncPictures(Date startTime, Date endTime) {
-        // 查询这段时间内更新的未删除数据
+        // 查询这段时间内更新的未删除数�?
         List<Picture> pictures = pictureMapper.selectList(new QueryWrapper<Picture>()
                 .ge("updateTime", startTime)
                 .le("updateTime", endTime)
@@ -364,7 +364,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
             log.info("增量同步图片数据到ES, 数量: {}", pictures.size());
         }
 
-        // 处理这段时间内被删除的数据
+        // 处理这段时间内被删除的数�?
         List<Picture> deletedPictures = pictureMapper.selectList(new QueryWrapper<Picture>()
                 .ge("updateTime", startTime)
                 .le("updateTime", endTime)
@@ -382,7 +382,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
      * 增量同步用户数据
      */
     private void incrementalSyncUsers(Date startTime, Date endTime) {
-        // 查询这段时间内更新的未删除数据
+        // 查询这段时间内更新的未删除数�?
         List<User> users = userMapper.selectList(new QueryWrapper<User>()
                 .ge("updateTime", startTime)
                 .le("updateTime", endTime)
@@ -400,7 +400,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
             log.info("增量同步用户数据到ES, 数量: {}", users.size());
         }
 
-        // 处理这段时间内被删除的数据
+        // 处理这段时间内被删除的数�?
         List<User> deletedUsers = userMapper.selectList(new QueryWrapper<User>()
                 .ge("updateTime", startTime)
                 .le("updateTime", endTime)
@@ -418,7 +418,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
      * 增量同步帖子数据
      */
     private void incrementalSyncPosts(Date startTime, Date endTime) {
-        // 查询这段时间内更新的未删除数据
+        // 查询这段时间内更新的未删除数�?
         List<Post> posts = postMapper.selectList(new QueryWrapper<Post>()
                 .ge("updateTime", startTime)
                 .le("updateTime", endTime)
@@ -436,7 +436,7 @@ public class ElasticSearchSyncJob implements CommandLineRunner {
             log.info("增量同步帖子数据到ES, 数量: {}", posts.size());
         }
 
-        // 处理这段时间内被删除的数据
+        // 处理这段时间内被删除的数�?
         List<Post> deletedPosts = postMapper.selectList(new QueryWrapper<Post>()
                 .ge("updateTime", startTime)
                 .le("updateTime", endTime)

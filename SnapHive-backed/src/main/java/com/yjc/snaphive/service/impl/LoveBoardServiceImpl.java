@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 恋爱画板服务实现类
+ * 恋爱画板服务实现�?
  */
 @Service
 public class LoveBoardServiceImpl extends ServiceImpl<LoveBoardMapper, LoveBoard>
@@ -33,11 +33,11 @@ public class LoveBoardServiceImpl extends ServiceImpl<LoveBoardMapper, LoveBoard
         }
         // 检查用户是否已经创建过恋爱画板
         if (hasLoveBoard(loginUserId)) {
-            throw new BusinessException(ErrorCode.OPERATION_ERROR, "您已经创建过恋爱画板了");
+            throw new BusinessException(ErrorCode.OPERATION_ERROR, "您已经创建过恋爱画板�?);
         }
-        // 设置创建者
+        // 设置创建�?
         loveBoard.setUserId(loginUserId);
-        // 设置默认值
+        // 设置默认�?
         loveBoard.setLikeCount(0L);
         loveBoard.setStatus(1);
         boolean result = this.save(loveBoard);
@@ -101,9 +101,9 @@ public class LoveBoardServiceImpl extends ServiceImpl<LoveBoardMapper, LoveBoard
             return loveBoard;
         }
 
-        // 如果不是画板主人，检查是否开放查看权限
+        // 如果不是画板主人，检查是否开放查看权�?
         if (loveBoard.getStatus() != 1) {
-            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "该恋爱画板未开放查看权限");
+            throw new BusinessException(ErrorCode.NO_AUTH_ERROR, "该恋爱画板未开放查看权�?);
         }
 
         return loveBoard;
@@ -114,12 +114,12 @@ public class LoveBoardServiceImpl extends ServiceImpl<LoveBoardMapper, LoveBoard
         if (loveBoardId <= 0 || userId <= 0) {
             return false;
         }
-        // 查询恋爱板
+        // 查询恋爱�?
         LoveBoard loveBoard = this.getById(loveBoardId);
         if (loveBoard == null || loveBoard.getIsDelete() == 1) {
             return false;
         }
-        // 检查用户是否是恋爱板的所有者
+        // 检查用户是否是恋爱板的所有�?
         return loveBoard.getUserId().equals(userId);
     }
 }

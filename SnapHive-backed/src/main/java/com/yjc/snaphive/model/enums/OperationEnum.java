@@ -1,10 +1,10 @@
-package com.yjc.snaphive.model.enums;
+﻿package com.yjc.snaphive.model.enums;
 
 import cn.hutool.core.util.ObjUtil;
 import lombok.Getter;
 
 /**
- * 操作枚举类
+ * 操作枚举�?
  */
 @Getter
 public enum OperationEnum {
@@ -24,7 +24,7 @@ public enum OperationEnum {
     /**
      * 根据值获取对应的枚举实例
      *
-     * @param value 要查找的枚举值
+     * @param value 要查找的枚举�?
      * @return 对应的枚举实例，如果没找到则返回 null
      */
     public static OperationEnum getEnumByValue(int value) {

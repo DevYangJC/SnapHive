@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.user;
+﻿package com.yjc.snaphive.model.dto.user;
 
 import lombok.Data;
 
@@ -13,12 +13,12 @@ public class UserChangeEmailRequest implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 新邮箱
+     * 新邮�?
      */
     private String newEmail;
 
     /**
-     * 验证码
+     * 验证�?
      */
     private String code;
 }

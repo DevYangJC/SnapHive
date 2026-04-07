@@ -1,4 +1,4 @@
-package com.yjc.snaphive.controller;
+﻿package com.yjc.snaphive.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yjc.snaphive.common.BaseResponse;
@@ -48,7 +48,7 @@ public class LikeRecordController {
     }
 
     /**
-     * 获取点赞状态
+     * 获取点赞状�?
      */
     @GetMapping("/status/{targetType}/{targetId}")
     public BaseResponse<Boolean> getLikeStatus(
@@ -75,7 +75,7 @@ public class LikeRecordController {
     }
 
     /**
-     * 获取用户被点赞历史
+     * 获取用户被点赞历�?
      */
     @PostMapping("/history")
     public BaseResponse<Page<LikeRecordVO>> getLikeHistory(@RequestBody LikeQueryRequest likeQueryRequest,

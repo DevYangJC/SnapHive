@@ -1,4 +1,4 @@
-package com.yjc.snaphive.service.impl;
+﻿package com.yjc.snaphive.service.impl;
 
 import com.yjc.snaphive.exception.ErrorCode;
 import com.yjc.snaphive.exception.ThrowUtils;
@@ -71,7 +71,7 @@ public class AppVersionServiceImpl extends ServiceImpl<AppVersionMapper, AppVers
             ThrowUtils.throwIf(!success, ErrorCode.OPERATION_ERROR);
 
         } catch (Exception e) {
-            log.error("上传新版本失败", e);
+            log.error("上传新版本失�?, e);
             throw new BusinessException(ErrorCode.OPERATION_ERROR, "上传失败");
         }
     }

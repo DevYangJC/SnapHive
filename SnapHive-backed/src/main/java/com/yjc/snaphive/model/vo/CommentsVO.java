@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.vo;
+﻿package com.yjc.snaphive.model.vo;
 
 import com.yjc.snaphive.common.PageRequest;
 import com.yjc.snaphive.model.entity.Post;
@@ -30,7 +30,7 @@ public class CommentsVO extends PageRequest implements Serializable {
     private Long targetId;
 
     /**
-     * 目标类型（1-图片 2-帖子）
+     * 目标类型�?-图片 2-帖子�?
      */
     private Integer targetType;
 
@@ -50,12 +50,12 @@ public class CommentsVO extends PageRequest implements Serializable {
     private Long parentId;
 
     /**
-     * 点赞数
+     * 点赞�?
      */
     private Long likeCount;
 
     /**
-     * 点踩数
+     * 点踩�?
      */
     private Long dislikeCount;
 
@@ -80,7 +80,7 @@ public class CommentsVO extends PageRequest implements Serializable {
     private Post post;
 
     /**
-     * 子评论列表
+     * 子评论列�?
      */
     private List<CommentsVO> children;
 }

@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.comments;
+﻿package com.yjc.snaphive.model.dto.comments;
 
 
 import lombok.Data;
@@ -28,7 +28,7 @@ public class CommentsLikeRequest  implements Serializable {
     private Long likeCount;
 
     /**
-     *  踩评论
+     *  踩评�?
      */
     private Long dislikeCount;
 

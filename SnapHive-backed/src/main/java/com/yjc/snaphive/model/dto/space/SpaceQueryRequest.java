@@ -1,4 +1,4 @@
-package com.yjc.snaphive.model.dto.space;
+﻿package com.yjc.snaphive.model.dto.space;
 
 import com.yjc.snaphive.common.PageRequest;
 import lombok.Data;
@@ -29,12 +29,12 @@ public class SpaceQueryRequest extends PageRequest implements Serializable {
     private String spaceName;
 
     /**
-     * 空间级别：0-普通版 1-专业版 2-旗舰版
+     * 空间级别�?-普通版 1-专业�?2-旗舰�?
      */
     private Integer spaceLevel;
 
     /**
-     * 空间类型：0-私有 1-团队
+     * 空间类型�?-私有 1-团队
      */
     private Integer spaceType;
 

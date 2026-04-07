@@ -1,4 +1,4 @@
-package com.yjc.snaphive.manager.upload;
+﻿package com.yjc.snaphive.manager.upload;
 
 import cn.hutool.core.io.FileUtil;
 import com.yjc.snaphive.exception.ErrorCode;
